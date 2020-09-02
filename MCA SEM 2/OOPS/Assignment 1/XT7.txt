@@ -1,0 +1,401 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(7):Define a class Car. Add data members as Make, Color, Size, and Cost. Write member functions for reading values and 
+	printing values of car. Define one more class as CarCollection. CarCollection contains array of cars. CarCollection class 
+	should contain member functions as Add, delete, modify and replace. CarCollection is to be defined as friend of Car class. 
+	Write C++ programs to test your classes.
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+#include<conio.h>
+#include<string>
+
+using namespace std;
+
+class Car
+{
+		string maker,colour;
+		float size,cost;
+		int id;
+
+public:
+	void read()
+	{
+		cout<<"\n----------------------\n";
+		cout<<"Enter id of car: ";
+		cin>>id;
+		cout<<"Enter Maker of car: ";
+		cin>>maker;
+		cout<<"Enter colour of car: ";
+		cin>>colour;
+		cout<<"Enter size of car in inches: ";
+		cin>>size;
+		cout<<"Enter cost of car in Rupee: ";
+		cin>>cost;
+	}
+
+	void display()
+	{
+		cout<<"\n=======================\n";
+		cout<<"Car ID: "<<id<<endl;
+		cout<<"Maker of car: "<<maker<<endl;
+		cout<<"Colour of car: "<<colour<<endl;
+		cout<<"Size of car: "<<size<<" Inches"<<endl;
+		cout<<"Cost of car: "<<cost<<" Rupee"<<endl;
+	}
+	friend class CarCollection;
+};
+
+class CarCollection
+{
+	Car c[10];
+	static int limit;
+public:
+
+	void add()
+	{
+		int count;
+		cout<<"Enter HOw many Cars you want to add: ";
+		cin>>count;
+		for(int i=limit;i<limit+count;i++)
+		{
+			c[i].read();
+		}
+		limit+=count;
+	}
+
+	void remove()
+	{
+		int c_id,flag=0,j;
+		cout<<"Enter Car id which You want to delete: ";
+		cin>>c_id;
+		for(int i=0;i<limit && !flag;i++)
+		{
+			if(c_id==c[i].id)
+			{
+				while(i<limit-1)
+				{
+					c[i]=c[i+1];
+					i++;
+				}
+				limit--;
+				flag=1;
+			}
+		}
+
+		if(!flag)
+			cout<<"\n-----------------------Invalid Car ID!!!!!";
+	}
+
+	void modify()
+	{
+		int c_id,flag=0;
+		cout<<"Enter Car id which You want to modify: ";
+		cin>>c_id;
+		for(int i=0;i<limit && !flag;i++)
+		{
+			if(c_id==c[i].id)
+			{
+				cout<<"Enter Maker name: ";
+				cin>>c[i].maker;
+				cout<<"Enter colour of car: ";
+				cin>>c[i].colour;
+				cout<<"Enter size of car in inches: ";
+				cin>>c[i].size;
+				cout<<"Enter cost of car in Rupee: ";
+				cin>>c[i].cost;
+				flag=1;
+			}
+		}
+
+		if(!flag)
+			cout<<"\n-----------------------Invalid Car ID!!!!!";
+	}
+
+	void replace()
+	{
+		int c_id1,c_id2,j,flag=0;
+		cout<<"Enter Car id which You want to replace: ";
+		cin>>c_id1;
+		cout<<"Enter Car id which You want to replace with: ";
+		cin>>c_id2;
+		for(int i=0;i<limit && !flag;i++)
+		{
+			if(c_id1==c[i].id)
+			{
+				for(j=0;j<limit;j++)
+				{
+					if(c_id2==c[j].id)
+					{
+						flag=1;
+						c[i]=c[j];
+						while(j<limit-1)
+						{
+							c[j]=c[j+1];
+							j++;
+						}
+						limit--;
+					}
+				}
+				
+				
+			}
+		}
+
+		if(!flag)
+			cout<<"\nInvalid Car ID";
+	}
+	void display()
+	{
+		for(int i=0;i<limit;i++)
+			c[i].display();
+	}
+
+};
+
+int CarCollection::limit=0;
+void main()
+{
+	CarCollection c;
+	int key;
+	do
+	{
+		cout<<"----------------------------------------------------\n";
+		cout<<"1-Add Car\n2-Delete Car\n3-Modify Car";
+		cout<<"\n4-Replace Car\n5-Display Car\n6-Exit\nEnter Your Choice: ";
+		cin>>key;
+		if(key==1)
+			c.add();
+		else if(key==2)
+			c.remove();
+		else if(key==3)
+			c.modify();
+		else if(key==4)
+			c.replace();
+		else if(key==5)
+			c.display();
+	}while(key!=6);
+
+	getch();
+}
+
+*****************************************************************************************************************************************
+output:
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 1
+Enter HOw many Cars you want to add: 2
+
+----------------------
+Enter id of car: 1
+Enter Maker of car: Maruti
+Enter colour of car: red
+Enter size of car in inches: 23
+Enter cost of car in Rupee: 150000
+
+----------------------
+Enter id of car: 2
+Enter Maker of car: Suzuki
+Enter colour of car: white
+Enter size of car in inches: 20
+Enter cost of car in Rupee: 200000
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 5
+
+=======================
+Car ID: 1
+Maker of car: Maruti
+Colour of car: red
+Size of car: 23 Inches
+Cost of car: 150000 Rupee
+
+=======================
+Car ID: 2
+Maker of car: Suzuki
+Colour of car: white
+Size of car: 20 Inches
+Cost of car: 200000 Rupee
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 1
+Enter HOw many Cars you want to add: 2
+
+----------------------
+Enter id of car: 3
+Enter Maker of car: Mahindra
+Enter colour of car: blue
+Enter size of car in inches: 30
+Enter cost of car in Rupee: 3500000
+
+----------------------
+Enter id of car: 4
+Enter Maker of car: ferrari
+Enter colour of car: red
+Enter size of car in inches: 24
+Enter cost of car in Rupee: 4500000
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 5
+
+=======================
+Car ID: 1
+Maker of car: Maruti
+Colour of car: red
+Size of car: 23 Inches
+Cost of car: 150000 Rupee
+
+=======================
+Car ID: 2
+Maker of car: Suzuki
+Colour of car: white
+Size of car: 20 Inches
+Cost of car: 200000 Rupee
+
+=======================
+Car ID: 3
+Maker of car: Mahindra
+Colour of car: blue
+Size of car: 30 Inches
+Cost of car: 3.5e+006 Rupee
+
+=======================
+Car ID: 4
+Maker of car: ferrari
+Colour of car: red
+Size of car: 24 Inches
+Cost of car: 4.5e+006 Rupee
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 2
+Enter Car id which You want to delete: 2
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 5
+
+=======================
+Car ID: 1
+Maker of car: Maruti
+Colour of car: red
+Size of car: 23 Inches
+Cost of car: 150000 Rupee
+
+=======================
+Car ID: 3
+Maker of car: Mahindra
+Colour of car: blue
+Size of car: 30 Inches
+Cost of car: 3.5e+006 Rupee
+
+=======================
+Car ID: 4
+Maker of car: ferrari
+Colour of car: red
+Size of car: 24 Inches
+Cost of car: 4.5e+006 Rupee
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 3
+Enter Car id which You want to modify: 1
+Enter Maker name: maruti
+Enter colour of car: red
+Enter size of car in inches: 18
+Enter cost of car in Rupee: 160000
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 4
+Enter Car id which You want to replace: 6
+Enter Car id which You want to replace with: 2
+Invalid Car ID
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 4
+Enter Car id which You want to replace: 3
+Enter Car id which You want to replace with: 4
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice: 5
+
+=======================
+Car ID: 1
+Maker of car: maruti
+Colour of car: red
+Size of car: 18 Inches
+Cost of car: 160000 Rupee
+
+=======================
+Car ID: 4
+Maker of car: ferrari
+Colour of car: red
+Size of car: 24 Inches
+Cost of car: 4.5e+006 Rupee
+----------------------------------------------------
+1-Add Car
+2-Delete Car
+3-Modify Car
+4-Replace Car
+5-Display Car
+6-Exit
+Enter Your Choice:
+
+*****************************************************************************************************************************************
+
+

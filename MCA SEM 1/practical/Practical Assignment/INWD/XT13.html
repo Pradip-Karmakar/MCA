@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>XT13</title>
+<script>
+	var str=prompt("Enter a string");
+</script>
+</head>
+<body>
+	<ul type="none">
+		<li><input type="radio" name="ok" onchange="vowel(str)"> No. of Vowels </li>
+		<li><input type="radio" name="ok" onchange="reverse(str)"> Reverse of String </li>
+		<li><input type="radio" name="ok" onchange="palin(str)"> Check Palindrome </li>
+	</ul>
+	<p id="get"></p>
+</body>
+</html>
+<script>
+function vowel(str)
+{
+	var vowel_list = 'aeiouAEIOU';
+  	var vcount = 0;
+    for(var i = 0; i < str.length ; i++)
+ 	{
+	    if (vowel_list.indexOf(str[i]) !== -1)
+	    {
+		    vcount += 1;
+	    }  
+  	}
+	document.getElementById('get').innerHTML = "Vowels Occured : " +vcount;
+}
+
+function reverse(str){
+	var splitString = str.split("");
+   	var reverseArray = splitString.reverse();
+ 	var joinArray = reverseArray.join("");
+  	document.getElementById('get').innerHTML = "Reverse String : " +joinArray;
+}
+
+function palin(str)
+{
+	var len = str.length;
+    var mid = Math.floor(len/2);
+    for ( var i = 0; i < mid; i++ ) {
+        if (str[i] !== str[len - 1 - i]) {
+       		document.getElementById('get').innerHTML = "String Is Not Palindrome";	 
+	    }
+		else
+		{
+			document.getElementById('get').innerHTML = "String Is Palindrome";
+		}
+    }
+		
+}
+</script>

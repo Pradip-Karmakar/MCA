@@ -1,0 +1,120 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(5):Define a supplier class. The class contains details about the suppliers. One of the details is the list of items supplied by
+     the supplier. Create a class Item to store item details. The items supplied by any  given supplier are different and varying.
+     Use dynamic memory allocation in the constructor function to achieve the solution.  	
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class item
+{
+	string it_name;
+	int it_id;
+public:
+	void read()
+	{
+		cout<<"Enter item id: ";
+		cin>>it_id;
+		cout<<"Enter Item Name: ";
+		cin>>it_name;		
+	}
+	void display()
+	{
+		cout<<"\nItem id= "<<it_id<<endl;
+		cout<<"Item Name= "<<it_name<<endl;
+	}
+
+};
+
+class supplier
+{
+	string sp_name;
+	int sp_id,n;
+	item *it;
+public:
+	void read()
+	{
+		cout << "Enter Supplier id : ";
+		cin >> sp_id;
+		cout << "Enter Supplier Name : ";
+		cin >> sp_name;
+		cout << "Enter Number of items supplier supply: ";
+		cin >> n;
+		it = new item[n];
+		for( int i = 0; i < n; i++)
+		{
+			it[i].read();
+		}
+	}
+	void display()
+	{
+		cout << "Supplier ID : " << sp_id << endl;
+		cout << "Supplier Name : " << sp_name << endl;
+		cout << endl << "Items Supplied by supplier" << endl;
+		for( int i = 0; i < n; i++)
+		{
+			it[i].display();
+		}
+	}
+};
+
+void main()
+{
+	supplier s[2];
+	s[0].read();
+	s[1].read();
+	s[0].display();
+	s[1].display();
+}
+
+*****************************************************************************************************************************************
+
+output:
+
+Enter Supplier id : 1
+Enter Supplier Name : Pradip
+Enter Number of items supplier supply : 1
+
+Enter item id : 1
+Enter Item Name : Games
+
+Enter Supplier id : 2
+Enter Supplier Name : Sudip
+Enter Number of items supplier supply : 2
+
+Enter item id : 2
+Enter Item Name : Laptop
+
+Enter item id : 3
+Enter Item Name : Speakers
+
+Supplier ID : 1
+Supplier Name : Pradip
+
+Items Supplied by supplier
+Item id = 1
+Item Name = Gmaes
+
+Supplier ID: 2
+Supplier Name: Sudip
+
+Items supplied by supplier
+Item id = 2
+Item Name = Laptop
+
+Item id = 3
+Item Name = Speakers
+
+*****************************************************************************************************************************************

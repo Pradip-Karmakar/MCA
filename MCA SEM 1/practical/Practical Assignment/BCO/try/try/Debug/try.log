@@ -1,0 +1,13 @@
+﻿Build started 11-12-2019 23:09:09.
+     1>Project "E:\practical\Practical Assignment\BCO\try\try\try.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\try.unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt try.c
+         try.c
+     1>e:\practical\practical assignment\bco\try\try\try.c(7): error C2105: '--' needs l-value
+     1>Done Building Project "E:\practical\Practical Assignment\BCO\try\try\try.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.16

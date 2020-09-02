@@ -1,0 +1,69 @@
+
+	********************************************
+		NAME : YASH PALSANAWALA
+		CLASS : MCA - 2
+		ROLLNO : 32
+		SUBJECT : Web Application Development
+	********************************************
+
+****************************************************************************************
+Q. 4. Write a function which takes 5 number of input as array from user. Then calculate total and
+average and display total and average of the 5 numbers.[Hint: use & to return multiple values]
+****************************************************************************************
+
+********************************************
+	average.php
+********************************************
+
+<?php
+
+	echo "<form method='post' action='average.php'>";
+	echo "<br> Enter Total Number : ";
+	echo "<input type='number' name='num' >";
+	echo "<br> <input type='submit' name='submit' value='submit'> <br> <br>";
+	
+	if(isset($_POST['submit']))
+	{		
+		$n = $_POST['num'];
+		echo "<table>";
+		
+		for($i=1;$i<=$n;$i++)
+		{
+			echo "<tr>";
+			echo "<td> Enter $i Number : </td>";
+			echo "<td> <input type='number' name='val[]' required> </td>";
+			echo "</tr>";
+		}
+		
+		echo "</table>";
+		echo "<br> <input type='submit' name='submit1' value='Calculate'> <br> <br>";		
+	}
+	
+	if(isset($_POST['submit1']))
+		{
+			$t=0;
+			$avg=0;
+			
+			function calculate($arr,&$t,&$avg)
+			{
+				echo "<br> Values : ";
+				foreach($arr as $value)
+				{
+					echo "<br> $value";
+					$t = $t + $value;
+					$avg = $avg + 1;
+				}				
+			}
+			
+			$arr = $_POST['val'];
+			calculate($arr,$t,$avg);			
+			
+			$avg = $t/$avg;
+			echo "<br> Total = $t";
+			echo "<br> Average = $avg";
+		}
+
+	echo "</form>";
+?>
+
+*******************************************************************************************************

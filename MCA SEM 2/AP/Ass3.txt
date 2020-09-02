@@ -1,0 +1,2506 @@
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to create a singly linked list & Display In 
+            FIFO Pattern.
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure declaration 
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// function declarations 
+int ask_selection();
+void menu( struct node *, struct node * );
+struct node * get_link_list( struct node *, struct node * );
+int get_input();
+void display(struct node *);
+
+// main function
+void main()
+{
+    struct node *new,*head = NULL;    
+    menu(new,head);
+}
+
+
+// menu function gives user to choose option from menu
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head = get_link_list(new,head);
+        menu(new,head);
+    case(2):
+        display(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection function will get the user option selected
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Display The Link List in FIFO. \n 3 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 4 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// get_link_list funtion use for inserting elements in linklist from user
+struct node * get_link_list( struct node *new, struct node *head )
+{
+    int input = get_input();
+    struct node *temp;
+    temp = head;
+    new = (struct node *)malloc(sizeof(struct node));
+    if( head == NULL )
+    {
+        head = new;
+        temp = head;
+    }
+    else{
+        while( temp->next != NULL )
+        {
+            temp = temp->next;
+        }
+    }
+    temp->next = new;
+    new->data = input;
+    new->next = NULL;
+    return head;
+}
+
+
+// get_input will take input from user which is insert to link list.
+int get_input()
+{
+    int in;
+    printf("\n Enter The Number : ");
+    scanf("%d",&in);
+    return in;
+}
+
+
+// display the linklist till now
+void display(struct node *head)
+{
+    int count = 0;
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+            count++;
+        }
+        printf(" %d \n Total Data Found : %d \n",temp->data,count+1);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List. 
+ 2 . Display The Link List. 
+ 3 . Exit. 
+1
+
+ Enter The Number : 3
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 6
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 8
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 2
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+2
+
+The List is :
+ 3 =>  6 =>  8 =>  2
+Total Data Found : 4
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to create a singly linked list & Display In 
+            LIFO Pattern.
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure declaration 
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// function declarations 
+int ask_selection();
+void menu( struct node *, struct node * );
+struct node * get_link_list( struct node *, struct node * );
+int get_input();
+void display(struct node *);
+
+
+// main function
+void main()
+{
+    struct node *new,*head = NULL;    
+    menu(new,head);
+}
+
+
+// menu function gives user to choose option from menu
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head = get_link_list(new,head);
+        menu(new,head);
+    case(2):
+        display(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection function will get the user option selected
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Display The Link List in LIFO. \n 3 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 4 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// get_link_list funtion use for inserting elements in linklist from user
+struct node * get_link_list( struct node *new, struct node *head )
+{
+    int input = get_input();
+        new = (struct node *)malloc(sizeof(struct node));  
+        new->data = input;
+        new->next = head;
+        head = new;
+    return head;
+}
+
+
+// get_input will take input from user which is insert to link list.
+int get_input()
+{
+    int in;
+    printf("\n Enter The Number : ");
+    scanf("%d",&in);
+    return in;
+}
+
+
+// display the linklist till now
+void display(struct node *head)
+{
+    int count = 0;
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+            count++;
+        }
+        printf(" %d \n Total Data Found : %d \n",temp->data, count+1);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List in LIFO.
+ 3 . Exit.
+1
+
+ Enter The Number : 4
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List in LIFO.
+ 3 . Exit.
+1
+
+ Enter The Number : 7
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List in LIFO.
+ 3 . Exit.
+1
+
+ Enter The Number : 8
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List in LIFO.
+ 3 . Exit.
+1
+
+ Enter The Number : 5
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List in LIFO.
+ 3 . Exit.
+1
+
+ Enter The Number : 9
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List in LIFO.
+ 3 . Exit.
+2
+
+The List is :
+ 9 =>  5 =>  8 =>  7 =>  4
+ Total Data Found : 5
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List in LIFO.
+ 3 . Exit.
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a menu driven program for insert delete and display link list.
+            
+*********************************************************************************************/
+
+#include<stdio.h>   //c standard library
+#include<conio.h>   //c input ouput library
+#include<stdlib.h>  //c stdlib Library file
+
+// Structure Declaration
+struct node{
+    int data;  
+    struct node *next;
+};
+
+// Functions Declaration
+void menu(struct node *,struct node *);
+int get_n(char);
+struct node * insert_beg(struct node *,struct node *,int);
+struct node * insert_end(struct node *,struct node *, int);
+struct node * insert_atany(struct node *,struct node *, int);
+struct node * delete_data(struct node *,struct node *, int);
+void display_link(struct node *);
+
+// Void Main
+void main()
+{
+    struct node *new;
+    struct node *head = NULL;
+    menu(new,head); // Calling menu funtion
+}
+
+// menu function
+void menu( struct node *new, struct node *head )
+{
+    int n,getnum;
+    printf("\n 1 . Add New Data To Linklist From Begining. \n 2 . Add New Data To Linklist From Ending.\n 3 . Add New Data To Linklist At Any Place. \n 4 . Delete a Number From The Link-List. \n 5 . Display LinkList Till Now. \n 6 . Exit. \n");
+    scanf("%d",&n);
+    // Switch case which check the user input and run specified function
+    switch(n)
+    {
+        case(1):
+            getnum = get_n('i');
+            head = insert_beg(new,head,getnum);   //insertion from begining linklist function call 
+            menu(new,head);    //void menu function call
+        case(2):
+            getnum = get_n('i');
+            head = insert_end(new,head,getnum);   //insertion from ending linklist function call 
+            menu(new,head);    //void menu function call
+        case(3):
+            getnum = get_n('i');
+            head = insert_atany(new,head,getnum);   //insertion from any point linklist function call 
+            menu(new,head);    //void menu function call
+        case(4):
+            getnum = get_n('d');
+            head = delete_data(new,head,getnum);
+            menu(new,head);
+        case(5):
+            display_link(head);     //display linklist function call 
+            menu(new,head);     //void menu function call
+        case(6):
+            exit(0);    //exit function call which terminated the program
+        default:
+            printf("\n Please Enter Valid Number.");
+            menu(new,head);     //void menu function call
+    }
+}
+
+// function for taking input from user
+
+int get_n(char a)
+{
+    int n;
+    if( a == 'i' )
+    {
+        printf(" Enter The Number : ");
+    }
+    else{
+        printf(" Enter The Number to Delete : ");
+    }
+    scanf("%d",&n);
+    return n;
+}
+
+//  function insert_beg, use for linklist begining insertion 
+struct node * insert_beg( struct node *new, struct node *head,int n )
+{
+    new = (struct node *)malloc(sizeof(struct node));  
+    new->data = n;
+    new->next = head;
+    head = new;
+    return head;
+}
+
+//  function insert_end, use for linklist ending insertion 
+struct node * insert_end( struct node *new, struct node *head, int n )
+{
+    struct node *temp;
+    new = (struct node *)malloc(sizeof(struct node));
+    if( head == NULL )
+    {
+        head = new;
+        temp = head;
+    }
+    else{
+        temp = head;
+        while( temp->next != NULL ) // loop until next has NULL 
+        {
+            temp = temp->next;    
+        }
+    }
+    temp->next = new; 
+    new->data = n;
+    new->next = NULL;
+    return head;
+}
+
+//  function insert_atany, use for linklist any-point insertion 
+struct node * insert_atany( struct node *new, struct node *head, int n )
+{
+    struct node *first;
+    struct node *last;
+    first = head;
+    new = (struct node *)malloc(sizeof(struct node));
+    if( head == NULL || head->data >= n )  // check if head already NUll or input value of user need to insert at begining
+    {
+        new->data = n;
+        new->next = head;
+        head = new;
+    }
+    else{
+        while( first != NULL && first->data < n )  // loop until user input in greater
+        {
+            last = first;   // store last linklist address
+            first = first->next; // store next linklist address
+        }
+        new->data = n;
+        new->next = first;
+        last->next = new;
+    }
+    return head;
+}
+
+struct node * delete_data( struct node *new, struct node *head,int n )
+{
+    struct node *temp,*tempstore;
+    temp = head;
+    if( head == NULL )
+    {
+        printf("\n There is Nothing To Delete. \n");
+    }
+    else if( temp->data == n )
+    {
+        head = temp->next;
+        free(temp);
+    }
+    else{
+        if( temp->data != n && temp->next == NULL )
+        {
+            printf("\n No Such Data To Delete. \n");
+        }
+        else if( temp->data == n && temp->next == NULL )
+        {
+            free(temp);
+            head = NULL;
+        }
+        else{
+            while( temp->next->data != n )
+            {
+                if( temp->next->next != NULL)
+                {
+                    temp = temp->next;
+                }
+                else{
+                    printf("\n No Such Data To Delete. \n");
+                    menu(new,head);
+                }
+            }
+            tempstore = temp->next;
+            temp->next = temp->next->next;
+            free(tempstore);
+        }
+    }
+    return head;
+}
+
+//  function display_link will display the linklist elements
+void display_link(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)    // check wheater the head is null
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)   // print all the elements from the link-list
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+1
+ Enter The Number : 5
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+1
+ Enter The Number : 4
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+1
+ Enter The Number : 2
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+2
+ Enter The Number : 7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+5
+
+The List is :
+ 2 =>  4 =>  5 =>  7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+3
+ Enter The Number : 8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+5
+
+The List is :
+ 2 =>  4 =>  5 =>  7 =>  8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+3
+ Enter The Number : 3
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+5
+
+The List is :
+ 2 =>  3 =>  4 =>  5 =>  7 =>  8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+4
+ Enter The Number to Delete : 7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+5
+
+The List is :
+ 2 =>  3 =>  4 =>  5 =>  8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+4
+ Enter The Number to Delete : 9
+
+ No Such Data To Delete.
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Delete a Number From The Link-List.
+ 5 . Display LinkList Till Now.
+ 6 . Exit.
+6
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a C program to create a ordered singly linked list & Display.
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// structure declaration
+struct node{
+    int data;
+    struct node *next;
+};
+
+// ask_selection function will get the user option selected
+int ask_selection();
+void menu( struct node *, struct node * );
+struct node * get_link_list( struct node *, struct node * );
+int getinput();
+void display(struct node *);
+
+
+// main function
+void main()
+{
+    struct node *new,*head = NULL;
+    menu(new,head);
+}
+
+
+// menu function give user menu driven outlet
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head = get_link_list(new,head);
+        menu(new,head);
+    case(2):
+        display(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection function will get the user option selected
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Display The Link List. \n 3 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 4 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// take user input for inserting data 
+int getinput()
+{
+    int in;
+    printf("\n Enter The Number : ");
+    scanf("%d",&in);
+    return in;
+}
+
+
+// insert user data into link list
+struct node * get_link_list( struct node *new, struct node *head )
+{
+    int i,input = getinput();
+    struct node *first,*last;
+    new = (struct node *)malloc(sizeof(struct node));
+    if(head == NULL || head->data >= input)
+    {
+        new->data = input;
+        new->next = head;
+        head = new;
+    }
+    else{
+        first = head;
+        while( first != NULL && first->data < input )
+        {
+            last = first;
+            first = first->next;
+        }
+        new->data = input;
+        new->next = first;
+        last->next = new;
+    }
+    return head;
+}
+
+
+// display all data available in linklist
+void display(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 4
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 3
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+2
+
+The List is :
+ 3 =>  4
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 6
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+2
+
+The List is :
+ 3 =>  4 =>  6
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 5 
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+2
+
+The List is :
+ 3 =>  4 =>  5 =>  6
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 2
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+2
+
+The List is :
+ 2 =>  3 =>  4 =>  5 =>  6
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 8
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+2
+
+The List is :
+ 2 =>  3 =>  4 =>  5 =>  6 =>  8
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+1
+
+ Enter The Number : 7
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+2
+
+The List is :
+ 2 =>  3 =>  4 =>  5 =>  6 =>  7 =>  8
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Link List.
+ 3 . Exit.
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to create a singly linked list in Reversed Order.
+            & Display.
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure Declaration
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// Functions Declaration
+void menu( struct node *, struct node * );
+int ask_selection();
+struct node * get_linklist_with_reverse( struct node *, struct node * );
+int get_input();
+int count_linklist( struct node * );
+struct node * reverse_linklist( struct node * );
+void display_linklist(struct node *);
+
+
+// Main Function 
+void main()
+{
+    struct node *new,*head = NULL;
+    menu(new,head);
+}
+
+
+// Menu Function
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection(),linklist_count = 0;
+    switch (selection)
+    {
+    case(1):
+        head = get_linklist_with_reverse(new,head);
+        menu(new,head);
+    case(2):
+        linklist_count = count_linklist(head);  
+        if( linklist_count > 1 )
+        {
+            head = reverse_linklist(head);
+            printf("\n Link List Reversed. \n");
+        }
+        else{
+            printf(" \n No Need To Reverse LinkList. \n");
+        }
+        menu(new,head);
+    case(3):
+        display_linklist(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection Function
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Reverse Link-List. \n 3 . Display The Link List. \n 4 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 5 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// getting elements to linklist with reverse functionality Function
+struct node * get_linklist_with_reverse( struct node *new, struct node *head )
+{
+    int i,input = get_input();
+    new = (struct node *)malloc(sizeof(struct node));  
+    new->data = input;
+    new->next = head;
+    head = new;
+    return head;
+}
+
+
+// Function for getting input from user 
+int get_input()
+{
+    int in;
+    printf("\n Enter The Number : ");
+    scanf("%d",&in);
+    return in;
+}
+
+
+// Counting The Total Elements Available in Linklist
+int count_linklist( struct node *head)
+{
+    int count = 0;
+    struct node *temp;
+    temp = head;
+    while( temp != NULL )
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+
+// Function to reverse the linklist
+struct node * reverse_linklist( struct node *head )
+{
+    struct node *recent,*last = NULL,*first = NULL;
+    recent = head;
+    while( recent != NULL )
+    {
+        first = recent->next;
+        recent->next = last;
+        last = recent;
+        recent = first;
+    }
+    head = last;
+    return head;
+}
+
+
+// Funtion Display will show all elements in linklist
+void display_linklist(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 5
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 6
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 3
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 5
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 5 =>  3 =>  6 =>  5
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 9
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 2
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 2 =>  9 =>  5 =>  3 =>  6 =>  5
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+ Link List Reversed.
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 5 =>  6 =>  3 =>  5 =>  9 =>  2
+
+ 1 . Input Data To Link-List.
+ 2 . Reverse Link-List.
+ 3 . Display The Link List.
+ 4 . Exit.
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to create a singly linked list Add All the Elements 
+            & Display.
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure Declaration
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// Functions Declaration
+void menu( struct node *, struct node * );
+int ask_selection();
+struct node * get_linklist( struct node *, struct node * );
+int get_input();
+void Addition_Element_linklist( struct node * );
+void display_linklist(struct node *);
+
+
+// Main Function 
+void main()
+{
+    struct node *new,*head = NULL;
+    menu(new,head);
+}
+
+
+// Menu Function
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head = get_linklist(new,head);
+        menu(new,head);
+    case(2): 
+        Addition_Element_linklist(head);
+        menu(new,head);
+    case(3):
+        display_linklist(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection Function
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Display The Addition of Element from Link List. \n 3 . Display The Link List. \n 4 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 5 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// getting elements to linklist with reverse functionality Function
+struct node * get_linklist( struct node *new, struct node *head )
+{
+    int i,input = get_input();
+    new = (struct node *)malloc(sizeof(struct node));  
+    new->data = input;
+    new->next = head;
+    head = new;
+    return head;
+}
+
+
+// Function for getting input from user 
+int get_input()
+{
+    int in;
+    printf("\n Enter The Number : ");
+    scanf("%d",&in);
+    return in;
+}
+
+
+// Function to add element of the linklist
+void Addition_Element_linklist( struct node *head )
+{
+    int sum = 0;
+    struct node *temp;
+    temp = head;
+    while( temp != NULL )
+    {
+        sum += temp->data;
+        temp = temp->next;
+    }
+    printf(" \n The Total of the All Elements : %d \n",sum);
+}
+
+
+// Funtion Display will show all elements in linklist
+void display_linklist(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Addition of Element from Link List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 3
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Addition of Element from Link List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 5
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Addition of Element from Link List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 7
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Addition of Element from Link List.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 8
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Addition of Element from Link List.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 8 =>  7 =>  5 =>  3
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Addition of Element from Link List.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+ 
+ The Total of the All Elements : 23
+
+ 1 . Input Data To Link-List.
+ 2 . Display The Addition of Element from Link List.
+ 3 . Display The Link List.
+ 4 . Exit.
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to create two singly linked list & Append Into 
+            First Linklist & Display
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure declaration 
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// function declarations
+void menu( struct node *, struct node *, struct node *, struct node * );
+int ask_selection();
+struct node * get_linklist( struct node *new, struct node *head );
+int get_input();
+void display_linklist( struct node *, struct node * );
+void append_link_list( struct node *, struct node * );
+
+
+
+// main function
+void main()
+{
+    struct node *list1,*list2,*head1 = NULL,*head2 = NULL;
+    menu(list1,list2,head1,head2);
+}
+
+
+// menu function gives user to choose option from menu
+void menu( struct node *list1, struct node *list2, struct node *head1, struct node *head2 )
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head1 = get_linklist(list1,head1);
+        menu(list1,list2,head1,head2);
+    case(2): 
+        head2 = get_linklist(list2,head2);
+        menu(list1,list2,head1,head2);
+    case(3):
+        display_linklist(head1,head2);
+        menu(list1,list2,head1,head2);
+    case(4):
+        append_link_list(head1,head2);
+        menu(list1,list2,head1,head2);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection function will get the user option selected
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To First Link-List. \n 2 . Input Data To Second Link-List.  \n 3 . Display The Elements from Both Link List. \n 4 . Append The Second Link List into First Link List. \n 5 . Exit. \n");
+    scanf("%d",&n);
+    if( n > 0 && n < 6 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// get_link_list funtion use for inserting elements in linklist from user
+struct node * get_linklist( struct node *new, struct node *head )
+{
+    int i,input = get_input();
+    struct node *temp;
+    new = (struct node *)malloc(sizeof(struct node));
+    if( head == NULL )
+    {
+        head = new;
+        new->data = input;
+        new->next = NULL;
+    }
+    else{
+        temp = head;
+        while( temp->next != NULL )
+        {
+            temp = temp->next;
+        }
+        temp->next = new;
+        new->data = input;
+        new->next = NULL;
+    } 
+    return head;
+}
+
+
+
+// get_input will take input from user which is insert to link list.
+int get_input()
+{
+    int in;
+    printf("\n Enter The Number : ");
+    scanf("%d",&in);
+    return in;
+}
+
+
+// display both link list
+void display_linklist(struct node *head1, struct node *head2 )
+{
+    struct node *temp;
+    if(head1 == NULL)
+    {
+        printf("\nFirst Link List : NULL\n");
+    }
+    else
+    {
+        temp = head1;
+        printf("\nFirst Link List : ");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+
+    if(head2 == NULL)
+    {
+        printf("\nSecond Link List : NULL\n");
+    }
+    else
+    {
+        temp = head2;
+        printf("\nSecond Link List : ");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+
+// append second linklist into first linklist
+void append_link_list( struct node *head1, struct node *head2 )
+{
+    struct node *temp_head1,*temp_head2,*prev = NULL;
+    if( head2 == NULL )
+    {
+        printf("\n Nothing To Append. \n");
+    }
+    else{
+        temp_head1 = head1;
+        temp_head2 = head2;
+
+        while( temp_head1->next != NULL)
+        {
+            temp_head1 = temp_head1->next;
+        }
+        temp_head1->next = temp_head2;
+    }
+}
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+1
+
+ Enter The Number : 5
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+1
+
+ Enter The Number : 6
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+3
+
+First Link List :  5 =>  6
+
+Second Link List : NULL
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+4
+
+ Nothing To Append.
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+2
+
+ Enter The Number : 4
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+2
+
+ Enter The Number : 7
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+2
+
+ Enter The Number : 8
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+3
+
+First Link List :  5 =>  6
+
+Second Link List :  4 =>  7 =>  8
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+4
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+3
+
+First Link List :  5 =>  6 =>  4 =>  7 =>  8
+
+Second Link List :  4 =>  7 =>  8
+
+ 1 . Input Data To First Link-List.
+ 2 . Input Data To Second Link-List.
+ 3 . Display The Elements from Both Link List.
+ 4 . Append The Second Link List into First Link List.
+ 5 . Exit.
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to swap two consecutive value from the 
+            linklist & display.( only value swap )
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure Declaration
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// Functions Declaration
+void menu( struct node *, struct node * );
+int ask_selection();
+struct node * get_linklist( struct node *, struct node * );
+int get_input(int);
+void Swap_Element_linklist( struct node * );
+void display_linklist(struct node *);
+
+
+// Main Function 
+void main()
+{
+    struct node *new,*head = NULL;
+    menu(new,head);
+}
+
+
+// Menu Function
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head = get_linklist(new,head);
+        menu(new,head);
+    case(2): 
+        Swap_Element_linklist(head);
+        menu(new,head);
+    case(3):
+        display_linklist(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection Function
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Swap The Consecutive Values. \n 3 . Display The Link List. \n 4 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 5 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// getting elements to linklist Function
+struct node * get_linklist( struct node *new, struct node *head )
+{
+    int i,input = get_input(0);
+    new = (struct node *)malloc(sizeof(struct node));  
+    new->data = input;
+    new->next = head;
+    head = new;
+    return head;
+}
+
+
+// Function for getting input from user 
+int get_input(int a)
+{
+    int in;
+    if( a == 0 )
+    {
+        printf("\n Enter The Number : ");
+    }
+    else{
+        printf("\n Enter The Swapping Number : ");
+    }
+    scanf("%d",&in);
+    return in;
+}
+
+
+// Function to swap element of the linklist
+void Swap_Element_linklist( struct node *head )
+{
+    int swap_me = get_input(1),temp_hold = 0;
+    struct node *temp;
+    temp = head;
+    while( temp != NULL && temp->data != swap_me )
+    {
+        temp = temp->next;
+    }
+    if( temp == NULL || temp->next == NULL )
+    {
+        printf("\n Swapping Not Possible. \n");
+    }
+    else{
+        temp_hold = temp->data;
+        temp->data = temp->next->data;
+        temp->next->data = temp_hold;
+        printf(" \n Swapping Done. \n");
+    }
+}
+
+
+// Funtion Display will show all elements in linklist
+void display_linklist(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 5
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 7
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 4
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 9
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 9 =>  4 =>  7 =>  5
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+ Enter The Swapping Number : 7
+ 
+ Swapping Done.
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 9 =>  4 =>  5 =>  7
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+ Enter The Swapping Number : 4
+ 
+ Swapping Done.
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 9 =>  5 =>  4 =>  7
+
+ 1 . Input Data To Link-List.
+ 2 . Swap The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to swap two consecutive value from the 
+            linklist & display. ( Only Address Swap )
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure Declaration
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// Functions Declaration
+void menu( struct node *, struct node * );
+int ask_selection();
+struct node * get_linklist( struct node *, struct node * );
+int get_input(int);
+struct node * Swap_Element_linklist( struct node * );
+void display_linklist(struct node *);
+
+
+// Main Function 
+void main()
+{
+    struct node *new,*head = NULL;
+    menu(new,head);
+}
+
+
+// Menu Function
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head = get_linklist(new,head);
+        menu(new,head);
+    case(2): 
+        head = Swap_Element_linklist(head);
+        menu(new,head);
+    case(3):
+        display_linklist(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection Function
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Swap Address of The Consecutive Values. \n 3 . Display The Link List. \n 4 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 5 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// getting elements to linklist Function
+struct node * get_linklist( struct node *new, struct node *head )
+{
+    int i,input = get_input(0);
+    new = (struct node *)malloc(sizeof(struct node));  
+    new->data = input;
+    new->next = head;
+    head = new;
+    return head;
+}
+
+
+// Function for getting input from user 
+int get_input(int a)
+{
+    int in;
+    if( a == 0 )
+    {
+        printf("\n Enter The Number : ");
+    }
+    else{
+        printf("\n Enter The Swapping Number : ");
+    }
+    scanf("%d",&in);
+    return in;
+}
+
+
+// Function to swap address of the linklist
+struct node * Swap_Element_linklist( struct node *head )
+{
+    int swap_me = get_input(1);
+    struct node *temp,*first = NULL,*prev = NULL;
+    temp = head;
+    while( temp != NULL && temp->data != swap_me )
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+    if( temp == NULL || temp->next == NULL )
+    {
+        printf("\n Swapping Not Possible. \n");
+    }
+    else{
+        if( prev == NULL )
+        {
+            head = temp->next;
+            first = temp->next->next;
+            temp->next->next = temp;
+            temp->next = first;
+        }
+        else{
+            first = temp->next->next;
+            prev->next = temp->next;
+            temp->next->next = temp;
+            temp->next = first;
+
+        }
+        printf(" \n Swapping Done. \n");
+    }
+    return head;
+}
+
+
+// Funtion Display will show all elements in linklist
+void display_linklist(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 2
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 4
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 6 
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 7
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 9
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 16
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 16 =>  9 =>  7 =>  6 =>  4 =>  2
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+ Enter The Swapping Number : 9
+ 
+ Swapping Done.
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 16 =>  7 =>  9 =>  6 =>  4 =>  2
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+ Enter The Swapping Number : 16
+ 
+ Swapping Done.
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 7 =>  16 =>  9 =>  6 =>  4 =>  2
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+ Enter The Swapping Number : 6
+ 
+ Swapping Done.
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 7 =>  16 =>  9 =>  4 =>  6 =>  2
+
+ 1 . Input Data To Link-List.
+ 2 . Swap Address of The Consecutive Values.
+ 3 . Display The Link List.
+ 4 . Exit.
+
+
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+
+**********************************************************************************************
+
+Questions : Write a modular C program to create a singly linked list & split into 
+            two linklist & display.
+            
+*********************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+// Structure Declaration
+struct node{
+    int data;
+    struct node *next;
+};
+
+
+// Functions Declaration
+void menu( struct node *, struct node * );
+int ask_selection();
+struct node * get_linklist( struct node *, struct node * );
+int get_input();
+void display_splitted_linklist( struct node *, struct node * );
+void split( struct node *, struct node **, struct node **, int );
+void display_linklist(struct node *);
+
+
+// Main Function 
+void main()
+{
+    struct node *new,*head = NULL;
+    menu(new,head);
+}
+
+
+// Menu Function
+void menu(struct node *new,struct node *head)
+{
+    int selection = ask_selection();
+    switch (selection)
+    {
+    case(1):
+        head = get_linklist(new,head);
+        menu(new,head);
+    case(2): 
+        display_splitted_linklist(new,head);
+        menu(new,head);
+    case(3):
+        display_linklist(head);
+        menu(new,head);    
+    default:
+        exit(0);
+    }
+}
+
+
+// ask_selection Function
+int ask_selection()
+{
+    int n;
+    printf("\n 1 . Input Data To Link-List. \n 2 . Split Link-List into Two. \n 3 . Display The Link List. \n 4 . Exit. \n");
+    scanf(" %d",&n);
+    if( n > 0 && n < 5 )
+    {
+        return n;
+    }
+    else{
+        printf("\n Wrong Selection Please Choose Correct Options. \n");
+        ask_selection();
+    }
+}
+
+
+// getting elements to linklist Function
+struct node * get_linklist( struct node *new, struct node *head )
+{
+    int i,input = get_input();
+    new = (struct node *)malloc(sizeof(struct node));  
+    new->data = input;
+    new->next = head;
+    head = new;
+    return head;
+}
+
+
+// Function for getting input from user 
+int get_input()
+{
+    int in;
+    printf("\n Enter The Number : ");
+    scanf("%d",&in);
+    return in;
+}
+
+
+// Function to diplay spliteed linklist
+void display_splitted_linklist( struct node *new, struct node *head )
+{
+    struct node *temp, *splithead1 = NULL, *splithead2 = NULL;
+    temp = head;
+    int count = 0,split_1 = 0,split_2 = 0;
+    while( temp != NULL )
+    {
+        count++;
+        temp = temp->next;
+    }
+    if( count < 2 )
+    {
+        printf(" No Need To split Link-List, Less Than 2 Elements or Empty.");
+    }
+    else{
+        temp = head;
+        split_1 = count/2;
+        split_2 = count - split_1;
+        split( new,&splithead1,&temp,split_1 );
+        split( new,&splithead2,&temp,split_2 );
+        display_linklist(splithead1);
+        display_linklist(splithead2);
+    }
+    
+}
+
+
+// split the link list
+void split( struct node *new, struct node **splithead, struct node **temp, int limit )
+{
+    struct node *splittertemp,*temp2;
+    temp2 = *temp;
+    while( limit > 0 )
+        {
+            new = (struct node *)malloc(sizeof(struct node));
+            if( *splithead == NULL )
+            {
+                *splithead = new;
+                splittertemp = *splithead;
+            }
+            splittertemp->next = new;
+            new->data = temp2->data;
+            new->next = NULL;
+            splittertemp = new;
+            temp2 = temp2->next;
+            --limit;
+        }
+        *temp = temp2;
+}
+
+
+// Funtion Display will show all elements in linklist
+void display_linklist(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 3
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 6
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 5
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 59
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 64
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 18 
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+3
+
+The List is :
+ 18 =>  64 =>  59 =>  5 =>  6 =>  3
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+The List is :
+ 18 =>  64 =>  59
+
+The List is :
+ 5 =>  6 =>  3
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 9
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+The List is :
+ 9 =>  18 =>  64
+
+The List is :
+ 59 =>  5 =>  6 =>  3
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+1
+
+ Enter The Number : 10
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.
+2
+
+The List is :
+ 10 =>  9 =>  18 =>  64
+
+The List is :
+ 59 =>  5 =>  6 =>  3
+
+ 1 . Input Data To Link-List.
+ 2 . Split Link-List into Two.
+ 3 . Display The Link List.
+ 4 . Exit.

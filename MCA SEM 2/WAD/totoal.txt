@@ -1,0 +1,2858 @@
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+Name: Pradip S Karmakar
+Roll-no: 10
+Class: MCA 2
+Subject: Web Application Development (WAD)
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+							Assignment - 1
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+
+Q1) Write program in PHP and Html which ask user to enter the Amount,rate and Duration in years and calculate and display 
+Simple the simple interest. 
+
+***********************************************************************************************************************************
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT1</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+		<h1>PRN FINDER</h1>
+		<form method="POST" name="form1">
+			<div>
+				<input type="number" name="p" placeholder="Enter Amount">
+			</div>
+			<div>
+				<input type="number" name="r" placeholder="Enter Rate Of Interest">
+			</div>
+			<div>
+				<input type="number" name="n" placeholder="Enter No of years">
+			</div>
+			<div>
+				<button class="submit" name="submit"> Submit </button>
+			</div>
+		</form>
+	</div>
+	<?php
+		if(isset($_POST['submit'])){
+			echo "<center>";	
+			$prn = ($_POST['p'] * $_POST['r'] * $_POST['n']) / 100;
+			echo "<h2> $prn </h2>";
+			echo "</center>";
+		}
+	?>
+</body>
+</html>
+
+			
+***********************************************************************************************************************************
+
+Q2) Write a PP and HTML script which ask user to enter his first name and last name and display it. The program must get the values 
+by using $_GET, $POST and $_REQUEST. Check if you set method = Get/post and retrieve the variable using $_POST/$_GET.
+
+***********************************************************************************************************************************
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT2</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+		<form method="POST" name="form1">
+			<div>
+				<input type="text" name="fname" autocomplete="off" placeholder="First Name">
+			</div>
+			<div>
+				<input type="text" name="lname" autocomplete="off" placeholder="Last Name">
+			</div>
+			<div>
+				<button class="submit" name="submit"> Submit </button>
+			</div>
+		</form>
+	
+		<?php
+		if(isset($_POST['submit']))
+		{
+			if($_SERVER['REQUEST_METHOD'] === 'POST') {
+				echo "<br>Method is POST";
+				if($_REQUEST['fname']) {
+					echo "<br>Using Request";
+					echo "<br> Your First name : " . $_REQUEST['fname'];
+				}
+				if($_REQUEST['fname']) {
+					echo "<br> Your First name : " . $_REQUEST['lname'];
+				}
+			}
+
+
+			else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+				echo "<br>Method is GET";	
+				if($_REQUEST['fname']) {
+					echo "<br>Using Request";
+					echo "<br> Your First name : " . $_REQUEST['fname'];
+				}
+				if($_REQUEST['fname']) {
+					echo "<br> Your First name : " . $_REQUEST['lname'];
+				}
+			}
+		}
+		?>
+	</div>
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+Q3) Write a PHP script which ask user to provide min and max radius value. The sciprt will display area of a circle of radius wise. 
+The format should be as follow: The area of circle for radius 1 is 3.14 sq meter. [ Min value = 1]
+
+***********************************************************************************************************************************
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT3</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+		<form method="POST">
+			<div>
+				<input type="number" name="min" autocomplete="off" placeholder="Minimum">
+			</div>
+			<div>
+				<input type="number" name="max" autocomplete="off" placeholder="Maximum">
+			</div>
+			<div>
+				<button class="submit" name="submit"> Submit </button>
+			</div>
+		</form>
+	
+		<?php
+		if (isset($_POST['submit'])) {
+			$min = $_POST['min'];
+			$max = $_POST['max'];	
+			if($min < 1) {
+				echo "<br>Minimum Value must be greater than 0";
+				die();
+			}	
+			else if($min > $max){
+				echo "<br>Maximum value must be greater than mininum value";
+				die();
+			}
+
+			for ($i = $min; $i <= $max ; $i++) { 
+				echo "<br> The radius of " .$i. " is " . (3.14 * $i * $i);
+			}
+		}
+		?>
+	</div>
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+4) Write a PHP/HTML script which ask user to enter StudentID, Name, and marks of the 3 subjects. The script will display the 
+total marks,percentage and grade. The guideline to determine Grade is;
+									Grade A if percentage >70
+									Grade B if percentage >65
+									Grade C if percentage >60
+									Grade D if percentage >55
+									Grade E if percentage >50
+									Grade F if percentage < 50.
+Write the same script by using if –else ladder and switch case. Make validations that the marks are must be positive integer numbers only. StudentID and student Name must be entered.
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT4</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+		<form method="POST">
+			<div>
+				<input type="number" name="rno" required placeholder="Student Roll No">
+			</div>
+			<div>
+				<input type="text" name="sname" autocomplete="off" placeholder="Enter Student Name">
+			</div>
+			<div>
+				<input type="number" name="m1" autocomplete="off" placeholder="Marks 1">
+			</div>
+			<div>
+				<input type="number" name="m2" autocomplete="off" placeholder="Marks 2">
+			</div>
+			<div>
+				<input type="number" name="m3" autocomplete="off" placeholder="Marks 3">
+			</div>
+			<div>
+				<button class="submit" name="submit"> Submit </button>
+			</div>
+		</form>
+	
+		<?php
+		if(isset($_POST['submit'])){
+			if($_POST['rno'] == '' || is_nan($_POST['rno'])) {
+				echo "Invalid Student Roll No.";
+			}
+			else if ($_POST['sname'] == '') {
+				echo "Fill Student Name.";
+			}
+			else {
+				$m1 = $_POST['m1'];
+				$m2 = $_POST['m2'];
+				$m3 = $_POST['m3'];
+				if($m1 < 0 || $m1 > 100 || $m2 < 0 || $m2 > 100 || $m3 < 0 || $m3 > 100) {
+					echo "<br>Marks Must be btween 0 to 100";
+				} else {
+					$tot = $m1 + $m2 + $m3;
+					$per = $tot / 3;
+					echo "<br>Total: " . number_format((float)$tot, 2, '.', ',');
+					echo "<br>Percentage: " . number_format((float)$per, 2, '.', '');
+
+					switch(1) {
+						case ($per > 80): echo "<br>Distinction"; break;
+						case ($per > 70): echo "<br>First Class"; break;
+						case ($per > 60): echo "<br>Second Class"; break;
+						case ($per > 50): echo "<br>Third Class"; break;
+						case ($per > 35): echo "<br>Pass"; break;
+						default: echo "<br>Fail"; break;
+					}
+				}
+			}
+		}
+		?>
+	</div>
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+Q5) Write a PHP script which will write students information in a binary(textfile) name studinfo.txt and display acknowledgement.
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT5</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+		<form method="POST">
+			<div>
+				<input type="text" name="sname" autocomplete="off" placeholder="Enter The Name" required>
+			</div>
+			<div>
+				<button class="submit" name="submit"> Submit </button>
+			</div>
+		</form>
+	
+		<?php
+		if(isset($_POST['submit'])) {
+			if ($_POST['sname'] == '') 
+			{ 
+				echo "Fill The Name"; 
+			} 
+			else {
+				$f1 = @fopen('files/studinfo.txt', 'a+b');
+				$sname = "\r\n" . $_POST['sname'];
+				$fwrite = fwrite($f1, $sname);
+				if($fwrite === false) {
+					echo "Fail To Register Name."; 
+				} else {
+					echo "Name Registered Successfully. " . $fwrite . " bytes written.";
+				}
+				fclose($f1); 
+			} 
+		}
+		?>
+	</div>
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+6) Write a PHP script which will read the students information from the file studinfo.txt and display records.
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT6</title>
+</head>
+<body>
+<?php
+	if(file_exists("files/studinfo.txt")) {
+		$f1Handle = @fopen("files/studinfo.txt", "rb");
+		echo fread($f1Handle, filesize('files/studinfo.txt'));
+		$fn = fopen("files/studinfo.txt","r");
+		while(! feof($fn))  {
+			$result = fgets($fn);
+			echo "<br>" . $result;
+		}
+		fclose($fn);
+		fclose($f1Handle);
+	} 
+	else {
+		echo "No such File Exists";
+	}
+?>
+</body>
+</html>
+		
+***********************************************************************************************************************************
+
+Q7) Write a PHP script which will display the filesize studinfo.txt and display records. Also provide functionality of record 
+navigation by using fseek, ftell and seek in built functions. 
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignmnet 1 XT7</title>
+</head>
+<body>
+	<?php
+	$file = 'files/7.txt';
+
+	$fReadHandle = fopen("files/studinfo.txt", 'r+');
+	$currentPosition = fgets($fReadHandle, 4);
+	echo "<br> Reading from Start <br>" . $currentPosition;
+
+	$currentPosition = fgets($fReadHandle, 5);
+	echo "<br> Reading from the last read <br>" . $currentPosition;
+	fseek($fReadHandle, 0);
+	
+	$currentPosition = fgets($fReadHandle, 4);
+	echo "<br> Again Reading from Start <br>" . $currentPosition;
+	
+	$ftell = ftell($fReadHandle);
+	echo '<br> $ftell' . " $ftell ";
+	?>
+</body>
+</html>
+***********************************************************************************************************************************
+
+Q8) Create a PHP/HTML script which allows user to choose his/her hobbies by checking the checkboxes and display the user’s hobbies.
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT8</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+		<h2>Hobby Selector</h2>
+		<form method="POST">
+			<div>
+				<input type="checkbox" id="h1" name="hobby[]" value="Gaming"> Gaming
+				<input type="checkbox" id="h2" name="hobby[]" value="Study"> Study
+				<input type="checkbox" id="h3" name="hobby[]" value="Sleeping"> Sleeping
+				<input type="checkbox" id="h3" name="hobby[]" value="Riding"> Riding
+				<input type="checkbox" id="h3" name="hobby[]" value="Travelling"> Travelling
+			</div>
+			<div>
+				<button class="submit" name="submit"> Submit </button>
+			</div>
+		</form>
+		<?php
+			if(isset($_POST['submit'])){
+				if(!empty($_POST['hobby'])){
+					foreach($_POST['hobby'] as $selected){
+						echo $selected."</br>";
+					}
+				}
+			}
+		?>
+	</div>
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+Q9) Create an array of your favorite Punjabi food. Write PHP script to display only even number position Punjabi food.
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT9</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+	<?php
+		$arr = array("1. Chana Masala","2. Dal Makhani","3. Chole Bhature","4. Kadai Paneer","5. Aloo Paratha","6. Chicken Leg Piece");
+		$i = 2;
+		foreach ($arr as $value) {
+			if($i % 2) {
+				echo "<br>" . $value;
+			}
+			$i++;
+		} 
+		?>
+	</div>
+</body>
+</html>
+
+
+***********************************************************************************************************************************
+
+Q10) Create an array of Milk Types and its price.  
+		i.Display all the types and price.  
+		ii. Sort the array by price and display. 
+		iii. Sort the array by milk type and display
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT10</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+	<?php
+
+		$milk = array ("Tazza" => 26, "Shakti" => 22, "Gold" => 30);
+		echo "Sort by Price<br>";
+		$pricesort = $procuct =  $milk;
+		asort($pricesort);
+		foreach($pricesort as $key=>$value)
+		{
+			echo $key . " : " . $value . "<br>"; 
+		}
+
+		echo "<br> Sort By Name <br>";
+
+		ksort($procuct);
+		foreach($procuct as $key=>$value)
+		{
+			echo $key . " : " . $value . "<br>"; 
+		}
+	?>
+	</div>
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+Q11) Create a 2-D array which stores the distance between Source and Destination of five cities in KM.  Allows user to chose source 
+and Destination from Drop Down list. The script should display correct distance between the two cities. 
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT11</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="box">
+      <form method="POST">
+        <div>
+          <select name = "cityA">
+              <option value = 0>Navsari</option>
+              <option value = 1>Surat</option>
+              <option value = 2>Ahmedabad</option>
+              <option value = 3>Kutchh</option>
+              <option value = 4>Mumbai</option>
+            </select>
+          
+            <select name = "cityB">
+              <option value = 0>Navsari</option>
+              <option value = 1>Surat</option>
+              <option value = 2>Ahmedabada</option>
+              <option value = 3>Kutchh</option>
+              <option value = 4>Mumbai</option>
+            </select>
+          </div>
+          <div>
+              <input type="submit" value="Submit" name="submit" class="submit">
+          </div>
+      </form>
+      <?php
+        if(isset($_POST['submit'])) {
+          $cityA = $_POST['cityA'];
+          $cityB = $_POST['cityB'];
+          $city = array (
+            "Navsari",
+            "Surat",
+            "Ahmedabad",
+            "Kutchh",
+            "Mumbai"
+          );
+
+          $distance = array (
+            array (0, 40, 398, 733, 426),
+            array (40, 0, 358, 693, 466),
+            array (398, 358, 0, 362, 850),
+            array (733, 693, 362, 0, 1162),
+            array (426, 466, 850, 1162, 0)
+          );
+
+          $result = $distance[$cityA][$cityB];
+          print "<h3>The distance between ";
+          print "$city[$cityA] to $city[$cityB]";
+          print " is $result Kms.</h3>";
+        }
+        ?>
+	</div>
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+Q12) Create a 2-D array which stores card types (‘C’,’H’,’D’,’S’) and rank (2,3,4,5,6,7,8,9,10, J, Q,K,A). Each type has 13 ranks. 
+Display total cards by their type and rank in ascending and descending order. Then shuffle it and display the cards.
+
+***********************************************************************************************************************************
+<?php
+    $cards = array( array("C_A","C_K","C_Q","C_J","C_10","C_9","C_8","C_7","C_6","C_5","C_4","C_3","C_2"),
+                    array("H_A","H_K","H_Q","H_J","H_10","H_9","H_8","H_7","H_6","H_5","H_4","H_3","H_2"),
+                    array("D_A","D_K","D_Q","D_J","D_10","D_9","D_8","D_7","D_6","D_5","D_4","D_3","D_2"),
+                    array("S_A","S_K","S_Q","S_J","S_10","S_9","S_8","S_7","S_6","S_5","S_4","S_3","S_2")
+    );
+    echo "Decending Order";
+    echo "<table border='1px'>";
+    for( $i = 0; $i < 4; $i++ )
+    {
+        echo "<tr>";
+        for( $j = 0; $j < 13; $j++ )
+        {
+            echo "<td>";
+            echo $cards[$i][$j];
+            echo "</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table> <br>";
+
+    echo "Accending Order";
+    echo "<table border='1px'>";
+    for( $i = 3; $i >= 0; $i-- )
+    {
+        echo "<tr>";
+        for( $j = 12; $j >= 0; $j-- )
+        {
+            echo "<td>";
+            echo $cards[$i][$j];
+            echo "</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table> <br>";
+
+    echo "After Shuffle";
+    echo "<table border='1px'>";
+    shuffle($cards);
+    for( $i = 0; $i < 4; $i++ )
+    { 
+        echo "<tr>";
+       for( $j = 0; $j < 13; $j++ )
+       {
+            shuffle($cards);
+            shuffle($cards[0]);
+            while( $cards[$i][$j] == "" )
+            {
+                shuffle($cards);
+                shuffle($cards[0]);
+            }
+            echo "<td>";
+            echo $cards[$i][$j];
+            echo "</td>";
+            $cards[$i][$j] = "";
+       }
+       echo "</tr>";
+    }
+    echo "</table>";
+?>
+
+***********************************************************************************************************************************
+
+Q13) Load the student’s details from studinfo.txt to an array and display all students information in tabular format
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 1 XT13</title>
+</head>
+<body>
+	<?php
+	$i = 0;
+	if(file_exists("files/studinfo.txt")) {
+		$f1Handle = @fopen("files/studinfo.txt", "rb");
+		
+		$fn = fopen("files/studinfo.txt","r");
+		while(! feof($fn))  {
+			$array[$i++] = fgets($fn);
+		}
+		fclose($fn);
+		echo '<table border="1" style="border: solid 3px #808080;">';
+		while($i--) {
+			echo "<tr>";
+			echo "<td>";
+			echo $array[$i];
+			echo "</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+		fclose($f1Handle);
+	} else {
+		echo "No such File Exists";
+	}
+	?>
+</body>
+</html>	
+***********************************************************************************************************************************
+
+Q14) Create an array and apply following functions and display the results:
+	i. each ii. Current iii. Reset  iv. End v. pos vi. Prev vii. array_walk viii. Count ix. Sizeof x. array_count_values xi. Extract
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1 XT14</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <div class="box">
+    <?php
+        function number($value,$key)
+        {
+            echo "<br>The $key called $value ";
+        }
+            $arr = array("1"=>"one","2" => "two","3" => "three","4" => "four","5" => "five");
+            $temp = "hello";
+            $temparr = array("temp" => "Morning", "temp2" => "Night", "temp3" => "Evening");
+
+            echo "<table border = '1'>";
+            echo "<tr><td>Each : </td><td>";
+            print_r (each($arr));
+
+            echo "</td></tr> <br> <tr><td>Current : </td><td>" . current($arr) . "</td></tr>";
+
+            echo "<br> <tr><td> Reset : </td><td>" . reset($arr). "</td></tr>";
+
+            echo "<br> <tr><td> End : </td><td>" . end($arr). "</td></tr>";
+
+            echo "<br> <tr><td> POS : </td><td>" . pos($arr). "</td></tr>";
+
+            echo "<br> <tr><td> Prev : </td><td>" . prev($arr) . "<br><tr><td>Array_Walk : </td><td>";
+
+            echo "</td></tr> <br> <tr><td> Array_walk Return : </td><td>" . array_walk($temparr,"number"). "</td></tr>";
+
+            echo "<br> <tr><td> Count : </td><td>" . count($arr). "</td></tr>";
+
+            echo "<br> <tr><td>Sizeof : </td><td>" . sizeof($arr) . "</td></tr> <br> <tr><td>Array_count_values : </td><td>";
+            
+            print_r  (array_count_values($arr));
+            echo "</td></tr>";
+
+            extract($temparr);
+            echo "<br> <tr><td>Extract : </td><td>" . $temp . "</td></tr></table>";
+        ?>
+    </div>
+</body>
+</html>
+***********************************************************************************************************************************
+
+Q15) Write a simple php script which evalutes following string functions and display the output:
+
+i. ltrim ii. Rtrim iii. Trim iv. Str_pad v. Lcfist vi. Ucfirst vii. Ucwords viii.ucfirst ix. Strtolower x. Strtoupper xi. Strrev 
+xii. Str_shuffle xiii. Str_repeat  xiv. Explode xv. Implode xvi. Strcmp xvii. Strcasecmp xviii. Strcasecmp xix. Strnatcmp xx. Strnatcasecmp  
+xxi. Strlen xxii. Strstr xxiii. Strchr xxiv. Strrchr xxv. Stristr xxvi. Strpos  xxvii. Strrpos  xxviii. Str_replace xxix. Subbstr_replace 
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1 XT15</title>
+</head>
+<body>
+<?php
+
+$str = "pradip karmakar";
+echo "<center>";
+echo '<table border = 1 >';
+
+echo "<tr><td>";
+echo "trim ";
+echo "</td><td>";
+echo trim($str,"kar"); 
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "rtrim ";
+echo "</td><td>";
+echo rtrim($str,"kar"); 
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "ltrim ";
+echo "</td><td>";
+echo ltrim($str,"pra"); 
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "STR_PAD_LEFT ";
+echo "</td><td>";
+echo str_pad($str, 30, "*", STR_PAD_LEFT); 
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "STR_PAD_BOTH ";
+echo "</td><td>";
+echo str_pad($str, 30, "*", STR_PAD_BOTH); 
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "STR_PAD";
+echo "</td><td>";
+echo str_pad($str, 30, "*"); 
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "lcfirst(Lower case)";
+echo "</td><td>"; 
+echo lcfirst("Hey siri!");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "ucfirst(Upper case)";
+echo "</td><td>"; 
+echo ucfirst("hey siri !");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "ucwords";
+echo "</td><td>"; 
+echo ucwords("Hey siri !");
+echo "</td></tr>";
+
+
+echo "<tr><td>";
+echo "Strtolower";
+echo "</td><td>"; 
+echo Strtolower($str);
+echo "</td></tr>";
+
+
+echo "<tr><td>";
+echo "strtoupper";
+echo "</td><td>"; 
+echo strtoupper($str);
+echo "</td></tr>";
+
+
+echo "<tr><td>";
+echo "strrev";
+echo "</td><td>"; 
+echo strrev($str);
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "str_shuffle (ymmv)";
+echo "</td><td>"; 
+echo str_shuffle($str);
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "str_repeat";
+echo "</td><td>"; 
+echo str_repeat(" P.J.D.A ", 5);
+echo "</td></tr>";
+
+$str2 = "Hello World Its Pradip Karmakar";
+echo "<tr><td>";
+echo "explode";
+echo "</td><td>"; 
+print_r(explode(' ', $str2, 1));
+echo "</td></tr>";
+
+$arr = array('Hello','Wolrd','Its','Pradip','Karmakar');
+echo "<tr><td>";
+echo "implode";
+echo "</td><td>"; 
+echo implode("<b>+</b>", $arr);
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strcmp";
+echo "</td><td>"; 
+echo strcmp("Pradip","pradip");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strcasecmp";
+echo "</td><td>"; 
+echo strcasecmp("Pradip","pradip");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strlen";
+echo "</td><td>"; 
+echo strlen("Pradip Karmakar");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strstr";
+echo "</td><td>"; 
+echo strstr("Pradip Karmakar", " ");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "stristr";
+echo "</td><td>"; 
+echo stristr("Pradip Karmakar", " K");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strrstr(true)";
+echo "</td><td>"; 
+echo strchr("Hello world world!","world",true);
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strchr";
+echo "</td><td>"; 
+echo strchr("Hello world world!","world");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strrchr";
+echo "</td><td>"; 
+echo strrchr("Hello world world!","world");
+echo "</td></tr>";
+
+
+echo "<tr><td>";
+echo "strpos";
+echo "</td><td>"; 
+echo strpos("Ajinkya php, php","php");
+echo "</td></tr>";
+
+echo "<tr><td>";
+echo "strrpos";
+echo "</td><td>"; 
+echo strrpos("Ajinkya php, php","php") . "<br>";
+echo "</td></tr>";
+
+
+echo "<tr><td>";
+echo "substr_replace";
+echo "</td><td>"; 
+echo substr_replace("Bobby", 'bob', 0) . "<br>";
+echo "</td></tr>";
+
+
+
+echo "<tr><td>";
+echo "str_replace";
+echo "</td><td>"; 
+echo str_replace("Pradip", "Supriya", "Pradip Karmakar") . "<br>";
+echo "</td></tr>";
+
+echo "</table>";
+echo "</center>";
+
+?>
+</body>
+</html>
+***********************************************************************************************************************************
+
+Q16) Write a php script which ask user to enter username and password. Validate the username by that 
+	  a.  username only includes alphanumeric characters only.  
+	  b. Username must begin with character only 
+	The password  
+	  a. Must contain at least one punctuation mark. 
+	  b. Must contain at least one digit 
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1 XT16</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <div class="box">
+        <form method="POST">
+            <div>
+                <input type="text" placeholder="Enter Your Name" name="uname" autocomplete="off" required>
+            </div>
+            <div>
+                <input type="text" placeholder="Enter Your Password" name="pass" autocomplete="off" required>
+            </div>
+            <div>
+                <input type="submit" name="submit" class="submit" value="check">   
+            </div>
+        </form>
+        <?php
+            if(isset($_POST['submit']))
+            {
+                if(preg_match("/^[A-Za-z]+[A-Za-z0-9]/", $_POST["uname"]) === 0)
+                {
+                    echo"Invalid format in UserName";
+                    die();
+                }
+                else{
+                    if(preg_match("/[a-zA-Z0-9]+[?!0-9]/", $_POST['pass']) == 0)
+                    {
+                        echo"Invalid format Of password";
+                        die();
+                    }
+                    else{
+                        echo "Username = " . $_POST['uname'] . "<br> Password = " .  $_POST['pass'] ;
+                    }
+                }
+            }
+        ?>
+    </div>
+</body>
+</html>
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+Name: Pradip S Karmakar
+Roll-no: 10
+Class: MCA 2
+Subject: Web Application Development (WAD)
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+
+							Assignment - 2
+
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+
+1) Write a PHP script which allows user to enter product code, product name, product price and discount percentage. The program 
+must use a function to calculate discounted amount calculate net pay amount. 
+
+***********************************************************************************************************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2 XT1</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="box">
+        <form method="POST">
+            <div>
+                <input type="text" name="pcode" placeholder="Product Code" required> 
+            </div>
+            <div>
+                <input type="text" name="pname" placeholder="Product Name" required>
+            </div>
+            <div>
+                <input type="number" name="price" min="1" placeholder="Product Price" required>
+            </div>
+            <div>
+                <input type="number" name="discount" min="0" max="100" placeholder="Product Discount" required>
+            </div>
+            <div>
+                <input type="submit" name="submit" value="Calculate" class="submit"> 
+            </div>
+        </form>
+        <?php
+            function calculate($pr,$d)
+            {
+                $netpay = ($pr*$d)/100;
+                $netpay = $pr - $netpay;
+                
+                echo "<br> PRODUCT PRICE : $pr";
+                echo "<br> DISCOUNT : $d%";
+                echo "<br> NET BILL : $netpay";
+            }
+            
+            if(isset($_POST['submit']))
+            {
+                $pc = $_POST['pcode'];
+                $pn = $_POST['pname'];
+                $pr = $_POST['price'];
+                $d = $_POST['discount'];
+                echo "<br> PRODUCT CODE : $pc";
+                echo "<br> PRODUCT NAME : $pn";
+                calculate($pr,$d);
+            }
+        ?>
+    </div>    
+</body>
+</html>
+
+***********************************************************************************************************************************
+
+Q2) Write a PHP script file which make your pages have the same look. [Hint: use require] 
+
+***********************************************************************************************************************************
+		<?php 
+			echo " <h2>This is Practical 2 but Same look as below practical - 1 </h2> ";
+			require 'XT1.php';
+		?>
+
+	OUTPUT :
+	
+		This is Practical 2 but Same look as below practical - 1
+		Product Details
+		Product code :  101
+		Product Name :  Bag
+		Product Price :  670
+		Product Discount : (In %)  15
+		 
+		Product Discount amount is 100.5.
+		Net pay amount for Product 569.5.
+
+***********************************************************************************************************************************
+
+3) Write a PHP function which ask the user number of tickets to be booked. The function get the no. of booked tickets and create 
+a table based on that which have exactly same rows as number entered by user. The value for rows are booked ticket numbers
+
+***********************************************************************************************************************************
+
+********************************************
+	ticket.php
+********************************************
+
+<?php
+	echo "<form method='post' action='ticket.php'>";
+	echo "<br>Enter Total Number of Movie Ticket : ";
+	echo "<input type = 'number' name='txt' >";
+	echo "<br> <input type='submit' name='submit' value='Book Ticket' > <br> <br>";
+
+	if(isset($_POST['submit']))
+	{
+		function ticket($n)
+		{
+			echo "<table border='1'>";
+			echo "<tr>";
+			echo "<th> No. </th>";
+			echo "<th> Ticket </th>";
+			echo "</tr>";
+			for($i=1;$i <= $n;$i++)
+			{
+				echo "<tr>";
+				echo "<td> $i </td>";
+				echo "<td>  A ". $i ."</td>";
+				echo "</tr>";
+			}
+
+			echo "</table>";
+		}
+	
+		$n = $_POST['txt'];
+		ticket($n);
+	}
+
+	echo "</form>";
+?>
+
+***********************************************************************************************************************************
+
+Q4) Write a function which takes 5 number of input as array from user. Then calculate total and average and display total and average 
+of the 5 numbers.[Hint: use & to return multiple values] 
+
+***********************************************************************************************************************************
+********************************************
+	average.php
+********************************************
+
+<?php
+
+	echo "<form method='post' action='average.php'>";
+	echo "<br> Enter Total Number : ";
+	echo "<input type='number' name='num' >";
+	echo "<br> <input type='submit' name='submit' value='submit'> <br> <br>";
+	
+	if(isset($_POST['submit']))
+	{		
+		$n = $_POST['num'];
+		echo "<table>";
+		
+		for($i=1;$i<=$n;$i++)
+		{
+			echo "<tr>";
+			echo "<td> Enter $i Number : </td>";
+			echo "<td> <input type='number' name='val[]' required> </td>";
+			echo "</tr>";
+		}
+		
+		echo "</table>";
+		echo "<br> <input type='submit' name='submit1' value='Calculate'> <br> <br>";		
+	}
+	
+	if(isset($_POST['submit1']))
+		{
+			$t=0;
+			$avg=0;
+			
+			function calculate($arr,&$t,&$avg)
+			{
+				echo "<br> Values : ";
+				foreach($arr as $value)
+				{
+					echo "<br> $value";
+					$t = $t + $value;
+					$avg = $avg + 1;
+				}				
+			}
+			
+			$arr = $_POST['val'];
+			calculate($arr,$t,$avg);			
+			
+			$avg = $t/$avg;
+			echo "<br> Total = $t";
+			echo "<br> Average = $avg";
+		}
+
+	echo "</form>";
+?>
+
+
+***********************************************************************************************************************************
+
+Q5) Write a program to calculate factorial value by using recursive function. The value must be entered by user.
+
+***********************************************************************************************************************************
+********************************************
+	recursion.php
+********************************************
+
+<?php
+
+	echo "<form method='post' action='recursion.php'>";
+	
+	echo "<br> Enter Number : ";
+	echo "<input type='number' name='num' required>";
+	echo "<br> <input type='submit' name='submit' value='submit'> <br>";
+	
+	if(isset($_POST['submit']))
+	{
+		
+		function fact($n)
+		{
+			$i;
+			if($n==1)
+			{
+				$i=1;
+				return $i;
+			}
+			else if($n==2)
+			{
+				$i=2;
+				return $i;
+			}
+			else
+			{
+				$i=$n*fact($n-1);
+			}
+			return	$i;		
+		}
+		
+		$n = $_POST['num'];
+		
+		$ans=0;
+		$ans=fact($n);
+		echo "<br> FACTORIAL = $ans";
+	}
+	
+	echo "</form>";
+?>
+		
+***********************************************************************************************************************************
+
+Q6) Create a class Vehicle having attributes VID, ModelNo and Mileage( per litere). Write operations to calculate cost per Km by 
+asking price of fuel from user. Implement all the attributes and operations for the class. 
+
+***********************************************************************************************************************************
+********************************************
+	vehicle.html
+********************************************
+
+<html>
+<head>
+</head>
+<body>
+	<form method="post" action="vehicle.php">
+	<table>
+	<tr>
+		<td>  Enter Vehicle ID : </td>
+		<td> <input type='text' name='vid' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Model No : </td>
+		<td> <input type='text' name='model' required> </td>
+	<tr>
+	
+	<tr>
+		<td> Enter Mileage : " </td>
+		<td> <input type='number' name='mil' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Fuel Price : " </td>
+		<td> <input type='number' name='fuel' required> </td>
+	</tr>
+	
+	<tr>
+		<td> <input type='submit' name='submit' value="submit" > </td>
+		<td> <input type='reset' name='reset' value="reset" > </td>
+	<tr>
+			  
+	</table>
+	</form>
+</body>
+</html>
+
+
+********************************************
+	vehicle.php
+********************************************
+
+<?php
+
+class vehicle
+{
+	private
+		$vid,$modelno,$mileage;
+	public
+		function __construct($vid1,$model1,$mi1)
+		{
+			$this->vid = $vid1;
+			$this->modelno = $model1;
+			$this->mileage = $mi1;
+		}		
+		function display($f)
+		{		
+			echo "<br> Vehicle ID : ".$this->vid;
+			echo "<br> Model No : ".$this->modelno;
+			echo "<br> Mileage : ".$this->mileage;
+			echo "<br> Fuel/Ltr : ".$f;
+			
+			echo "<br> RS per KM : ".($f/$this->mileage);
+			
+		}
+};
+
+
+$vid = $_POST['vid'];
+$model = $_POST['model'];
+$mi = $_POST['mil'];
+$f = $_POST['fuel'];
+
+$v = new vehicle($vid,$model,$mi);
+$v -> display($f);
+
+?>
+		
+***********************************************************************************************************************************
+
+Q7) Create a class Car which is child class of the class Vehicle. Add the operation maintenance for car class. The maintenance class has a property to calculate 
+cost to maintain a car in good condition for a month. Write a function which provides the total maintenance cost of a car for the year. 
+
+***********************************************************************************************************************************
+********************************************
+	vehicle.html
+********************************************
+
+<html>
+<head>
+</head>
+<body>
+	<form method="post" action="vehicle.php">
+	<table>
+	<tr>
+		<td>  Enter Vehicle ID : </td>
+		<td> <input type='text' name='vid' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Model No : </td>
+		<td> <input type='text' name='model' required> </td>
+	<tr>
+	
+	<tr>
+		<td> Enter Mileage :  </td>
+		<td> <input type='number' name='mil' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Car Number :  </td>
+		<td> <input type='text' name='cno' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Car Name :  </td>
+		<td> <input type='text' name='cname' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Car Maintenence per Month :  </td>
+		<td> <input type='number' name='cost' required> </td>
+	</tr>
+	
+	<tr>
+		<td> <input type='submit' name='submit' value="submit" > </td>
+		<td> <input type='reset' name='reset' value="reset" > </td>
+	<tr>
+		
+	</table>
+	</form>
+</body>
+</html>
+
+
+********************************************
+	vehicle.php
+********************************************
+
+<?php
+
+class vehicle
+{
+	private
+		$vid,$modelno,$mileage;
+	public
+		function __construct($vid1,$model1,$mi1)
+		{
+			$this->vid = $vid1;
+			$this->modelno = $model1;
+			$this->mileage = $mi1;
+		}		
+		function display()
+		{		
+			echo "<br> Vehicle ID : ".$this->vid;
+			echo "<br> Model No : ".$this->modelno;
+			echo "<br> Mileage : ".$this->mileage;		
+		}
+};
+
+class car extends vehicle
+{
+	private
+		$carno,$carname;
+	public		
+		function __construct($vid,$modelno,$mil,$carno,$cname)
+		{
+			$this->carno = $carno;
+			$this->carname = $cname;
+			
+			parent :: __construct($vid,$modelno,$mil);
+		}
+		function display()
+		{
+			parent :: display();
+			
+			echo "<br> <br> CAR Number : ".$this->carno;
+			echo "<br> CAR NAME : ".$this->carname;
+		}
+};
+
+class maintenence extends car
+{
+	private
+		$cost;
+	public
+		function __construct($vid,$modelno,$mil,$carno,$cname,$cost)
+		{
+			$this->cost = $cost;
+			parent :: __construct($vid,$modelno,$mil,$carno,$cname);
+		}
+		function display()
+		{
+			parent :: display();
+			
+			echo "<br> <br> MONTHLY MAINTENENCE : ".$this->cost;
+			echo "<br> YEARLY MAINTENENCE : ".($this->cost*12);			
+		}
+};
+
+$vid = $_POST['vid'];
+$modelno = $_POST['model'];
+$mil = $_POST['mil'];
+$carno = $_POST['cno'];
+$cname = $_POST['cname'];
+$cost = $_POST['cost'];
+
+$m = new maintenence($vid,$modelno,$mil,$carno,$cname,$cost);
+$m -> display();
+
+?>
+***********************************************************************************************************************************
+
+Q8) Using question 6,7 take input from user for three cars maintenance. Add these records into text file. Calculate most 
+economical car and display car details. 
+
+***********************************************************************************************************************************
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<title>Practical-8</title>
+			</head>
+			<body>
+				<h2>Find Best Economical Car</h2>
+				<form action="" method="post">
+					<?php 
+						for($i=1;$i<=3;$i++)
+							echo "<label>Enter Car $i maintanance : </label><input type='text' name=car$i><br><br/>";
+						?>
+					<input type="submit" name="submit" value="Find">
+				</form>
+			</body>
+		</html>
+		<?php
+			if(isset($_POST['submit'])){
+				extract($_POST);
+				class Vehical
+				{
+					private $vid,$modelno,$milage; 
+					public function __construct($vid=0,$modelno='',$milage=0){
+						$this->vid = $vid;
+						$this->modelno = $modelno;
+						$this->milage = $milage;
+					}
+					public function getvid(){	return $this->vid;	}
+					public function setvid($value){	$this->vid = $value;	}
+					public function getmodelno(){	return $this->modelno;	}
+					public function setmodelno($value){	$this->modelno = $value;	}
+					public function getmilage(){	return $this->milage;	}
+					public function setmilage($value){	$this->milage = $value;	}
+					public function totalCost($cost){
+						return $cost/$this->milage;
+					}
+				}
+				class Car extends Vehical
+				{
+					public function __construct($vid=0,$modelno='',$milage=0){
+						parent::__construct($vid,$modelno,$milage);
+					}
+					public function MaintainanceCost($maintain){
+						return 12*$maintain;
+					}
+				}
+				$obj1 = new Car("101","PKC101",50,$car1);
+				$obj2 = new Car("102","PKC102",30,$car2);
+				$obj3 = new Car("103","PKC103",70,$car3);
+				$c1 = $obj1->MaintainanceCost($car1);
+				$c2 = $obj2->MaintainanceCost($car2);
+				$c3 = $obj3->MaintainanceCost($car3);
+				if($c1 <= $c2 && $c1 <= $c3){
+					echo $obj1->getmodelno()." is best car.";
+				}
+				else if($c2 <= $c1 && $c2 <= $c3){
+					echo $obj2->getmodelno()." is best car.";
+				}
+				else{
+					echo $obj3->getmodelno()." is best car.";					
+				}
+			}
+		?>
+		
+
+***********************************************************************************************************************************
+
+Q9) Make Exception handling for Question No. 8. 
+
+***********************************************************************************************************************************
+
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<title>Practical-8</title>
+			</head>
+			<body>
+				<h2>Find Best Economical Car</h2>
+				<form action="" method="post">
+					<?php 
+						for($i=1;$i<=3;$i++)
+							echo "<label>Enter Car $i maintanance : </label><input type='text' name=car$i><br><br/>";
+						?>
+					<input type="submit" name="submit" value="Find">
+				</form>
+			</body>
+		</html>
+		<?php
+			if(isset($_POST['submit'])){
+				extract($_POST);
+				class Vehical
+				{
+					private $vid,$modelno,$milage; 
+					public function __construct($vid=0,$modelno='',$milage=0){
+						$this->vid = $vid;
+						$this->modelno = $modelno;
+						$this->milage = $milage;
+					}
+					public function getvid(){	return $this->vid;	}
+					public function setvid($value){	$this->vid = $value;	}
+					public function getmodelno(){	return $this->modelno;	}
+					public function setmodelno($value){	$this->modelno = $value;	}
+					public function getmilage(){	return $this->milage;	}
+					public function setmilage($value){	$this->milage = $value;	}
+					public function totalCost($cost){
+						return $cost/$this->milage;
+					}
+				}
+				class Car extends Vehical
+				{
+					public function __construct($vid=0,$modelno='',$milage=0){
+						parent::__construct($vid,$modelno,$milage);
+					}
+					public function MaintainanceCost($maintain){
+						return 12*$maintain;
+					}
+				}
+				try{
+					$obj1 = new Car("101","PKC101",50,$car1);
+					$obj2 = new Car("102","PKC102",30,$car2);
+					$obj3 = new Car("103","PKC103",70,$car3);
+					$c1 = $obj1->MaintainanceCost($car1);
+					$c2 = $obj2->MaintainanceCost($car2);
+					$c3 = $obj3->MaintainanceCost($car3);
+					if($c1 <= $c2 && $c1 <= $c3){
+						echo $obj1->getmodelno()." is best car.";
+					}
+					else if($c2 <= $c1 && $c2 <= $c3){
+						echo $obj2->getmodelno()." is best car.";
+					}
+					else{
+						echo $obj3->getmodelno()." is best car.";					
+					}
+				}
+				catch(Exception $e)
+				{
+				echo "Error: ".$e->getMessage();
+				}
+			}
+		?>
+		
+
+		
+***********************************************************************************************************************************
+
+Q10) Write an PHP script which allows user to enter product Name, Quantity and Price. Based on the price and quantity calculate cost for each
+item and total cost. Make validation that the Quantity and Price must not be blanks and they are must be >=0. If any user enter violates the rule,
+make appropriate exception handling.
+
+***********************************************************************************************************************************
+
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<title>Practical-10</title>
+			</head>
+			<body>
+				<form action="" method="post">
+					<label>Product Name : </label>
+					<input type="text" name="p_name"> 
+					<br/>
+					<label>Quantity :  </label>
+					<input type="text" name="p_quantity" required>
+					<br/>
+					<label>Price :  </label>
+					<input type="text" name="p_price" required>
+					<br/>
+					<input type="submit" name="submit" value="Calculate cost">
+				</form>
+			</body>
+		</html>
+		<?php
+			if (isset($_POST['submit'])) {
+				extract($_POST);
+				if($p_quantity > 0 && $p_price > 0)
+				{
+					$total = $p_quantity*$p_price;
+					echo "cost for product is <b> $p_price </b><br>";
+					echo "total cost for product is <b> $total </b>";	
+				}
+				else if($p_quantity == 0)
+					echo "Enter valid quantity!!!!!";	
+				else if($p_price == 0)
+					echo "Enter valid price!!!!!";
+				}		
+			}
+		?>
+
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+ *************************************************************************************************************************************
+*************************************************************************************************************************************
+Name: Pradip S Karmakar
+Roll-no: 10
+Class: MCA 2
+Subject: Web Application Development (WAD)
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+
+1) Create tables described below:-
+
+a)Table name: client_master
+	Description: Used to store client information
+
+	CREATE TABLE `assignment 3`.`client_master` ( `client_no` VARCHAR(6) NOT NULL , `name` VARCHAR(20) NOT NULL , `address1` VARCHAR(30) NULL DEFAULT NULL , 	
+               `address2` VARCHAR(30) NULL DEFAULT NULL , `city` VARCHAR(15) NULL DEFAULT NULL , `pincode` INT(8) NULL DEFAULT NULL , `state` VARCHAR(15) NULL DEFAULT NULL , 	
+               `bal_due` INT(10,2) NULL DEFAULT NULL , PRIMARY KEY (`client_no`(6))) ENGINE = InnoDB;
+
+b)Table name: product_master
+	Description: Used to store product information
+	
+	CREATE TABLE `assignment 3`.`product_master` ( `product_no` VARCHAR(6) NOT NULL , `description` VARCHAR(15) NOT NULL , `profit_percent` DOUBLE(4,2) NOT NULL , 	
+              `unit_measure` VARCHAR(10) NOT NULL , `qty_no_hand` INT(8) NOT NULL , `reorder_lvl` INT(8) NOT NULL , `sell_price` DOUBLE(8,2) NOT NULL , `cost_price` DOUBLE	
+              (8,2) NOT NULL , PRIMARY KEY (`product_no`(6)) COMMENT 'first letter must start with p') ENGINE = InnoDB;
+
+c)Table name: salesman_master
+	Description: Used to store salesman working for the company.
+		
+	CREATE TABLE IF NOT EXISTS `salesman_master` (
+			  `salesman_no` varchar(6) NOT NULL,
+			  `salesman_name` varchar(20) NOT NULL,
+			  `address1` varchar(30) DEFAULT NULL,
+			  `address2` varchar(30) DEFAULT NULL,
+			  `city` varchar(20) DEFAULT NULL,
+			  `pincode` varchar(8) DEFAULT NULL,
+			  `state` varchar(20) NOT NULL,
+			  `sal_amt` int(8) NOT NULL,
+			  `tgt_to_get` int(8) NOT NULL,
+			  `ytd_sales` int(8) NOT NULL,
+			  `remarks` varchar(60) DEFAULT NULL,
+			  PRIMARY KEY (`salesman_no`)
+			);
+			
+d)Table name:sale_order
+	Description: Used to store client’s orders
+		
+	CREATE TABLE IF NOT EXISTS `sale_order` (
+			  `order_no` varchar(6) NOT NULL,
+			  `order_date` date NOT NULL,
+			  `client_no` varchar(6) NOT NULL,
+			  `dely_addr` varchar(25) NOT NULL,
+			  `salesman_no` varchar(6) NOT NULL,
+			  `dely_type` char(1) NOT NULL DEFAULT 'F',
+			  `billed_yn` char(1) NOT NULL,
+			  `dely_date` date NOT NULL,
+			  `order_status` varchar(10) NOT NULL,
+			  PRIMARY KEY (`order_no`),
+			  KEY `client_no` (`client_no`),
+			  KEY `salesman_no` (`salesman_no`)
+			);	
+
+	ALTER TABLE `sale_order` ADD FOREIGN KEY (`client_no`) REFERENCES `client_master`(`client_no`) ON DELETE RESTRICT ON UPDATE RESTRICT; ALTER TABLE `sale_order` 
+	ADD FOREIGN KEY (`salesman_no`) REFERENCES `salesman_master`(`salesman_no`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+e)Table Name: sale_order_details
+	Description: Used to store client’s orders with details of each product ordered.
+		
+	CREATE TABLE IF NOT EXISTS `sales_order_details` (
+			  `order_no` varchar(6) NOT NULL,
+			  `product_no` varchar(6) NOT NULL,
+			  `qty_ordered` int(8) NOT NULL,
+			  `qty_disp` int(8) NOT NULL,
+			  `product_rate` int(10) NOT NULL,
+			  KEY `order_no` (`order_no`),
+			  KEY `product_no` (`product_no`)
+			);
+			
+	ALTER TABLE `sales_order_details`
+	ADD CONSTRAINT `sales_order_details_ibfk_2` FOREIGN KEY (`product_no`) REFERENCES `product_master` (`product_no`),
+	ADD CONSTRAINT `sales_order_details_ibfk_1` FOREIGN KEY (`order_no`) REFERENCES `sale_order` (`order_no`);
+
+*************************************************************************************************************************************
+
+2) Insert the following data into their respective tables:
+
+	a) Data for client_master table:
+
+	INSERT INTO `client_master` (`client_no`, `Name`, `Address1`, `Address2`, `City`, `Pincode`, `State`, `Bal_due`) VALUES
+		('C00001', 'Ivan Bayross', '', '', 'Bombay', 400054, 'Maharashtra', 15000),
+		('C00002', 'Vandana Saitwal', '', '', 'Madras', 780001, 'Tamil Nadu', 0),
+		('C00003', 'Pramada Jaguste', '', '', 'BOmbay', 400057, 'Maharashtra', 5000),
+		('C00004', 'Basu Navindgi', '', '', 'Bombay', 400056, 'Maharshtra', 0),
+		('C00005', 'Ravi Shreedharan', '', '', 'Delhi', 100001, 'Delhi', 2000),
+		('C00006', 'Rukmini', '', '', 'Bombay', 400050, 'Maharashtra', 0);
+		
+	b) Data for product_master table:
+	
+		INSERT INTO `product_master` (`product_no`, `description`, `profit_percent`, `unit_measure`, `qty_no_hand`, `reorder_lvl`, `sell_price`, `cost_price`) VALUES
+		('P00001', '1.44 Floppies', 5, 'Piece', 100, 20, 525, 500),
+		('P03453', 'monitors', 6, 'Piece', 10, 3, 12000, 11280),
+		('P06734', 'mouse', 5, 'Piece', 20, 5, 1050, 1000),
+		('P07865', '1.22 Floppies', 5, 'Piece', 20, 5, 525, 500),
+		('P07868', 'keyboards', 2, 'Piece', 10, 3, 3150, 3050),
+		('P07885', 'CD Drive', 3, 'Piece', 10, 3, 5250, 5100),
+		('P07965', '540 HHD', 4, 'Piece', 10, 3, 8400, 8000),
+		('P07975', '1.44 Drive', 5, 'Piece', 10, 3, 1050, 1000),
+		('P08865', '1.22 Drive', 5, 'Piece', 2, 3, 1050, 1000);
+		
+	c) Data for salesman_master table:
+	
+		INSERT INTO `salesman_master` (`salesman_no`, `salesman_name`, `address1`, `address2`, `city`, `pincode`, `state`, `sal_amt`, `tgt_to_get`, `ytd_sales`, `remarks`) VALUES
+		('S00001', 'Kiran', 'A/14', 'Worli', 'Bombay', '400002', 'Maharastra', 3000, 100, 50, 'Good'),
+		('S00002', 'Manish', '65', 'Nariman', 'Bombay', '400001', 'Maharastra', 3000, 200, 100, 'Good'),
+		('S00003', 'Ravi', 'P-7', 'Bandra', 'Bombay', '400032', 'Maharastra', 3000, 200, 100, 'Good'),
+		('S00004', 'Aashish', 'A/5', 'Juhu', 'Bombay', '400044', 'Maharastra', 3500, 200, 150, 'Good');
+		
+	d) Data for sales_order table:
+	
+		INSERT INTO `sale_order` (`order_no`, `order_date`, `client_no`, `dely_addr`, `salesman_no`, `dely_type`, `billed_yn`, `dely_date`, `order_status`) VALUES
+		('O19001', '1996-01-12', 'C00001', '', 'S00001', 'F', 'N', '1996-01-20', 'In Process'),
+		('O19002', '1996-01-25', 'C00002', '', 'S00002', 'P', 'N', '1996-01-27', 'Cancelled'),
+		('O19003', '1996-04-03', 'C00001', '', 'S00001', 'F', 'Y', '1996-05-22', 'Fulfilled'),
+		('O19008', '1996-05-24', 'C00005', '', 'S00004', 'F', 'N', '1996-05-26', 'In process'),
+		('O46865', '1996-02-18', 'C00003', '', 'S00003', 'F', 'Y', '1996-02-20', 'Fulfilled'),
+		('O46866', '1996-05-20', 'C00004', '', 'S00002', 'F', 'N', '1996-05-22', 'Cancelled');
+		
+	e) Data for the sales_order_details table:
+	
+		INSERT INTO `sales_order_details` (`order_no`, `product_no`, `qty_ordered`, `qty_disp`, `product_rate`) VALUES
+		('O19001', 'P00001', 4, 4, 525),
+		('O19001', 'P07965', 2, 1, 8400),
+		('O19001', 'P07885', 2, 1, 5250),
+		('O19002', 'P00001', 10, 0, 525),
+		('O46865', 'P07868', 3, 3, 3150),
+		('O46865', 'P07885', 3, 1, 5250),
+		('O46865', 'P00001', 10, 10, 520),
+		('O46865', 'P03453', 4, 4, 1050),
+		('O19003', 'P03453', 2, 2, 1050),
+		('O19003', 'P06734', 1, 1, 12000),
+		('O46866', 'P07965', 1, 0, 8400),
+		('O46866', 'P07965', 1, 0, 1050),
+		('O19008', 'P00001', 10, 5, 525),
+		('O19008', 'P07975', 5, 3, 1050);
+
+*************************************************************************************************************************************
+
+3). Exercises computation on table data:
+
+	a) Find the name of all clients having ‘a’ as the second letter in their names
+	
+		SELECT * FROM `client_master` where Name like '_a%'
+
+		client_no	Name				Address1	Address2	City	Pincode	State		Bal_due
+		C00002		Vandana Saitwal								Madras	780001	Tamil Nadu	0
+		C00004		Basu Navindgi								Bombay	400056	Maharshtra	0
+		C00005		Ravi Shreedharan							Delhi	100001	Delhi		2000
+
+	b) Find out the clients who stay in a city whose second letter is ‘a’.
+	
+		SELECT * FROM `client_master` where City like '_a%'
+
+		client_no	Name				Address1	Address2	City	Pincode	State		Bal_due
+		C00002		Vandana Saitwal								Madras	780001	Tamil Nadu	0
+
+	c) Find the list of all client who stay in ‘Bombay’ or ‘Delhi’.
+			
+		SELECT * FROM `client_master` where City = 'Bombay' or City = 'Delhi'
+
+		client_no	Name				Address1	Address2	City	Pincode	State		Bal_due
+		C00001		Ivan Bayross								Bombay	400054	Maharashtra	15000
+		C00003		Pramada Jaguste								BOmbay	400057	Maharashtra	5000
+		C00004		Basu Navindgi								Bombay	400056	Maharshtra	0
+		C00005		Ravi Shreedharan							Delhi	100001	Delhi		2000
+		C00006		Rukmini										Bombay	400050	Maharashtra	0
+
+	d) Print the list of client whose bal_due is greater then value 10000.
+	
+		SELECT * FROM `client_master` where Bal_due > '10000'
+
+		client_no	Name			Address1	Address2	City	Pincode	State		Bal_due
+		C00001		Ivan Bayross							Bombay	400054	Maharashtra	15000
+		
+	e) Print the information from sales_oeder table for order placed in the month of January.
+	
+		SELECT * FROM `sale_order`where month(order_date) = 1
+
+		order_no	order_date	client_no	dely_addr	salesman_no	dely_type	billed_yn	dely_date	order_status
+		O19001		1996-01-12	C00001 [->]				S00001 [->]		F			N		1996-01-20	In Process
+		O19002		1996-01-25	C00002 [->]				S00002 [->]		P			N		1996-01-27	Cancelled
+	
+	f) Display the order information for client_no ‘C00001’ and ‘C00002’.
+			
+		SELECT * FROM `sale_order` where client_no = 'C00001' or client_no = 'C00002'
+
+		order_no	order_date	client_no		dely_addr	salesman_no	dely_type	billed_yn	dely_date	order_status
+		O19001		1996-01-12	C00001 [->]					S00001 [->]		F			N		1996-01-20	In Process
+		O19002		1996-01-25	C00002 [->]					S00002 [->]		P			N		1996-01-27	Cancelled
+		O19003		1996-04-03	C00001 [->]					S00001 [->]		F			Y		1996-05-22	Fulfilled
+
+	g) Find products whose selling price is greater than 2000 and less than or equal to 5000.
+	
+		SELECT * FROM `product_master` where sell_price between 2000 and 5000
+
+		product_no	description  profit_perecent	unit_measure  qty_no_hand  reorder_lvl	sell_price	cost_price
+		P07868		keyboards			2			Piece			10			3			3150		3050
+		
+	h) Find products whose selling price is more than 1500. Calculate a new selling price as, original selling price * .15. Rename the new column in the above query as new_price.
+	
+		SELECT *,sell_price*15 as new_price FROM `product_master`where sell_price > 1500
+
+		product_no	description	profit_perecent	unit_measure  qty_no_hand	reorder_lvl	sell_price	cost_price	new_price
+		P03453		monitors		6			Piece			10				3		12000		11280		180000
+		P07868		keyboards		2			Piece			10				3		3150		3050		47250
+		P07885		CD Drive		3			Piece			10				3		5250		5100		78750
+		P07965		540 HHD			4			Piece			10				3		8400		8000		126000
+		
+	i) List the names, city and state of clients who are not in the state of ‘Maharastra’.
+	
+		SELECT name,city,state FROM `client_master` where state != 'Maharashtra'
+
+		Name				City	State
+		Vandana Saitwal		Madras	Tamil Nadu
+		Basu Navindgi		Bombay	Maharshtra
+		Ravi Shreedharan	Delhi	Delhi
+		
+	j) Count the total number of orders.
+	
+		SELECT count(*) as total_orders FROM `sale_order`
+
+		total_orders
+			6
+
+	k) Calculate the average price of all the products.
+	
+		SELECT avg(sell_price) as average_price FROM `product_master`
+
+		average_price
+		3666.6667
+
+	l) Determine the maximum and minimum product prices. Rename the output as max_price and min_price respectively.
+	
+		SELECT max(sell_price) as max_price,min(sell_price) as min_price FROM `product_master`
+
+		max_price	min_price
+		12000		525
+		
+	m) Count the number of products having price greater than or equal to 1500.
+	
+		SELECT count(sell_price) as 'price>=1500' FROM `product_master` where sell_price >= 1500
+
+		price>=1500
+			4
+
+	n) Find all the products whose qty_no_hand is less than recorder level.
+	
+		SELECT * FROM `product_master` where qty_no_hand < reorder_lvl
+
+		product_no	description	profit_perecent	unit_measure  qty_no_hand	reorder_lvl	sell_price	cost_price
+		P08865		1.22 Drive		5			Piece			2				3		1050		1000
+	
+*************************************************************************************************************************************
+
+4). Exercise on Date Manipulation:
+
+	a) Display the order number and day on which clients placed their order.
+	
+		SELECT order_no,day(order_date) as Day FROM `sale_order`
+		
+		order_no	Day
+		O19001		12
+		O19002		25
+		O19003		3
+		O19008		24
+		O46865		18
+		O46866		20
+
+	b) Display the month (in alphabets) and date when the order must be delivered.
+	
+		SELECT order_no,dely_date,MONTHName(dely_date) as Month FROM `sale_order`
+
+		order_no	dely_date	Month
+		O19001		1996-01-20	January
+		O19002		1996-01-27	January
+		O19003		1996-05-22	May
+		O19008		1996-05-26	May
+		O46865		1996-02-20	February
+		O46866		1996-05-22	May
+		
+	c) Display the order_date in the format ‘DD-Month-yy’. e.g. 12-February-96.
+	
+		SELECT order_no,DATE_FORMAT(order_date,'%d-%M-%y') as Date FROM `sale_order`
+
+		order_no	Date
+		O19001		12-January-96
+		O19002		25-January-96
+		O19003		03-April-96
+		O19008		24-May-96
+		O46865		18-February-96
+		O46866		20-May-96
+
+	d) Find the date, 15 days after today’s date
+		.
+		select DATE_ADD(NOW(),INTERVAL 15 DAY) as '15 Days after Date'
+
+		15 Days after Date
+		2018-12-05 00:09:51
+
+	e) Find the number of days elapsed between today’s date and the delivery date of the orders placed by the clients.
+	
+		SELECT DATEDIFF(NOW(),dely_date) as Duration from sale_order
+
+		Duration
+		8349
+		8342
+		8226
+		8222
+		8318
+		8226
+	
+*************************************************************************************************************************************
+
+5). Exercise on using Having and Group By Clauses:
+
+	a) Print the description and total qty sold for each product.
+	
+		SELECT p.product_no,description,sum(qty_ordered) as qty_sold FROM sales_order_details as s, product_master as p where p.product_no = s.product_no group by p.product_no
+
+		product_no	description		qty_sold
+		P00001 [->]	1.44 Floppies	34
+		P03453 [->]	monitors		6
+		P06734 [->]	mouse			1
+		P07868 [->]	keyboards		3
+		P07885 [->]	CD Drive		5
+		P07965 [->]	540 HHD			4
+		P07975 [->]	1.44 Drive		5
+		
+	b) Find the value of each product sold.
+		
+		SELECT p.product_no,sum(sell_price*qty_ordered) as Total_value FROM sales_order_details as s, product_master as p where p.product_no = s.product_no group by p.product_no
+	
+		product_no	Total_value
+		P00001 [->]	17850
+		P03453 [->]	72000
+		P06734 [->]	1050
+		P07868 [->]	9450
+		P07885 [->]	26250
+		P07965 [->]	33600
+		P07975 [->]
+		
+	c) Calculate the average qty sold for each client that has a maximum order value of 15000.00.
+	
+		SELECT o.client_no,avg(qty_ordered) as avg_qty_sold FROM sales_order_details as s, sale_order as o where o.order_no = s.order_no and qty_ordered*product_rate <= 15000 group by o.client_no
+
+		client_no	avg_qty_sold
+		C00001		2.2500
+		C00002		10.0000
+		C00003		5.6667
+		C00004		1.0000
+		C00005		7.5000
+		
+	d) Find out the sum total of all the billed orders for the month of January.
+	
+		SELECT sum(qty_ordered*product_rate) as total_of_january FROM sales_order_details as s, sale_order as o where month(order_date) = 1
+		
+		total_of_january
+		206600
+	
+*************************************************************************************************************************************
+
+6). Exercise on Joins and Correlation:
+
+	a) Find out the products, which have been sold to ‘Ivan Bayross’.
+	
+		SELECT description as 'Ivan Bayross\'s prodcts' FROM sale_order as o, client_master as c, sales_order_details as s,product_master as p where p.product_no = s.product_no and o.order_no = s.order_no and c.client_no = o.client_no and c.Name = 'Ivan Bayross' group by p.product_no
+			
+		Ivan Bayross's prodcts
+			1.44 Floppies
+			540 HHD
+			CD Drive
+			monitors
+			mouse
+
+	b) Find out the products and their quantities that will have to be delivered in the current month.
+	
+		SELECT description,sum(qty_ordered) FROM sale_order as o, sales_order_details as s,product_master as p where o.order_no = s.order_no and s.product_no = p.product_no and month(dely_date) = 5 group by o.order_no
+
+		description		sum(qty_ordered)
+		monitors			3
+		1.44 Floppies		15
+		540 HHD				2
+		
+	c) Find the product_no and description of constantly sold i.e. rapidly moving products.
+	
+		SELECT p.product_no,sum(qty_ordered) FROM sale_order as o, sales_order_details as s,product_master as p where s.order_no = o.order_no and s.product_no = p.product_no group by p.product_no order by sum(qty_ordered) desc limit 3
+		
+		product_no	sum(qty_ordered)
+		P00001			34
+		P03453			6
+		P07975			5
+		
+	d) Find the name of clients who have purchase ‘CD Drive’.
+	
+		SELECT c.Name as 'CD Drive Buyers' FROM sale_order as o, client_master as c, sales_order_details as s,product_master as p where p.product_no = s.product_no and o.order_no = s.order_no and c.client_no = o.client_no and p.description = 'CD Drive' group by c.Name
+
+		CD Drive Buyers
+		Ivan Bayross
+		Pramada Jaguste
+		
+	e) List the product_no and order_no of customers having qty_ordered less than 5 from the sales_order_details table for the product ‘1.44 Floppies’.
+	
+		SELECT p.product_no,o.order_no FROM sale_order as o, sales_order_details as s,product_master as p where s.order_no = o.order_no and s.product_no = p.product_no and p.description = '1.44 Floppies' group by o.order_no
+		
+		product_no	order_no
+		P00001		O19001
+		P00001		O19002
+		P00001		O19008
+		P00001		O46865
+
+	f) Find the products and their quantities for the orders placed by ‘lvan Bayross’ and ‘Vandana Saitwal’.
+	
+		SELECT p.product_no,sum(qty_ordered) as qty FROM sale_order as o, client_master as c, sales_order_details as s,product_master as p where p.product_no = s.product_no and o.order_no = s.order_no and c.client_no = o.client_no and (c.Name = 'Ivan Bayross' or c.Name = 'Vandana Saitwal') group by p.product_no
+
+		product_no	qty
+		P00001		14
+		P03453		2
+		P06734		1
+		P07885		2
+		P07965		2
+		
+	g) Find the products and their quantities for the orders placed by client_no ‘C00001’ and ‘C00002’.
+	
+		SELECT p.product_no,sum(qty_ordered) as qty FROM sale_order as o, sales_order_details as s,product_master as p where p.product_no = s.product_no and o.order_no = s.order_no and (o.client_no = 'C00001' or o.client_no = 'C00002') group by p.product_no
+	
+		product_no	qty
+		P00001		14
+		P03453		2
+		P06734		1
+		P07885		2
+		P07965		2	
+	
+*************************************************************************************************************************************
+
+7). Exercise on Sub-queries:
+
+	a) Find the product_no and description of non-moving products i.e. products not being sold.
+	
+		SELECT p.product_no, description FROM product_master as p left join sales_order_details as s on p.product_no = s.product_no where s.product_no is null
+		
+		product_no	description
+		P07865		1.22 Floppies
+		P08865		1.22 Drive
+		
+	b) Find the customer name, address1, address2, city and pin code for the client who has placed order no ‘O19001’.
+	
+		SELECT Name,Address1,Address2,City,Pincode FROM client_master as c,sale_order as o where c.client_no = o.client_no and order_no = 'O19001'
+
+		Name			Address1	Address2	City	Pincode
+		Ivan Bayross							Bombay	400054
+		
+	c) Find the client names who have placed orders before the month of May’96.
+	
+		SELECT Name FROM client_master as c,sale_order as o where c.client_no = o.client_no and year(order_date) <= 1996 and month(order_date) < 5 group by Name
+
+			Name
+		Ivan Bayross
+		Pramada Jaguste
+		Vandana Saitwal
+		
+	d) Find out if the product ‘1.44 Drive’ has been ordered by any client and print the clint_no, name to whom it was sold.
+	
+		SELECT c.client_no,Name FROM sale_order as o, sales_order_details as s,product_master as p,client_master as c where s.order_no = o.order_no and s.product_no = p.product_no and c.client_no = o.client_no and p.description = '1.44 Drive' group by o.order_no
+
+		client_no		Name
+		C00005 [->]	Ravi Shreedharan
+		
+	e) Find the names of clients who have placed orders worth Rs.10000 or more.
+	
+		SELECT Name FROM sales_order_details as s, sale_order as o, client_master as c where c.client_no = o.client_no and o.order_no = s.order_no and qty_ordered*product_rate >= 10000 group by o.client_no
+
+			Name
+		Ivan Bayross
+		Pramada Jaguste
+
+*************************************************************************************************************************************
+
+8). Exercise on Constructing Sentences with data:
+
+	a) Print information from product_master, sales_order_detail tables in the following format for all the records:
+		{Description} worth Rs. {total sales for the product} was sold.
+	
+		SELECT concat(Description,' worth Rs\. ',(qty_ordered*product_rate) ,' was sold\.') as 'Data' FROM sales_order_details as s, product_master as p WHERE p.product_no = s.product_no group by Description
+
+						Data
+		1.44 Drive worth Rs. 5250 was sold.
+		1.44 Floppies worth Rs. 2100 was sold.
+		540 HHD worth Rs. 16800 was sold.
+		CD Drive worth Rs. 10500 was sold.
+		keyboards worth Rs. 9450 was sold.
+		monitors worth Rs. 4200 was sold.
+		mouse worth Rs. 12000 was sold.
+
+	b) Print information from product_master, sales_order_detail tables in the following format for all the records:
+		{Description} worth Rs. {total sales for the product} was ordered in the month of {order_date in month format}.
+	
+		SELECT concat(Description,' worth Rs\. ',qty_ordered*product_rate,' was ordered in a month of ',MONTH(o.order_date),'\.') as 'Data' FROM sales_order_details as s, product_master as p, sale_order as o WHERE p.product_no = s.product_no and s.order_no = o.order_no group by Description
+
+								Data
+		1.44 Drive worth Rs. 5250 was ordered in a month of 5.
+		1.44 Floppies worth Rs. 2100 was ordered in a month of 1.
+		540 HHD worth Rs. 16800 was ordered in a month of 1.
+		CD Drive worth Rs. 10500 was ordered in a month of 1.
+		keyboards worth Rs. 9450 was ordered in a month of 2.
+		monitors worth Rs. 2100 was ordered in a month of 4.
+		mouse worth Rs. 12000 was ordered in a month of 4.
+		
+	c) Print information from client_master, product_master, sales_order tables in the following format for all the records:
+		{cust_name} has placed order {order_no} on {order_date}.
+		
+		SELECT concat(Name,' has placed order ',order_no,' on date ',order_date,'\.') as 'Data' FROM client_master as c, sale_order as o WHERE c.client_no = o.client_no group by Name
+
+								Data
+		Basu Navindgi has placed order O46866 on date 1996-05-20.
+		Ivan Bayross has placed order O19001 on date 1996-01-12.
+		Pramada Jaguste has placed order O46865 on date 1996-02-18.
+		Ravi Shreedharan has placed order O19008 on date 1996-05-24.
+		Vandana Saitwal has placed order O19002 on date 1996-01-25.
+
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+Name: Pradip S Karmakar
+Roll-no: 10
+Class: MCA 2
+Subject: Web Application Development (WAD)
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+							ASSIGNMENT 4
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+
+Q1) Write a php script to upload a file. 
+
+*************************************************************************************************************************************	
+		p1.html:
+			<!DOCTYPE html>
+			<html>
+				<body>
+				<form action="p1.php" method="post" enctype="multipart/form-data">
+					<h2>File Upload</h2>
+					Select image to upload:
+					<input type="file" name="fileToUpload" id="fileToUpload">
+					<input type="submit" value="Upload Image" name="submit">
+				</form>
+				</body>
+			</html>
+
+		p1.php:
+			<?php
+				$target_file = basename($_FILES["fileToUpload"]["name"]);
+				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+						echo "Upload success";
+					} else {
+						echo "Sorry, there was an error uploading your file.";
+					}
+			?>
+
+	OUTPUT :
+	
+		File Upload
+		Select image to upload:   Capture2.PNG
+		
+		Upload success
+
+*************************************************************************************************************************************
+
+Q2) Write a php script which reads and display each directory as a bulleted list.
+
+************************************************************************************************************************************
+	
+		<?php
+			$cwd = getcwd();
+			$dir = scandir($cwd);
+			foreach($dir as $d)
+			{
+				if(is_dir($d))	
+					echo "<br> $d";
+			}
+		?>
+
+	OUTPUT :
+		
+		Practical1
+		Practical2
+		Practical3
+		Practical4
+		
+*************************************************************************************************************************************
+
+Q3) Write a php script which reads and display each file of a specified directory.
+
+*************************************************************************************************************************************
+		<?php
+			$cwd = getcwd();
+			$dir = scandir($cwd);
+			foreach($dir as $d)
+			{
+				if(is_file($d))		
+					echo "<br> $d";
+			}
+		?>
+		
+	OUTPUT :
+	
+		p1.php
+		p2.php
+		p3.php
+
+*************************************************************************************************************************************
+
+Q4) Write a php script which reads and display each file details of a specified directory. The file details include file last access date, last modified date, owner etc. 
+
+*************************************************************************************************************************************
+		<?php
+			$cwd = getcwd();
+			$dir = scandir($cwd);
+			foreach($dir as $d)
+			{
+				if(is_file($d))
+					echo "<br>" .$d. " create date : ".date('d-m-Y',fileatime($d))." access date : ".date('d-m-Y',fileatime($d)). " author : ".fileowner($d);
+			}
+		?>
+		
+	OUTPUT :
+	
+		p1.php create date : 06-12-2018 access date : 06-12-2018 author : ZK\ZK
+		p2.php create date : 06-12-2018 access date : 06-12-2018 author : ZK\ZK
+		p3.php create date : 03-12-2018 access date : 03-12-2018 author : ZK\ZK
+		
+*************************************************************************************************************************************
+
+Q5) Write a php script which reads and display each file of each directory
+
+*************************************************************************************************************************************
+		<?php
+			lists(getcwd());
+			function lists($dir){
+				$ffs = scandir($dir);
+				unset($ffs[array_search('.', $ffs, true)]);
+				unset($ffs[array_search('..', $ffs, true)]); 
+				foreach($ffs as $ff){		
+					if(is_dir($dir.'/'.$ff)) { 
+						echo "<br/>$ff<br/>";
+						lists($dir.'/'.$ff);
+						echo "<br/>";
+					}
+					else
+						echo $ff."<br/>";
+				}
+			}
+		?>
+
+	OUTPUT :
+	
+		Practical1
+		p1.php
+		p2.php
+
+		Practical2
+		p1.php
+		p2.php
+		
+		Practical3
+		p1.php
+		p2.php
+
+*************************************************************************************************************************************
+
+Q6) Write a program to create, copy and delete a directory using php.
+
+*************************************************************************************************************************************
+
+		<?php
+			mkdir("xyz");	
+			function copyr($source, $dest){
+				if (is_link($source)) 
+					return symlink(readlink($source), $dest);
+				if (is_file($source)) 
+					return copy($source, $dest);
+				if (!is_dir($dest)) 
+					mkdir($dest);
+				$dir = dir($source);
+				while (false !== $entry = $dir->read()) {
+					if ($entry == '.' || $entry == '..') 
+						continue;
+					copyr("$source/$entry", "$dest/$entry");
+				}
+				$dir->close();
+				return true;
+			}
+			copyr("xyz","abc");
+			rmdir("xyz");
+		?>
+
+*************************************************************************************************************************************
+
+Q10) Create a database in named Samay in mysql.The samay database has a table named Watch.In the  Watch table perform the followings:
+			 i. insert a record with date and time 
+			 ii. Insert a record with only date 
+			 iii. Insert a record with only time 
+			 iv. Retrieve a record which will display only date in the format dd/mm/yyyy 
+			 v. Retrieve a record which will display date in the format mm/dd/yyyy 
+			 vi. Retrieve a record which will display date in the format yyyy-mm-dd 
+			 vii. Retrieve a record which will display date and time in the format dd/mm/yyyy hh:mi:ss
+			 viii. What is the date of a record in which you have inserted time only?
+	What is the time of a record in which you have inserted date only?
+
+ *************************************************************************************************************************************
+
+		<?php 	
+			$link=mysqli_connect("localhost","root","") or die(mysqli_error($link));
+			mysqli_query($link,"create database if not exists samay") or die(mysqli_error($link));
+			mysqli_select_db($link,"samay") or die(mysqli_error($link));
+			mysqli_query($link,"create table if not exists watch(`date` date)") or die(mysqli_error($link));
+			
+			echo " <h2> insert a record with date and time </h2> ";
+			$date = date("Y-m-d H:i:s");
+			$insert = "INSERT INTO watch (date) VALUES ('$date')";
+			if (mysqli_query($link,$insert)) 
+				echo "record inserted data $date";
+			else
+				echo "Failed";
+
+			echo " <h2> Insert a record with only date </h2> ";
+			$date = date('Y-m-d');
+			$insert = "INSERT INTO watch (date) VALUES ('$date')";
+			if (mysqli_query($link,$insert)) 
+				echo "record inserted date $date";
+			else
+				echo "Failed";
+			
+			echo " <h2> Insert a record with only Time </h2> ";
+			date_default_timezone_set("Asia/Kolkata");
+			$date = date("H:m:s");
+			$insert = "INSERT INTO watch (date) VALUES ('$date')";
+			if (mysqli_query($link,$insert)) 
+				echo "record inserted time $date";
+				else
+					echo "Failed";
+
+			echo " <h2> Retrieve a record which will display only date in the format dd/mm/yyyy </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%d/%m/%Y') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					if($row[0] == '00/00/0000')
+						continue;
+					echo $row[0]."<br>";	
+				}
+
+			echo " <h2> Retrieve a record which will display date in the format mm/dd/yyyy </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%m/%d/%Y') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					if($row[0] == '00/00/0000')
+						continue;
+					echo $row[0]."<br>";	
+				}
+
+			echo " <h2> Retrieve a record which will display date in the format yyyy-mm-dd </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%Y-%m-%d') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					if($row[0] == '0000-00-00')
+						continue;
+					echo $row[0]."<br>";	
+				}
+				
+			echo " <h2> Retrieve a record which will display date and time in the format dd/mm/yyyy hh:mi:ss </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%d/%m/%y  %h:%i:%s') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					echo $row[0]."<br>";	
+				}
+		?>
+
+	OUTPUT :
+		
+		insert a record with date and time
+		record inserted date and time 2018-12-07 09:39:11
+		
+		Insert a record with only date
+		record inserted date 2018-12-07
+		
+		Insert a record with only Time
+		record inserted time 14:12:11
+		
+		Retrieve a record which will display only date in the format dd/mm/yyyy
+		07/12/2018
+		07/12/2018
+		07/12/2018
+		07/12/2018
+		11/12/2014
+		
+		Retrieve a record which will display date in the format mm/dd/yyyy
+		12/07/2018
+		12/07/2018
+		12/07/2018
+		12/07/2018
+		12/11/2014
+		
+		Retrieve a record which will display date in the format yyyy-mm-dd
+		2018-12-07
+		2018-12-07
+		2018-12-07
+		2018-12-07
+		2014-12-11
+		
+		Retrieve a record which will display date and time in the format dd/mm/yyyy hh:mi:ss
+		07/12/18 12:00:00
+		07/12/18 12:00:00
+		00/00/00 12:00:00
+		07/12/18 12:00:00
+		07/12/18 12:00:00
+		11/12/14 12:00:00
+
+
+*************************************************************************************************************************************
+
+Q11) Write a php script which will ask user to provide caption and background color of a button. The script will display the text in center of the
+button with background color selected by user
+
+*************************************************************************************************************************************
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button</title>
+    <style>
+    body{
+            margin: 0;
+            background-color:black; 
+        }
+        .content{
+            text-align: center;
+            margin: 10% 0 0 0;
+        }
+        .form_element{
+            width: 28%;
+            height: 55px;
+            border-radius: 5px;
+            border: 2px solid aquamarine;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: medium;
+        }
+
+        .form_button{
+            width: 35%;
+            height: 45px;
+            border-radius: 5px;
+            border: 0px;
+            background-color: red;
+            margin: 10px 0 20px 0;
+            font-weight: bold;
+        }
+
+        .form_button:hover{
+            cursor: pointer;
+            background-color: greenyellow;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <form method="POST">
+            <div>
+                <input type="text" name="cap" class="form_element" placeholder="Write Caption"/>
+            </div>
+            <div>
+                <input type="text" name="color" class="form_element" placeholder="Write Color Name"/>
+                <br><p style="color:#fff;"><span style="color:red;">* </span>Please Provide Proper Color Name otherwise won't effect.</p>
+            </div>
+            <div>
+                <input type="submit" name="submit" value="submit" class="form_button">
+            </div>
+        </form>
+        <?php
+            if(isset($_POST['submit']))
+            {
+                $caption = $_POST['cap'];
+                $color = $_POST['color'];
+        ?>
+            <div>
+                <input type="button" value="<?= $caption; ?>" class="form_button" style="background-color:<?= $color; ?>">
+            </div>
+        <?php
+            }
+        ?>
+    </div>
+</body>
+</html>
+
+
+*************************************************************************************************************************************
+
+Q13) Write a php script which allows user to store one or more itmes in a shopping cart. When user click on continue button it moves to the previous page 
+and allows user to change quantity of selected items. If user click on show cart button it will display shopping cart with items.  
+
+*************************************************************************************************************************************
+
+***************
+cart.sql
+***************
+
+CREATE TABLE `cart` (
+  `cart_id` int(2) NOT NULL,
+  `pro_id` int(2) NOT NULL,
+  `pro_name` varchar(30) NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `qty` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `pro_id` (`pro_id`);
+
+
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart` FOREIGN KEY (`pro_id`) REFERENCES `products` (`pro_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+
+***************
+products.sql
+***************
+
+CREATE TABLE `products` (
+  `pro_id` int(2) NOT NULL,
+  `pro_name` varchar(30) NOT NULL,
+  `price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `products` (`pro_id`, `pro_name`, `price`) VALUES
+(1, 'Desktop', '30000.00'),
+(2, 'Laptop', '35000.00'),
+(3, 'Gaming Set', '5500.00'),
+(4, 'Extentions', '800.00'),
+(5, 'Softwares', '16000.00');
+
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`pro_id`);
+
+ALTER TABLE `products`
+  MODIFY `pro_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
+
+***************
+Dataclass.php
+***************
+
+<?php
+class Dataclass
+{
+    
+	private $conn;
+
+
+    public function __construct()
+    {
+       $this->conn=mysqli_connect("localhost","root","","wad") or die('connection Failed');
+    }
+    public function getConn()
+    {
+        return $this->conn;
+    }
+
+    public function saveRecord($query)
+    {
+    	$res=mysqli_query($this->conn,$query);
+	    return $res;
+    }
+    public function getTable($query)
+    {
+    	$table = mysqli_query($this->conn,$query);
+
+    	return $table;
+    }
+
+    public function getRow($query)
+    {
+    	$table = mysqli_query($this->conn,$query);
+    	$row = mysqli_fetch_assoc($table);
+    	return $row;
+    }
+}
+?>
+
+
+***************
+Shop.php : 
+*************** 
+
+<?php
+    session_start();
+    $j = 1;
+    $qty = 1;
+    require_once('dataclass.php');
+    $dc = new Dataclass();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<form method="POST">
+    
+        <?php $getusers = $dc->getTable("select pro_id from cart"); 
+		    $sum = $getusers->num_rows;
+		?>   
+    <div class="box">
+        <?php
+            $get = $dc->getTable("select * from products");
+            while ($rw=mysqli_fetch_assoc($get))
+            {
+        ?>
+            <div class="product">
+            <h2><?= $rw['pro_name'] ?></h2>
+            <h3>Rs <?= $rw['price'] ?></h3>
+            <br>
+            <input type="hidden" name="id" value="<?= $rw['pro_id'] ?>">
+            <input type="submit" name="pro<?= $rw['pro_id'] ?>" class="form_button" value="Add">
+            </div>
+        <?php
+            }
+        ?>
+    </div>
+    <?php
+        while($j < 6)
+        {
+            $x = "pro".$j;
+        if(isset($_POST[$x])){
+            $proid = $j;
+            $check = "select pro_id from cart where pro_id = $proid";
+            $getcheck = $dc->getTable($check);
+            $data = $dc->getRow("select pro_id,pro_name,price from products where pro_id = $proid");
+            $id = $data['pro_id'];
+            $product = $data['pro_name'];
+            $price = $data['price'];
+            if($getcheck->num_rows == 0)
+            {
+                $save = "insert into cart(pro_id,pro_name,price,qty) values('$id','$product','$price','$qty')";
+                if($dc->saveRecord($save))
+                {
+                    header("location:shop.php");
+                }
+                else{
+                    echo "<script> alert('Error'); </script>";
+                }
+            }
+            else{
+                $update = $dc->getTable("update cart set qty = qty+1 where pro_id = $id");
+                if($update)
+                {
+                    echo "<script> alert('Product Updated Successfully'); </script>";
+                }
+                else{
+                    echo "<script> alert('Error in Update'); </script>";
+                }
+            }
+        }
+    $j++;
+    }
+    ?>
+    <div class="continue"> <h1>Cart Count : <?= $sum ?></h1></div> 
+    <div class="continue">
+        <input type="submit" name="continue" value="Continue" class="form_button">
+        <input type="submit" name="clear" value="Clear Cart" class="form_button">
+    </div>
+    <?php
+        if(isset($_POST['continue'])){
+            header('Location:cart.php');
+        }
+
+        if(isset($_POST['clear'])){
+            if($dc->saveRecord("delete from cart"))
+            {
+                echo "<script> alert('Cart Is Empty Now'); </script>";
+                header("location:shop.php");
+            }
+            else{
+                echo "<script> alert('Error in Deletion'); </script>";
+            }
+        }
+    ?>
+</form>
+</body>
+</html>
+
+
+*******************
+Cart.php
+*******************
+
+<?php
+session_start();
+require_once('dataclass.php');
+$dc = new Dataclass();
+$total = 0;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="cart">
+        <h1>Cart</h1>
+        <form method="POST">
+            <div class="innertable">    
+                <table>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    <?php 
+                        $get = $dc->getTable("select * from cart");
+                        while ($rw=mysqli_fetch_assoc($get))
+                        {
+                    ?>  
+                        <tr>
+                            <td><?= $rw['pro_name'] ?></td>
+                            <td><?= $rw['price'] ?></td>
+                            <td><?= $rw['qty'] ?></td>
+                            <td><?= $rw['price'] * $rw['qty'] ?></td>
+                        </tr>
+                    <?php
+                        $total += $rw['price'] * $rw['qty'];
+                        }
+                    ?>
+                    <tr>
+                        <th colspan="3">Total</th>
+                        <th><?= $total ?></th>
+                    </tr>  
+                </table>
+            </div>
+            <div>
+                <input type="submit" value="Home" name="submit" class="form_button">
+                <?php
+                    if(isset($_POST['submit']))
+                    {
+                        header("location:shop.php");
+                    }
+                ?>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+**************
+main.css
+**************
+
+body{
+    margin: 0 auto;
+    background-color:beige; 
+}
+.box{
+    text-align: center;
+    margin: 10% 0 0 0;
+    display: flex;
+}
+.cart{
+    text-align: center;
+    margin: 5% 0 0 0;
+}
+.continue{
+    text-align: center;
+    margin: 5% 0 0 0;
+}
+.product{
+    width: 33.33%;
+}
+.form_button{
+    width: 35%;
+    height: 45px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: red;
+    margin: 10px 0 20px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+.form_button:hover{
+    cursor: pointer;
+    background-color: greenyellow;
+}
+table{
+    width: 80%;
+    margin-left: 10%;
+    border-collapse: collapse;
+    border:1px solid black;
+    border-radius: 5%;
+}
+td,th,tr{
+    border:1px solid black;
+    padding: 2%;
+    border-spacing: -10px;
+}
+
+
+
+*************************************************************************************************************************************
+*************************************************************************************************************************************

@@ -1,0 +1,63 @@
+/************************************************************************************************************************************
+
+Roll No: 10
+Name:	 Pradip S Karmakar
+Class:	 MCA SEM-1
+Subject: Fundamentals of Programming(FOP)
+
+************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int i = 0, count = 0, rev = 0, flag = 0;
+	char name[20], reverse[20];
+	printf("Enter the String : ");
+	scanf("%s",name);
+	while(name[i] != '\0')
+	{
+		count++;
+		i++;
+	}
+	printf("\nThe Palindrome Of %s Is : ",name);
+	for(i = count - 1; i >= 0 ; i--)
+	{
+		reverse[rev] = name[i];
+		printf("%c", reverse[rev]);
+		rev++;
+	}
+	for(i = 0; i < count; i++)
+	{
+		if(name[i] == reverse[i])
+		{
+			flag = 1;
+		}
+		else
+		{
+			i = rev;
+			flag = 0;
+		}
+	}
+	if(flag)
+	{
+		printf("\n\nString Is Palindrome");
+	}
+	else
+	{
+		printf("\n\nString Is Not Palindrome");
+	}
+getch();
+}
+
+/************************************************************************************************************************************
+
+Output 1 : 					Output 2 :
+
+Enter the String : pradip			Enter the String : madam
+
+The Palindrome Of pradip Is : pidarp		The Palindrome Of madam Is : madam
+
+String Is Not Palindrome			String Is Palindrome
+
+************************************************************************************************************************************/

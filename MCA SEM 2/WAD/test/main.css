@@ -1,0 +1,47 @@
+body{
+    margin: 0 auto;
+    background-color:beige; 
+}
+.box{
+    text-align: center;
+    margin: 10% 0 0 0;
+    display: flex;
+}
+.cart{
+    text-align: center;
+    margin: 5% 0 0 0;
+}
+.continue{
+    text-align: center;
+    margin: 5% 0 0 0;
+}
+.product{
+    width: 33.33%;
+}
+.form_button{
+    width: 35%;
+    height: 45px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: red;
+    margin: 10px 0 20px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+.form_button:hover{
+    cursor: pointer;
+    background-color: greenyellow;
+}
+table{
+    width: 80%;
+    margin-left: 10%;
+    border-collapse: collapse;
+    border:1px solid black;
+    border-radius: 5%;
+}
+td,th,tr{
+    border:1px solid black;
+    padding: 2%;
+    border-spacing: -10px;
+}
+

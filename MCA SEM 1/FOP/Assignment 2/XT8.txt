@@ -1,0 +1,122 @@
+/************************************************************************************************************************************
+
+Roll No: 10
+Name:	 Pradip S Karmakar
+Class:	 MCA SEM-1
+Subject: Fundamentals of Programming(FOP)
+
+************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+void main()
+{
+	int i, j, k = 0, str1, str2, token = 0,temp=0;
+	char name1[20][20],name2[20][20],res[40][40];
+	printf("\nEnter Number Of Strings In First List : ");
+	scanf("%d",&str1);
+	printf("\nEnter Number Of Strings In Second List : ");
+	scanf("%d",&str2);
+	for(i = 0; i < str1; i++)
+	{
+		printf("\nEnter %d String Of First List : ", i + 1);
+		scanf("%s",name1[i]);
+	}
+	for(i = 0; i < str2; i++)
+	{
+		printf("\nEnter %d String Of Second List : ", i + 1);
+		scanf("%s",name2[i]);
+	}
+	
+	for(j = 0; j < str2 && k < str1; j++)
+	{
+		token = strcmp(name1[k], name2[j]);
+		if(token < 0)
+		{
+			strcpy(res[temp], name1[k]);
+			k++;
+			j--;
+
+		}
+		else if(token > 0)
+		{
+			strcpy(res[temp], name2[j]);
+		}
+		temp++;
+	}
+
+	while( j != str2 )
+		{
+			strcpy(res[temp], name2[j]);
+			j++;
+			temp++;
+		}
+
+	while( k != str1 )
+	{
+		strcpy(res[temp], name1[k]);
+		k++;
+		temp++;
+	}
+
+	for( i = 0; i < str1 + str2; i++)
+	{
+		printf("\n%s\n",res[i]);
+	}
+getch();
+}
+
+/************************************************************************************************************************************
+
+Output :
+
+Enter Number Of Strings In First List : 4
+
+Enter Number Of Strings In Second List : 7
+
+Enter 1 String Of First List : Ajinkya
+
+Enter 2 String Of First List : Dhaval
+
+Enter 3 String Of First List : Harsh
+
+Enter 4 String Of First List : Kamal
+
+Enter 1 String Of Second List : Bhavesh
+
+Enter 2 String Of Second List : Chetan
+
+Enter 3 String Of Second List : Harshad
+
+Enter 4 String Of Second List : Lakshya
+
+Enter 5 String Of Second List : Monil
+
+Enter 6 String Of Second List : Pradip
+
+Enter 7 String Of Second List : Zoya
+
+Ajinkya
+
+Bhavesh
+
+Chetan
+
+Dhaval
+
+Harsh
+
+Harshad
+
+Kamal
+
+Lakshya
+
+Monil
+
+Pradip
+
+Zoya
+
+************************************************************************************************************************************/

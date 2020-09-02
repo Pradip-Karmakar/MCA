@@ -1,0 +1,96 @@
+
+	********************************************
+		NAME : YASH PALSANAWALA
+		CLASS : MCA - 2
+		ROLLNO : 32
+		SUBJECT : Web Application Development
+	********************************************
+
+****************************************************************************************
+Q. 6. Create a class Vehicle having attributes VID, ModelNo and Mileage( per litere). Write operations 
+      to calculate cost per Km by asking price of fuel from user. Implement all the attributes and 
+      operations for the class. 
+****************************************************************************************
+
+********************************************
+	vehicle.html
+********************************************
+
+<html>
+<head>
+</head>
+<body>
+	<form method="post" action="vehicle.php">
+	<table>
+	<tr>
+		<td>  Enter Vehicle ID : </td>
+		<td> <input type='text' name='vid' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Model No : </td>
+		<td> <input type='text' name='model' required> </td>
+	<tr>
+	
+	<tr>
+		<td> Enter Mileage : " </td>
+		<td> <input type='number' name='mil' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Fuel Price : " </td>
+		<td> <input type='number' name='fuel' required> </td>
+	</tr>
+	
+	<tr>
+		<td> <input type='submit' name='submit' value="submit" > </td>
+		<td> <input type='reset' name='reset' value="reset" > </td>
+	<tr>
+			  
+	</table>
+	</form>
+</body>
+</html>
+
+
+********************************************
+	vehicle.php
+********************************************
+
+<?php
+
+class vehicle
+{
+	private
+		$vid,$modelno,$mileage;
+	public
+		function __construct($vid1,$model1,$mi1)
+		{
+			$this->vid = $vid1;
+			$this->modelno = $model1;
+			$this->mileage = $mi1;
+		}		
+		function display($f)
+		{		
+			echo "<br> Vehicle ID : ".$this->vid;
+			echo "<br> Model No : ".$this->modelno;
+			echo "<br> Mileage : ".$this->mileage;
+			echo "<br> Fuel/Ltr : ".$f;
+			
+			echo "<br> RS per KM : ".($f/$this->mileage);
+			
+		}
+};
+
+
+$vid = $_POST['vid'];
+$model = $_POST['model'];
+$mi = $_POST['mil'];
+$f = $_POST['fuel'];
+
+$v = new vehicle($vid,$model,$mi);
+$v -> display($f);
+
+?>
+
+*******************************************************************************************************

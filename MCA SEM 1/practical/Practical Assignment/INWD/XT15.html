@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>XT14</title>
+	<style type="text/css">
+	body{
+		font-size:20px;
+	}
+	input {
+		font-size:20px;
+	}
+	</style>
+<script>
+	function go()
+	{
+		document.getElementsByTagName("title")[0].innerHTML=document.getElementById("user").value;
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="user">Username<br><br>
+	<input type="password" id="pass">Password<br>
+	<button onclick="go()">Go!</button>
+</body>
+</html>

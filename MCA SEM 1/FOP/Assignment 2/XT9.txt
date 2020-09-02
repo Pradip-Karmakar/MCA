@@ -1,0 +1,191 @@
+/************************************************************************************************************************************
+
+Roll No: 10
+Name:	 Pradip S Karmakar
+Class:	 MCA SEM-1
+Subject: Fundamentals of Programming(FOP)
+
+************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+void star(int);
+void main()
+{
+	int i, j, std, sub, total = 0, subhigh = 0, marks[10][50], roll = 0, grandtotal = 0, grandindex;
+	char subject[10][10],name[50][20];
+
+	printf("\nEnter Total Number Of Subjects : ");
+	scanf("%d",&sub);
+
+	for(i = 0; i < sub; i++)
+	{
+		printf("\nEnter %d Subject Name : ",i+1);
+		scanf("%s",subject[i]);
+	}
+
+	printf("\nEnter Total Number Of Students : ");
+	scanf("%d",&std);
+	for(i = 0; i < std; i++)
+	{
+		star(3);
+		printf("\nEnter Student Name(Roll No : %d) : ",i+1);
+		scanf("%s",name[i]);
+		for(j = 0; j < sub; j++)
+		{
+			printf("\nEnter The Marks Of %s In %s : ",name[i],subject[j]);
+			scanf("%d",&marks[i][j]);
+			total += marks[i][j];
+		}
+		marks[i][j] = total;
+		if(grandtotal < marks[i][j])
+		{
+			grandtotal = marks[i][j];
+			grandindex = i;
+		}
+		total = 0;
+	}
+	star(0);
+	printf("\n\nRollno\t\tStudent Name");
+	for(i = 0; i < sub; i++)
+	{
+		printf("%12s",subject[i]);
+	}
+	printf("%12s\n","Total");
+	for(i = 0; i < std; i++)
+	{
+		printf("\n%4d %23s",i+1,name[i]);
+		for(j = 0; j < sub ; j++)
+		{
+			printf("%12d",marks[i][j]);
+		}
+		printf("%12d\n",marks[i][j]);
+	}
+	star(1);
+	for(i = 0; i < sub; i++)
+	{
+		for(j = 0; j < std; j++)
+		{
+			if(subhigh < marks[j][i])
+			{
+				subhigh = marks[j][i];
+				roll = j+1;
+			}
+		
+		}
+		printf("\n\nThe Highest Marks In %s Is %d And Scored By Roll No. %d (%s)\n",subject[i],subhigh,roll,name[roll-1]);
+		subhigh = 0;
+	}
+	star(2);
+	printf("\nCongratulation! Mr./Ms. %s You Have Scored %d Out Of %d And Secures First\n Position .",name[grandindex],grandtotal,sub*100);
+getch();
+}
+
+void star(int a)
+{
+	if(a == 0)
+	{
+		printf("\n**************************** Score card **************************************");
+	}
+	else if(a == 1)
+	{
+		printf("\n**************************** Greatest Marks **********************************");
+	}
+	else if(a == 2)
+	{
+		printf("\n**************************** TOP SCORER **********************************");
+	}
+	else
+	{
+		printf("______________________________________________________________________________\n");
+	}
+}
+
+/************************************************************************************************************************************
+
+Output :
+
+Enter Total Number Of Subjects : 3
+
+Enter 1 Subject Name : FOP
+
+Enter 2 Subject Name : DBMS
+
+Enter 3 Subject Name : BCO
+
+Enter Total Number Of Students : 5
+______________________________________________________________________________
+
+Enter Student Name(Roll No : 1) : Nirav
+
+Enter The Marks Of Nirav In FOP : 90
+
+Enter The Marks Of Nirav In DBMS : 67
+
+Enter The Marks Of Nirav In BCO : 42
+______________________________________________________________________________
+
+Enter Student Name(Roll No : 2) : Pradip
+
+Enter The Marks Of Pradip In FOP : 60
+
+Enter The Marks Of Pradip In DBMS : 70
+
+Enter The Marks Of Pradip In BCO : 58
+______________________________________________________________________________
+
+Enter Student Name(Roll No : 3) : Ajinkya
+
+Enter The Marks Of Ajinkya In FOP : 50
+
+Enter The Marks Of Ajinkya In DBMS : 45
+
+Enter The Marks Of Ajinkya In BCO : 63
+______________________________________________________________________________
+
+Enter Student Name(Roll No : 4) : Lakshya
+
+Enter The Marks Of Lakshya In FOP : 52
+
+Enter The Marks Of Lakshya In DBMS : 81
+
+Enter The Marks Of Lakshya In BCO : 43
+______________________________________________________________________________
+
+Enter Student Name(Roll No : 5) : Kamal
+
+Enter The Marks Of Kamal In FOP : 46
+
+Enter The Marks Of Kamal In DBMS : 53
+
+Enter The Marks Of Kamal In BCO : 89
+
+**************************** Score card **************************************
+
+Rollno          Student Name         FOP        DBMS         BCO       Total
+
+   1                   Nirav          90          67          42         199
+
+   2                  Pradip          60          70          58         188
+
+   3                 Ajinkya          50          45          63         158
+
+   4                 Lakshya          52          81          43         176
+
+   5                   Kamal          46          53          89         188
+
+**************************** Greatest Marks **********************************
+
+The Highest Marks In FOP Is 90 And Scored By Roll No. 1 (Nirav)
+
+
+The Highest Marks In DBMS Is 81 And Scored By Roll No. 4 (Lakshya)
+
+
+The Highest Marks In BCO Is 89 And Scored By Roll No. 5 (Kamal)
+
+**************************** TOP SCORER **********************************
+Congratulation! Mr./Ms. Nirav You Have Scored 199 Out Of 300 And Secures First 
+Position .
+
+************************************************************************************************************************************/

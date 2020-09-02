@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>	</title>
+
+</head>
+<body>
+	<p id="getname"></p>
+	<p id="getmarks"></p>
+	<script>
+		var urlParams = new URLSearchParams(location.search);
+		document.getElementById('getname').innerHTML = urlParams.get('name');
+		document.getElementById('getmarks').innerHTML = urlParams.get('m1');
+	</script>
+</body>
+</html>

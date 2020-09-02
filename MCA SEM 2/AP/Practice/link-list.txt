@@ -1,0 +1,325 @@
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : Advanced Programming
+**********************************************************************************************
+
+Questions : Write a modular C program to create a linked list by inserting elements in the beginning 
+	   of the linked list. Write display function to display created list. 
+
+*********************************************************************************************/
+
+#include<stdio.h>   //c standard library
+#include<conio.h>   //c input ouput library
+#include<stdlib.h>  //c stdlib Library file
+
+// Structure Declaration
+struct node{
+    int data;  
+    struct node *next;
+};
+
+// Functions Declaration
+void menu(struct node *,struct node *);
+int get_n();
+struct node * insert_beg(struct node *,struct node *,int);
+void insert_end(struct node *,struct node *, int);
+struct node * insert_atany(struct node *,struct node *, int);
+void display_link(struct node *);
+
+// Void Main
+void main()
+{
+    struct node *new;
+    struct node *head = NULL;
+    menu(new,head); // Calling menu funtion
+}
+
+// menu function
+void menu( struct node *new, struct node *head )
+{
+    int n,getnum;
+    printf("\n 1 . Add New Data To Linklist From Begining. \n 2 . Add New Data To Linklist From Ending.\n 3 . Add New Data To Linklist At Any Place. \n 4 . Display LinkList Till Now. \n 5 . Exit. \n");
+    scanf("%d",&n);
+    // Switch case which check the user input and run specified function
+    switch(n)
+    {
+        case(1):
+            getnum = get_n();
+            head = insert_beg(new,head,getnum);   //insertion from begining linklist function call 
+            menu(new,head);    //void menu function call
+        case(2):
+            getnum = get_n();
+            insert_end(new,head,getnum);   //insertion from ending linklist function call 
+            menu(new,head);    //void menu function call
+        case(3):
+            getnum = get_n();
+            head = insert_atany(new,head,getnum);   //insertion from any point linklist function call 
+            menu(new,head);    //void menu function call
+        case(4):
+            display_link(head);     //display linklist function call 
+            menu(new,head);     //void menu function call
+        case(5):
+            exit(0);    //exit function call which terminated the program
+        default:
+            printf("\n Please Enter Valid Number.");
+            menu(new,head);     //void menu function call
+    }
+}
+
+// function for taking input from user
+
+int get_n()
+{
+    int n;
+    printf(" Enter The Number : ");
+    scanf("%d",&n);
+    return n;
+}
+
+//  function insert_beg, use for linklist begining insertion 
+struct node * insert_beg( struct node *new, struct node *head,int n )
+{
+    new = (struct node *)malloc(sizeof(struct node));  
+    new->data = n;
+    new->next = head;
+    head = new;
+    return head;
+}
+
+//  function insert_end, use for linklist ending insertion 
+void insert_end( struct node *new, struct node *head, int n )
+{
+    struct node *temp;
+    temp = head;
+    new = (struct node *)malloc(sizeof(struct node));
+    while( temp->next != NULL ) // loop until next has NULL 
+    {
+        temp = temp->next;    
+    }
+    temp->next = new; 
+    new->data = n;
+    new->next = NULL;
+}
+
+//  function insert_atany, use for linklist any-point insertion 
+struct node * insert_atany( struct node *new, struct node *head, int n )
+{
+    struct node *first;
+    struct node *last;
+    first = head;
+    if( head == NULL || head->data > n )  // check if head already NUll or input value of user need to insert at begining
+    {
+        head = insert_beg(new,head,n); // calling insert_beg function for inserting data at begining
+    }
+    else{
+        while( first->data < n )  // loop until user input in greater
+        {
+            last = first;   // store last linklist address
+            first = first->next; // store next linklist address
+        }
+        new = (struct node *)malloc(sizeof(struct node));
+        new->data = n;
+        new->next = first;
+        last->next = new;
+    }
+    return head;
+}
+
+//  function display_link will display the linklist elements
+void display_link(struct node *head)
+{
+    struct node *temp;
+    if(head == NULL)    // check wheater the head is null
+    {
+        printf("\nThere Is Nothing To Display.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("\nThe List is : \n");
+        while(temp->next != NULL)   // print all the elements from the link-list
+        {
+            printf(" %d => ",temp->data);
+            temp = temp->next;
+        }
+        printf(" %d \n",temp->data);
+    }
+}
+
+
+/*********************************************************************************************
+
+OUTPUT:
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+1 
+ Enter The Number : 5
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 5
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+2
+ Enter The Number : 7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 5 =>  7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+3
+ Enter The Number : 6
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 5 =>  6 =>  7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+3
+ Enter The Number : 4
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 4 =>  5 =>  6 =>  7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+3
+ Enter The Number : 1
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 1 =>  4 =>  5 =>  6 =>  7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+3
+ Enter The Number : 2
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 1 =>  2 =>  4 =>  5 =>  6 =>  7
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+2
+ Enter The Number : 8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 1 =>  2 =>  4 =>  5 =>  6 =>  7 =>  8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+1
+ Enter The Number : 0
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 0 =>  1 =>  2 =>  4 =>  5 =>  6 =>  7 =>  8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+3
+ Enter The Number : 3
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+4
+
+The List is :
+ 0 =>  1 =>  2 =>  3 =>  4 =>  5 =>  6 =>  7 =>  8
+
+ 1 . Add New Data To Linklist From Begining.
+ 2 . Add New Data To Linklist From Ending.
+ 3 . Add New Data To Linklist At Any Place.
+ 4 . Display LinkList Till Now.
+ 5 . Exit.
+5
+*********************************************************************************************/

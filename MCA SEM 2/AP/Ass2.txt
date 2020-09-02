@@ -1,0 +1,2177 @@
+/**************************************************************************************************************************************************************************************
+
+NAME     : Pradip S Karmakar
+ROLL NO  : 10
+CLASS    : MCA (SEM-2)
+SUBJECT  : Advance Programing (AP)
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+int getData(int[], int);
+int reverseData(int[], int);
+
+void main()
+{
+    int numbers[20], n, i;
+    int *p = numbers;
+    printf("Enter Total Number of data You Want : ");
+    scanf("%d",&n);
+    getData(numbers, n);
+    reverseData(numbers, n);
+    printf("\n");
+}
+
+int getData(int arr[], int n)
+{
+    int i;
+    int *ptr = arr;
+    for (i = 0; i < n; ++i) {
+        printf("Enter Number %d : ", i + 1);
+        scanf("%d",ptr);
+        ptr++;
+    }
+}
+
+int reverseData(int arr[], int n)
+{
+    int i, *ptr = arr + n - 1;
+    printf("\nNumbers in reverse Order \n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", *ptr);
+        ptr--;
+    }
+}
+
+Output:
+
+Enter Total Number of data You Want : 5
+Enter Number 1 : 45
+Enter Number 2 : 34
+Enter Number 3 : 67
+Enter Number 4 : 12
+Enter Number 5 : 98
+
+Numbers in reverse Order
+98 12 67 34 45
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getnumbers(int *,int);
+void findmaxmin(int *, int, int *, int *);
+int getlimit();
+
+void main()
+{
+    int numbers[20],limit,*ptr,*max,*min;
+    ptr = numbers;
+    limit = getlimit();
+    getnumbers(ptr,limit);
+    findmaxmin(ptr,limit,max,min);
+}
+
+void getnumbers(int *p,int limit)
+{
+    int i = 0;
+    while( i < limit )
+    {
+        printf("Fill Number %d : ",i+1);
+        scanf("%d",p);
+        p++;
+        ++i;
+    } 
+}
+
+int getlimit()
+{
+    int l;
+    printf("Enter Total Numbers You Want : ");
+    scanf("%d",&l);
+    return l;
+}
+
+void findmaxmin(int *p, int limit, int *max, int *min)
+{
+    int i;
+    max = p;
+    min = p;
+    for( i = 0; i < limit; i++ )
+    {
+        if( *p > *max )
+        {
+            max = p;
+        }
+        else if( *p < *min )
+        {
+            min = p;
+        }
+        p++;
+    }
+    printf("\nMaximum Number : %d at Address %p\n",*max,max);
+    printf("\nMinimum Number : %d at Address %p\n",*min,min);
+}
+
+
+
+Output :
+Enter Total Numbers You Want : 5
+Fill Number 1 : 23
+Fill Number 2 : 56
+Fill Number 3 : 1
+Fill Number 4 : 78
+Fill Number 5 : 65
+max56min1max78
+Maximum Number : 78 at Address 000000000061FDBC
+
+Minimum Number : 1 at Address 000000000061FDB8
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void filterString(char[]);
+
+void main()
+{
+    char string1[50];
+    printf("Enter String : ");
+    scanf("%[^\n]",string1);
+    filterString(string1);
+    printf("\n");
+}
+
+
+void filterString(char string1[])
+{
+    char *cptr;
+    int Vowels = 0, Consonants = 0, Numbers = 0, Whitespaces = 0, Special_Characters = 0;
+    cptr = string1;
+    while(*cptr != '\0') {
+        if(*cptr == 65 || *cptr == 69 || *cptr == 73 || *cptr == 79 || *cptr == 85 || *cptr == 97 || *cptr == 101 || *cptr == 105 || *cptr == 111 || *cptr == 117) {
+            Vowels++;
+        }
+        else if (*cptr > 47 && *cptr < 58) {
+            Numbers++;
+        }
+        else if(*cptr == 9 || *cptr == 32) {
+            Whitespaces++;
+        }
+        else if((*cptr > 64 && *cptr < 91) || (*cptr > 96 && *cptr < 123)){
+            Consonants++;
+        }
+        else {
+            Special_Characters++;
+        }
+    cptr++;
+    }
+    printf("\n Vowels: %d\n", Vowels);
+    printf("\n Numbers: %d\n", Numbers);
+    printf("\n Whitespaces: %d\n", Whitespaces);
+    printf("\n Consonants: %d\n", Consonants);
+    printf("\n Special Characters: %d\n", Special_Characters);
+}
+
+Output:
+Enter String : Pradip @s Karmakar 23
+
+ Vowels: 5
+
+ Numbers: 2
+
+ Whitespaces: 3
+
+ Consonants: 10
+
+ Special Characters: 1
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+int getrow();
+int getcol();
+void getdata(int[][50],int,int);
+void transpose(int[][50],int[][50],int,int);
+void printdata(int[][50],int,int);
+
+void main()
+{
+	int matrix[50][50],temp[50][50],i,j;
+	i = getrow();
+	j = getcol();
+	getdata(matrix,i,j);
+	transpose(matrix,temp,i,j);
+	printdata(temp,i,j);
+	getch();
+}
+
+int getrow()
+{
+	int n;
+	printf("Enter The Number Rows : ");
+	scanf("%d",&n);
+	return n;
+}
+
+int getcol()
+{
+	int n;
+	printf("Enter The Number Columns : ");
+	scanf("%d",&n);
+	return n;
+}
+
+void getdata(int matrix[][50],int r, int c)
+{
+	int i,j,(*ptr)[50];
+	ptr = matrix;
+	 for( i = 0; i < r; i++ )
+	 {
+		for( j = 0; j < c; j++ )
+		{
+			printf("Enter The Value for Matrix[%d][%d] : ",i,j);
+			scanf("%d",(*(ptr + i)+ j));
+		}
+	 }
+}
+
+void printdata(int temp[][50],int r, int c)
+{
+	int i,j,(*ptr)[50];
+	ptr = temp;
+	 for( i = 0; i < c; i++ )
+	 {
+		for( j = 0; j < r; j++ )
+		{
+			printf("Value At Matrix[%d][%d] : %d\n",*(*(ptr + i) + j));
+		}
+	 }
+}
+
+void transpose(int matrix[][50], int temp[][50],int r, int c)
+{
+	int i,j,(*ptr)[50], (*ptr2)[50];
+	ptr = matrix;
+	ptr2 = temp;
+	for( i = 0; i < r; i++ )
+	{
+		for( j = 0; j < c; j++ )
+		{
+			*(*(ptr2 + j) + i) = *(*(ptr + i) + j);
+		}
+	}
+}
+
+Output :
+Enter The Number Rows : 3
+Enter The Number Columns : 2
+Enter The Value for Matrix[0][0] : 4
+Enter The Value for Matrix[0][1] : 76
+Enter The Value for Matrix[1][0] : 2
+Enter The Value for Matrix[1][1] : 5
+Enter The Value for Matrix[2][0] : 7
+Enter The Value for Matrix[2][1] : 2
+  4  2  7
+ 76  5  2
+
+**************************************************************************************************************************************************************************************/
+
+ 
+#include<stdio.h>
+#include<conio.h>
+
+int getcolrow(int);
+void getdata(int[][50],int,int);
+void multiply(int[][50],int[][50],int[][50],int,int);
+void printdata(int[][50],int,int);
+
+
+void main()
+{
+	int i, j, mat1[50][50], mat2[50][50], rest[50][50];
+	i = getcolrow(1);
+	j = getcolrow(2);
+	getdata(mat1,i,j);
+	getdata(mat2,i,j);
+	multiply(mat1,mat2,rest,i,j);
+	printdata(rest,i,j);
+	getch();
+}
+
+int getcolrow(int x)
+{
+	int *p;
+	p = &x;
+	if( *p == 1 )
+	{
+		printf("Enter The Rows : ");
+	}
+	else
+	{
+		printf("Enter The Columns : ");
+	}
+	scanf("%d",p);
+	return *p;
+}
+
+void getdata(int matrix[][50],int r,int c)
+{
+	int i,j,(*ptr)[50];
+	ptr = matrix;
+	for( i = 0; i < r; i++ )
+	{
+		for( j = 0; j < c; j++ ) 
+		{
+			printf("\nEnter The (%d,%d) of matrix : ",i,j);
+			scanf("%d",(*(ptr + i) + j));
+		}
+	}
+}
+
+void multiply(int mat1[][50], int mat2[][50], int rest[][50], int r, int c)
+{
+	int i , j, k, temp=0,(*ptr)[50],(*ptr2)[50],(*ptr3)[50];
+	ptr = mat1;
+	ptr2 = mat2;
+	ptr3 = rest;
+	for(i=0;i<r;i++)
+	{
+		for(j=0;j<r;j++)
+		{
+			for(k=0;k<c;k++)
+			{
+				temp += (*(*(ptr + i) + k)) * (*(*(ptr2 + k) + j));
+			}
+			*(*(ptr3 + i) + j) = temp;
+			temp=0;
+		}
+		printf("\n");
+	}
+}
+
+void printdata(int rest[][50],int r, int c)
+{
+	int i,j,(*ptr3)[50];
+	ptr3 = rest;
+	for( i = 0; i < r; i++ )
+	{
+		for( j = 0; j < c; j++)
+		{
+			printf("%3d",*(*(ptr3 + i) + j));
+		}
+		printf("\n");
+	}
+}
+
+Output:
+Enter The Columns : 3
+
+Enter The (0,0) of matrix : 1
+
+Enter The (0,1) of matrix : 2
+
+Enter The (0,2) of matrix : 3
+
+Enter The (1,0) of matrix : 1
+
+Enter The (1,1) of matrix : 2
+
+Enter The (1,2) of matrix : 3
+
+Enter The (2,0) of matrix : 1
+
+Enter The (2,1) of matrix : 2
+
+Enter The (2,2) of matrix : 3
+
+Enter The (0,0) of matrix : 1
+
+Enter The (0,1) of matrix : 2
+
+Enter The (0,2) of matrix : 3
+
+Enter The (1,0) of matrix : 1
+
+Enter The (1,1) of matrix : 2
+
+Enter The (1,2) of matrix : 3
+
+Enter The (2,0) of matrix : 1
+
+Enter The (2,1) of matrix : 2
+
+Enter The (2,2) of matrix : 3
+
+
+  6 12 18
+  6 12 18
+  6 12 18
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+int getrowcol(int);
+void getdata(int[][50],int,int);
+void add(int[][50],int[][50],int[][50],int,int);
+void printdata(int[][50],int,int);
+void main()
+{
+	int mat1[50][50],mat2[50][50],rest[50][50],row,col;
+	row = getrowcol(1);
+	col = getrowcol(2);
+	printf("\nMatrix 1\n__________\n");
+	getdata(mat1,row,col);
+	printf("\nMatrix 2\n__________\n");
+	getdata(mat2,row,col);
+	add(mat1,mat2,rest,row,col);
+	printf("\nMatrix 1\n__________\n");
+	printdata(mat1,row,col);
+	printf("\nMatrix 2\n__________\n");
+	printdata(mat2,row,col);
+	printf("\nResult\n__________\n");
+	printdata(rest,row,col);
+	getch();
+}
+
+int getrowcol(int x)
+{
+	int *p;
+	p = &x;
+	if(*p == 1)
+	{
+		printf("\nEnter The Rows For Matrix : ");
+	}
+	else
+	{
+		printf("\nEnter The Columns For Matrix : ");
+	}
+	scanf("%d",p);
+	return *p;
+}
+
+void getdata(int matrix[][50],int r,int c)
+{
+	int i, j, (*ptr)[50];
+	ptr = matrix;
+	
+	for( i = 0; i < r; i++ )
+	{
+		for( j = 0; j < c; j++ )
+		{
+			printf("\nEnter The Value For Matrix[%d][%d] : ",i,j);
+			scanf("%d",(*(ptr + i) + j));
+		}
+	}
+	printf("_______________________________________________\n");
+}
+
+void add(int matrix1[][50],int matrix2[][50],int resultmatrix[][50],int r, int c)
+{
+	int i, j,(*ptr)[50],(*ptr2)[50],(*ptr3)[50];
+	ptr = matrix1;
+	ptr2 = matrix2;
+	ptr3 = resultmatrix;
+	for( i = 0; i < r; i++ )
+	{
+		for( j = 0; j < c; j++ )
+		{
+			*(*(ptr3 + i) + j) = (*(*(ptr + i) + j)) + (*(*(ptr2 + i) + j));
+		}
+	}
+}
+
+void printdata(int matrix[][50],int r, int c)
+{
+	int i, j, (*ptr)[50];
+	ptr = matrix;
+	
+	for( i = 0; i < r; i++ )
+	{
+		for( j = 0; j < c; j++ )
+		{
+			printf("%3d",*(*(ptr + i) + j));
+		}
+		printf("\n");
+	}
+}
+
+Output :
+Enter The Rows For Matrix : 3
+
+Enter The Columns For Matrix : 3
+
+Matrix 1
+__________
+
+Enter The Value For Matrix[0][0] : 2
+
+Enter The Value For Matrix[0][1] : 5
+
+Enter The Value For Matrix[0][2] : 1
+
+Enter The Value For Matrix[1][0] : 7
+
+Enter The Value For Matrix[1][1] : 9
+
+Enter The Value For Matrix[1][2] : 3
+
+Enter The Value For Matrix[2][0] : 5
+
+Enter The Value For Matrix[2][1] : 7
+
+Enter The Value For Matrix[2][2] : 8
+_______________________________________________
+
+Matrix 2
+__________
+
+Enter The Value For Matrix[0][0] : 2
+
+Enter The Value For Matrix[0][1] : 4
+
+Enter The Value For Matrix[0][2] : 7
+
+Enter The Value For Matrix[1][0] : 5
+
+Enter The Value For Matrix[1][1] : 8
+
+Enter The Value For Matrix[1][2] : 0
+
+Enter The Value For Matrix[2][0] : 3
+
+Enter The Value For Matrix[2][1] : 5
+
+Enter The Value For Matrix[2][2] : 2
+_______________________________________________
+
+Matrix 1
+__________
+  2  5  1
+  7  9  3
+  5  7  8
+
+Matrix 2
+__________
+  2  4  7
+  5  8  0
+  3  5  2
+
+Result
+__________
+  4  9  8
+ 12 17  3
+  8 12 10
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+int getlist();
+void getdata(char[][15],int);
+void sort(char[][15],int);
+void printdata(char[][15],int);
+
+void main()
+{
+	char string[10][15],list;
+
+	list = getlist();
+	getdata(string,list);
+	sort(string,list);
+	printdata(string,list);
+	getch();
+}
+
+int getlist()
+{
+	int x;
+	printf("Enter The List Strings Count : ");
+	scanf("%d",&x);
+	return x;
+}
+
+void getdata(char s[][15],int list)
+{
+	int i, j;
+	char (*ptr)[15];
+	ptr = s;
+	for( i = 0; i < list; i++)
+	{
+		scanf("%s",*ptr);
+		ptr++;
+	}
+}
+
+void sort(char s[][15],int list)
+{
+	int i, j,check = 0;
+	char (*ptr)[15],temp[15];
+	ptr = s;
+	for( i = 0; i < list - 1; i++ )
+	{
+		for( j = 0; j < list - i - 1; j++ )
+		{
+			check = strcmp(*(ptr + j), *(ptr + j + 1));
+			if(check > 0)
+			{
+				strcpy(temp,*(ptr + j));
+				strcpy(*(ptr + j),*(ptr + j + 1));
+				strcpy(*(ptr + j + 1),temp);
+			}
+		}
+	}
+}
+
+void printdata(char s[][15],int list)
+{
+	int i, j;
+	char (*ptr)[15];
+	ptr = s;
+	printf("\n\n______________________After Sorting____________________\n");
+	for(i = 0; i < list; i++)
+	{
+		printf("%s\n",*ptr);
+		ptr++;
+	}
+}
+
+Output : 
+
+Enter The List Strings Count : 5
+pradip
+lakshya
+ajinkya
+nirav
+milind
+
+
+______________________After Sorting____________________
+ajinkya
+lakshya
+milind
+nirav
+pradip
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+int getlimit(int);
+void getdata(int [],int);
+int setdata(int [],int,int);
+void printdata(int [],int);
+void main()
+{
+    int arr[50],limit,setme;
+    limit = getlimit(1);
+    getdata(arr,limit);
+    setme = getlimit(2);
+    limit = setdata(arr,limit,setme);
+    printdata(arr,limit);
+    getch();
+}
+
+int getlimit(int i)
+{
+    int n;
+    if( i == 1 )
+    {
+        printf("Enter The Total Number You Want in Array : ");
+    }
+    else
+    {
+        printf("Enter The Number You Want to set in Array : ");
+    }
+    
+    scanf("%d",&n);
+    return n;
+}
+
+void getdata(int arr[],int l)
+{
+    int i,*ptr;
+    ptr = arr;
+    for( i = 0; i < l; i++,ptr++ )
+    {
+        scanf("%d",ptr);
+    }
+}
+
+int setdata(int arr[],int l,int set)
+{
+    int i,*ptr,temp = 0;
+    ptr = arr;
+
+    for(i=0;i<l;i++,ptr++)
+    {
+        if(set <= *ptr)
+        {
+            temp = *ptr;
+            *ptr = set;
+            ++ptr;
+            while( *ptr != '\0')
+            {
+                set = temp;
+                temp = *ptr;
+                *ptr = set;
+                ptr++;
+            }
+            *ptr = temp;
+            l = l+1;
+            i = l;
+        }
+    }
+    return l;
+}
+
+void printdata(int arr[],int l)
+{
+    int i, *ptr;
+    ptr = arr;
+    for ( i = 0; i < l; i++,ptr++)
+    {
+         printf("%d\n",*ptr);
+    }
+}
+
+Output :
+
+Enter The Total Number You Want in Array : 5
+12
+15
+18
+21
+25
+Enter The Number You Want to set in Array : 19
+12
+15
+18
+19
+21
+25
+
+**************************************************************************************************************************************************************************************/
+
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getinput(float *);
+int getdecimal();
+void print(float *,int);
+
+void main()
+{
+    int decimal = 0;
+    float num,*ptr;
+    ptr = &num;
+    getinput(ptr);
+    decimal = getdecimal();
+    print(ptr,decimal);
+    getch();
+}
+
+void getinput(float *ptr)
+{
+    printf("Enter The Decimal Number : ");
+    scanf("%f",ptr);
+}
+
+int getdecimal()
+{
+    int i = 0;
+    printf("Enter How Many Decimal Point You Want : ");
+    scanf("%d",&i);
+    return i;
+}
+
+void print(float *ptr,int i)
+{
+    printf("%.*f",i,*ptr);
+}
+
+Output : 
+
+Enter The Decimal Number : 15.7896
+Enter How Many Decimal Point You Want : 2
+15.79
+
+Enter The Decimal Number : 27.4567
+Enter How Many Decimal Point You Want : 3
+27.457
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getnumber(int *);
+void exchange(int *, int *);
+void print(int *);
+void main()
+{
+    int a,*ptra,b,*ptrb;
+    ptra = &a;
+    ptrb = &b;
+    getnumber(ptra);
+    getnumber(ptrb);
+    printf("\nValue : %d At Address : %p",*ptra,ptra);
+    printf("\nValue : %d At Address : %p\n",*ptrb,ptrb);
+    exchange(ptra,ptrb);
+    printf("\nAfter Exchange Values \n");
+    printf("\nValue : %d At Address : %p",*ptra,ptra);
+    printf("\nValue : %d At Address : %p\n",*ptrb,ptrb);
+}
+
+void getnumber(int *ptr)
+{
+    printf("\nEnter Number : ");
+    scanf("%d",ptr);
+}
+
+void exchange(int *ptra, int *ptrb)
+{
+    *ptra = *ptra + *ptrb;
+    *ptrb = *ptra - *ptrb;
+    *ptra = *ptra - *ptrb;
+}
+
+void print(int *ptr)
+{
+    printf("%d\n",*ptr);
+}
+
+Output :
+
+Enter Number : 45
+
+Enter Number : 78
+
+Value : 45 At Address : 000000000061FE0C
+Value : 78 At Address : 000000000061FE08
+
+After Exchange Values
+
+Value : 78 At Address : 000000000061FE0C
+Value : 45 At Address : 000000000061FE08
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+char finding();
+int occurance(char *,char);
+void print(int);
+
+void main()
+{
+    char str[15],*ptr,findme;
+    int index = 0;
+    ptr = str;
+    getstring(ptr);
+    findme = finding();
+    index = occurance(ptr,findme);
+    print(index);
+}
+
+void getstring(char *ptr)
+{
+    printf("Enter the String : ");
+    scanf("%s",ptr);
+}
+
+char finding()
+{
+    char s;
+    printf("Enter The Character You Want Find : ");
+    scanf(" %c",&s);
+    return s;
+}
+
+
+int occurance(char *ptr,char s)
+{
+    int index = 0,flag = 0;
+    while(*ptr != '\0' && flag != 1)
+    {
+        if( *ptr == s )
+        {
+            flag = 1;
+        }
+        else
+        {
+            index++;
+            ptr++;
+        }
+    }
+    if( flag == 1 )
+    {
+        return index;
+    }
+    else
+    {
+        return index = 101;
+    }
+}
+
+void print(int index)
+{
+    if (index == 101)
+    {
+        printf("No Match Found");
+    }
+    else
+    {
+        printf("Found At Index : %d",index);    
+    }
+}
+
+Output :
+
+Enter the String : pradip
+Enter The Character You Want Find : p
+Found At Index : 0
+
+Enter the String : pradip
+Enter The Character You Want Find : a
+Found At Index : 2
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+int checksubset(char *,char *);
+void print(int);
+
+void main()
+{
+    int index;
+    char mainstr[15], str[10], *mainptr, *ptr;
+    mainptr = mainstr;
+    ptr = str;
+    printf( "Enter The Main String : " );
+    getstring(mainstr);
+    printf( "Enter The Sub String : " );
+    getstring(ptr);
+    index = checksubset(mainptr,ptr);
+    print(index);
+}
+
+void getstring(char *ptr)
+{
+    scanf("%s",ptr);
+}
+
+int checksubset(char *main,char *sub)
+{
+    int flag = 0, index = 0, subindex = 0, returnvalue = 404;
+    char *temp;
+    temp = sub;
+    while( *main != '\0' && flag != 1 )
+    {
+        if( *main == *sub )
+        {
+            index++;
+            sub++;
+            main++;
+            subindex++;
+            if(*sub == '\0')
+            {
+                flag = 1;
+                returnvalue = index - subindex;
+            }            
+        }
+        else if( *main != *sub )
+        {
+            index++;
+            main++;
+            subindex = 0;
+            sub = temp;
+        }
+    }
+    return returnvalue;
+}
+
+void print(int n)
+{
+    if(n != 404)
+    {
+        printf( "\nString Found At Index : %d" ,n);
+    }
+    else
+    {
+        printf( "\nSubstring Not Found\n" );
+    }
+}
+
+Output:
+
+Enter The Main String : Pradip
+Enter The Sub String : Karmakar
+
+Substring Not Found
+PS E:\MCA\MCA SEM 2\AP\Assignment 2\XT11\XT11_b> ./XT11_b.exe
+Enter The Main String : Karmakar
+Enter The Sub String : mak
+
+String Found At Index : 3
+PS E:\MCA\MCA SEM 2\AP\Assignment 2\XT11\XT11_b> ./XT11_b.exe
+Enter The Main String : Karmakar
+Enter The Sub String : rma
+
+String Found At Index : 2
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+char getchart();
+void deleting(char *,char);
+
+void main()
+{
+    char str[10], delete, *strptr;
+    strptr = str;
+    getstring(strptr);
+    delete = getchart();
+    deleting(strptr,delete);
+}
+
+void getstring(char *s)
+{
+    printf( "Enter The String : " );
+    scanf("%s",s);
+}
+
+char getchart()
+{
+    char d;
+    printf( "Enter The Deletion Character : " );
+    scanf(" %c",&d);
+    return d;
+}
+
+void deleting(char *s,char d)
+{
+    printf("\nYour String : %s",s);
+    printf("\nCharacter tobe Deleted : %c",d);
+    char *trap,*store;
+    store = s;
+    while( *s != '\0' )
+    {
+        if( *s == d )
+        {
+            trap = s;
+            while( *trap != '\0' )
+            {
+                *trap = *(trap + 1);
+                trap++; 
+            }
+        }
+        s++;
+    }
+    s = store;
+    printf("\nResult : %s",s);
+}
+
+Output:
+
+Enter The String : Pradip
+Enter The Deletion Character : a
+
+Your String : Pradip
+Character tobe Deleted : a
+Result : Prdip
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void getstring(char *);
+int getlenstr2(char *);
+void stringremover(char *, char *,int);
+
+void main()
+{
+    int length = 0;
+    char string1[20],string2[10],*strptr1,*strptr2;
+    strptr1 = string1;
+    strptr2 = string2;
+    printf("Enter The First String : ");
+    getstring(strptr1);
+    printf("Enter The Second String : ");
+    getstring(strptr2);
+    length = getlenstr2(strptr2);
+    stringremover(strptr1,strptr2,length);
+
+}
+
+void getstring(char *string)
+{
+    scanf("%s",string);
+}
+
+int getlenstr2(char *s2)
+{
+    int count = 0;
+    while( *s2 != '\0' )
+    {
+        ++count;
+        s2++;
+    }
+    return count;
+}
+
+void stringremover(char *s1, char *s2, int length_s2)
+{
+    char *string1,*string2,*temp;
+    temp = s1;
+    string2 = s2;
+    while( *s1 != '\0' )
+    {
+        if( *s1 == *s2 )
+        {
+            string1 = s1;
+            while( *string2 != '\0' && *string1 == *string2 )
+            {
+                string2++;
+                string1++;
+            }
+            if( *string2 == '\0' )
+            {
+                string2 = s2;
+                while( *s1 != '\0')
+                {
+                    *s1 = *(s1 + length_s2);
+                    s1++;
+                }
+                s1 = temp;
+            }
+            else
+            {
+                string2 = s2;
+            }
+        }
+        s1++;
+    }
+    printf("%s",temp);
+}
+
+Output:
+
+Enter The First String : karmakar
+Enter The Second String : kar
+ma
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+char getchart();
+void deleting(char *,char);
+
+void main()
+{
+    char str[10], delete, *strptr;
+    strptr = str;
+    getstring(strptr);
+    delete = getchart();
+    deleting(strptr,delete);
+}
+
+void getstring(char *s)
+{
+    printf( "Enter The String : " );
+    scanf("%s",s);
+}
+
+char getchart()
+{
+    char d;
+    printf( "Enter The Deletion Character : " );
+    scanf(" %c",&d);
+    return d;
+}
+
+void deleting(char *s,char d)
+{
+    printf("\n%s",s);
+    printf("\n%c",d);
+    char *trap,*store;
+    store = s;
+    while( *s != '\0' )
+    {
+        if( *s == d || *s == d - 32 || *s == d + 32 )
+        {
+            trap = s;
+            while( *trap != '\0' )
+            {
+                *trap = *(trap + 1);
+                trap++; 
+            }
+        }
+        s++;
+    }
+    s = store;
+    printf("\n%s",s);
+}
+
+Output:
+
+Enter The String : Pradip
+Enter The Deletion Character : p
+
+Pradip
+p
+radi
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void getstring(char *);
+int getlenstr2(char *);
+void stringremover(char *, char *,int);
+char upper(char);
+char lower(char);
+
+void main()
+{
+    int length = 0;
+    char string1[20],string2[10],*strptr1,*strptr2;
+    strptr1 = string1;
+    strptr2 = string2;
+    printf("Enter The First String : ");
+    getstring(strptr1);
+    printf("Enter The Second String : ");
+    getstring(strptr2);
+    length = getlenstr2(strptr2);
+    stringremover(strptr1,strptr2,length);
+
+}
+
+void getstring(char *string)
+{
+    scanf("%s",string);
+}
+
+int getlenstr2(char *s2)
+{
+    int count = 0;
+    while( *s2 != '\0' )
+    {
+        ++count;
+        s2++;
+    }
+    return count;
+}
+
+void stringremover(char *s1, char *s2, int length_s2)
+{
+    int flag = 0;
+    char *string1,*string2,*temp;
+    temp = s1;
+    string2 = s2;
+    while( *s1 != '\0' && flag != 1 )
+    {
+        if( *s1 == *s2 || *s1 == (*s2 + 32) || *s1 == (*s2 - 32) )
+        {
+            string1 = s1;
+            while( *string2 != '\0' && (*string1 == *string2 || *string1 == (*string2 + 32) || *string1 == (*string2 - 32) ) )
+            {
+                string2++;
+                string1++;
+            }
+            if( *string2 == '\0'  )
+            {
+                string2 = s2;
+                while( *s1 != '\0')
+                {
+                    *s1 = *(s1 + length_s2);
+                    s1++;
+                }
+                s1 = temp;
+            }
+            else
+            {
+                string2 = s2;
+            }
+        }
+        s1++;
+    }
+    printf("%s",temp);
+}
+
+Output:
+
+Enter The First String : rollwalacomputerrollwala
+Enter The Second String : wala
+rollcomputerroll
+
+Enter The First String : rollwalacomputerrollWALA 
+Enter The Second String : wAla
+rollcomputerroll
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstr(char *);
+void copy(char *,char *);
+
+void main()
+{
+    char string1[20], string2[10],*ptrstr1, *ptrstr2;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("\nEnter The Main String : ");
+    getstr(ptrstr1);
+    printf("\nEnter The String to be Copy : ");
+    getstr(ptrstr2);
+    copy(ptrstr1,ptrstr2);
+
+}
+
+void getstr(char *s)
+{
+    scanf("%s",s);
+}
+
+void copy(char *s1,char *s2)
+{
+    char *temp;
+    temp = s1; 
+    while( *s2 != '\0' )
+    {
+        *s1 = *s2;
+        s2++;
+        s1++;
+    }
+    *s1 = '\0';
+    printf("\nAfter Copy To The First String : %s",temp);
+}
+
+Output:
+
+
+Enter The Main String : Pradip
+
+Enter The String to be Copy : karmakar
+
+After Copy To The First String : karmakar
+
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstr(char *);
+int getnchar();
+void copy(char *,char *,int);
+
+void main()
+{
+    char string1[20], string2[10],*ptrstr1, *ptrstr2;
+    int limit = 0;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("\nEnter The Main String : ");
+    getstr(ptrstr1);
+    printf("\nEnter The String to be Append : ");
+    getstr(ptrstr2);
+    limit = getnchar();
+    copy(ptrstr1,ptrstr2,limit);
+}
+
+void getstr(char *s)
+{
+    scanf("%s",s);
+}
+
+int getnchar()
+{
+    int d;
+    printf("How Many Char You Want to Append from String 2 : ");
+    scanf("%d",&d);
+    return d;
+}
+
+void copy(char *s1, char *s2, int i)
+{
+    char *temp;
+    temp = s1; 
+
+    while( i > 0 && *s2 != '\0')
+    {
+        *s1 = *s2;
+        i--;
+        s1++;
+        s2++;
+    }
+
+    *s1 = '\0';
+    printf("\n%s",temp);
+}
+
+Output:
+
+Enter The Main String : Karmakar
+
+Enter The String to be Append : Pradip
+How Many Char You Want to Append from String 2 : 4
+
+Prad
+
+**************************************************************************************************************************************************************************************/
+
+#include<conio.h>
+#include<stdio.h>
+
+void getstring(char *);
+int getlength(char *);
+void toggle(char *);
+
+void main()
+{
+    char string[20],*ptrstr;
+    int length = 0;
+    ptrstr = string;
+    getstring(ptrstr);
+    length = getlength(ptrstr);
+    printf("Length of The String Is : %d\n",length);
+    toggle(ptrstr); 
+}
+
+void getstring(char *s)
+{
+    printf("\nEnter The String : ");
+    scanf("%s",s);
+}
+
+int getlength(char *s)
+{
+    int i = 0;
+    while( *s != '\0' )
+    {
+        s++;
+        i++;
+    }
+    return i;
+}
+
+void toggle(char *s)
+{
+    char *temp;
+    temp = s;
+    while( *s != '\0' )
+    {
+        if( *s > 64 && *s < 91 )
+        {
+            *s += 32;
+        }
+        else if( *s > 96 && *s < 123 )
+        {
+            *s -= 32;
+        }
+        s++;
+    }
+    printf("\nAfter Toggle : %s",temp);
+}
+
+Output:
+
+Enter The String : Pradip
+Length of The String Is : 6
+
+After Toggle : pRADIP
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getdata(char *);
+void upper(char *);
+
+void main()
+{
+    char string[10],*ptrstr;
+    ptrstr = string;
+    getdata(ptrstr);
+    upper(ptrstr);
+}
+
+void getdata(char *s)
+{
+    printf("\nEnter the string : ");
+    scanf("%s",s);
+}
+
+void upper(char *s)
+{
+    char *temp;
+    temp = s;
+    while( *s != '\0' )
+    {
+        if( *s > 96 && *s < 123 )
+        {
+            *s -= 32;
+        }
+        s++;
+    }
+    printf("\n%s",temp);
+}
+
+Output:
+
+Enter the string : Pradip
+
+PRADIP
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getdata(char *);
+void upper(char *);
+
+void main()
+{
+    char string[10],*ptrstr;
+    ptrstr = string;
+    getdata(ptrstr);
+    upper(ptrstr);
+}
+
+void getdata(char *s)
+{
+    printf("\nEnter the string : ");
+    scanf("%s",s);
+}
+
+void upper(char *s)
+{
+    char *temp;
+    temp = s;
+    while( *s != '\0' )
+    {
+        if( *s > 64 && *s < 91 )
+        {
+            *s += 32;
+        }
+        s++;
+    }
+    printf("\n%s",temp);
+}
+
+Output:
+
+Enter the string : PRAdip
+
+pradip
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+int getlist();
+void getdata(char[][15],int);
+void sort(char[][15],int);
+void printdata(char[][15],int);
+
+void main()
+{
+	char string[10][15],list;
+
+	list = getlist();
+	getdata(string,list);
+	sort(string,list);
+	printdata(string,list);
+	getch();
+}
+
+int getlist()
+{
+	int x;
+	printf("Enter The List Strings Count : ");
+	scanf("%d",&x);
+	return x;
+}
+
+void getdata(char s[][15],int list)
+{
+	int i, j;
+	char (*ptr)[15];
+	ptr = s;
+	for( i = 0; i < list; i++)
+	{
+		scanf("%s",*ptr);
+		ptr++;
+	}
+}
+
+void sort(char s[][15],int list)
+{
+	int i, j,check = 0;
+	char (*ptr)[15],temp[15];
+	ptr = s;
+	for( i = 0; i < list - 1; i++ )
+	{
+		for( j = 0; j < list - i - 1; j++ )
+		{
+			check = strcmp(*(ptr + j), *(ptr + j + 1));
+			if(check > 0)
+			{
+				strcpy(temp,*(ptr + j));
+				strcpy(*(ptr + j),*(ptr + j + 1));
+				strcpy(*(ptr + j + 1),temp);
+			}
+		}
+	}
+}
+
+void printdata(char s[][15],int list)
+{
+	int i, j;
+	char (*ptr)[15];
+	ptr = s;
+	printf("\n\n______________________After Sorting____________________\n");
+	for(i = 0; i < list; i++)
+	{
+		printf("%s\n",*ptr);
+		ptr++;
+	}
+}
+
+Output:
+
+Enter The List Strings Count : 4
+pradip
+ajinkya
+nirav
+lakshya
+
+
+______________________After Sorting____________________
+ajinkya
+lakshya
+nirav
+pradip
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstr(char *);
+void append(char *,char *);
+
+void main()
+{
+    char string1[20], string2[10],*ptrstr1, *ptrstr2;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("\nEnter The Main String : ");
+    getstr(ptrstr1);
+    printf("\nEnter The String to be Append : ");
+    getstr(ptrstr2);
+    append(ptrstr1,ptrstr2);
+
+}
+
+void getstr(char *s)
+{
+    scanf("%s",s);
+}
+
+void append(char *s1,char *s2)
+{
+    char *temp;
+    temp = s1; 
+    while( *s1 != '\0' )
+    {
+        s1++;
+    }
+
+    while( *s2 != '\0' )
+    {
+        *s1 = *s2;
+        s2++;
+        s1++;
+    }
+    printf("\n %s",temp);
+}
+
+Output:
+
+Enter The Main String : Pradip
+
+Enter The String to be Append : Karmakar
+
+ PradipKarmakar
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstr(char *);
+int getnchar();
+void append(char *,char *,int);
+
+void main()
+{
+    char string1[20], string2[10],*ptrstr1, *ptrstr2;
+    int limit = 0;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("\nEnter The Main String : ");
+    getstr(ptrstr1);
+    printf("\nEnter The String to be Append : ");
+    getstr(ptrstr2);
+    limit = getnchar();
+    append(ptrstr1,ptrstr2,limit);
+    printf("\n%s",string1);
+}
+
+void getstr(char *s)
+{
+    scanf("%s",s);
+}
+
+int getnchar()
+{
+    int d;
+    printf("How Many Char You Want to Append from String 2 : ");
+    scanf("%d",&d);
+    return d;
+}
+
+void append(char *s1, char *s2, int i)
+{
+    char *temp;
+    temp = s1; 
+    while( *s1 != '\0' )
+    {
+        s1++;
+    }
+
+    while( i > 0 && *s2 != '\0')
+    {
+        *s1 = *s2;
+        i--;
+        s1++;
+        s2++;
+    }
+    *s1 = '\0';
+}
+
+
+Output:
+
+Enter The Main String : Pradip
+
+Enter The String to be Append : Karmakar
+How Many Char You Want to Append from String 2 : 5
+
+PradipKarma
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstr( char * );
+void reverse( char * );
+int length( char * );
+
+void main()
+{
+    char string[20],*ptrstr;                                                                       
+    ptrstr = string;
+    getstr(ptrstr);
+    reverse(ptrstr);
+}
+
+void getstr( char *s )
+{
+    printf("Enter The String : ");
+    scanf("%s",s);
+}
+
+void reverse( char *s )
+{
+    int leng = length(s),endlength = leng/2;
+    char *tempstr, tempchar, *s1;
+    tempstr = s;
+    s1 = s+(leng-1);
+    while( endlength > 0 )
+    {
+        tempchar = *s;
+        *s = *s1;
+        *s1  = tempchar;
+        endlength--;
+        s++;
+        s1--;
+    }
+    printf("%s",tempstr);
+}
+
+int length( char *s )
+{
+    int len = 0;
+    while( *s != '\0' )
+    {
+        len++;
+        s++;
+    }
+    return len;
+}
+
+
+Output:
+
+Enter The String : Pradip
+pidarP
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+int comparestring(char *,char *);
+
+void main()
+{
+    char string1[20],string2[20],*ptrstr1,*ptrstr2;
+    int rtnvalue = 0;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("Enter The First String : ");
+    getstring(ptrstr1);
+    printf("Enter The Second String : ");
+    getstring(ptrstr2);
+    rtnvalue = comparestring(ptrstr1,ptrstr2);
+    printf("\n%d",rtnvalue);
+}
+
+void getstring(char *s)
+{
+    scanf("%s",s);
+}
+
+int comparestring(char *s1,char *s2)
+{
+    int value = 0;
+    while( value == 0 && (*s1 != '\0' || *s2 != '\0') )
+    {
+        if( *s1 > *s2 )
+        {
+            value = 1;
+        }
+        else if( *s1 < *s2 )
+        {
+            value = -1;
+        }
+        s1++;
+        s2++;
+    }
+    return value;
+}
+
+
+Output:
+
+Enter The First String : Pradip
+Enter The Second String : Karmakar
+1
+
+
+Enter The First String : karmakar
+Enter The Second String : pradip
+-1
+
+
+Enter The First String : pradip
+Enter The Second String : pradip
+0
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+int comparestring(char *,char *);
+
+void main()
+{
+    char string1[20],string2[20],*ptrstr1,*ptrstr2;
+    int rtnvalue = 0;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("Enter The First String : ");
+    getstring(ptrstr1);
+    printf("Enter The Second String : ");
+    getstring(ptrstr2);
+    rtnvalue = comparestring(ptrstr1,ptrstr2);
+    printf("\n%d",rtnvalue);
+}
+
+void getstring(char *s)
+{
+    scanf("%s",s);
+}
+
+int comparestring(char *s1,char *s2)
+{
+    int value = 0;
+    while( value == 0 && (*s1 != '\0' || *s2 != '\0') )
+    {
+        if( *s1 > 64 && *s1 < 91 )
+        {
+            *s1 += 32;
+        }
+        if( *s2 > 64 && *s2 < 91 )
+        {
+            *s2 += 32;
+        }
+        if( *s1 > * s2 )
+        {
+            value = 1;
+        }
+        else if( *s1 < *s2 )
+        {
+            value = -1;
+        }
+        s1++;
+        s2++;
+    }
+    return value;
+}
+
+Output:
+
+Enter The First String : pradip
+Enter The Second String : Karmakar
+1
+
+
+Enter The First String : PrADIP
+Enter The Second String : pradip
+0
+
+
+Enter The First String : Karmakar
+Enter The Second String : Pradip
+-1
+
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+int getnvalue();
+int comparestring(char *,char *,int);
+
+void main()
+{
+    char string1[20],string2[20],*ptrstr1,*ptrstr2;
+    int rtnvalue = 0, n = 0;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("Enter The First String : ");
+    getstring(ptrstr1);
+    printf("Enter The Second String : ");
+    getstring(ptrstr2);
+    n = getnvalue();
+    rtnvalue = comparestring(ptrstr1,ptrstr2,n);
+    printf("\n%d",rtnvalue);
+}
+
+void getstring(char *s)
+{
+    scanf("%s",s);
+}
+
+int getnvalue()
+{
+    int i;
+    printf("Enter the Limit for Comparing : ");
+    scanf("%d",&i);
+    return i;
+}
+
+int comparestring(char *s1,char *s2, int i)
+{
+    int value = 0;
+    while( value == 0 && i > 0 && (*s1 != '\0' || *s2 != '\0'))
+    {
+        if( *s1 > *s2 )
+        {
+            value = 1;
+        }
+        else if( *s1 < *s2 )
+        {
+            value = -1;
+        }
+        s1++;
+        s2++;
+        i--;
+    }
+    return value;
+}
+
+Output:
+
+Enter The First String : Pradip
+Enter The Second String : Pradip
+Enter the Limit for Comparing : 4
+0
+
+
+Enter The First String : Karmakar
+Enter The Second String : Karnakar
+Enter the Limit for Comparing : 4
+-1
+
+
+Enter The First String : Karnakar 
+Enter The Second String : Karmakar 
+Enter the Limit for Comparing : 4
+1
+
+**************************************************************************************************************************************************************************************/
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void getstring(char *);
+int getnvalue();
+int comparestring(char *,char *,int);
+
+void main()
+{
+    char string1[20],string2[20],*ptrstr1,*ptrstr2;
+    int rtnvalue = 0, n = 0;
+    ptrstr1 = string1;
+    ptrstr2 = string2;
+    printf("Enter The First String : ");
+    getstring(ptrstr1);
+    printf("Enter The Second String : ");
+    getstring(ptrstr2);
+    n = getnvalue();
+    rtnvalue = comparestring(ptrstr1,ptrstr2,n);
+    printf("\n%d",rtnvalue);
+}
+
+void getstring(char *s)
+{
+    scanf("%s",s);
+}
+
+int getnvalue()
+{
+    int i;
+    printf("Enter the Limit for Comparing : ");
+    scanf("%d",&i);
+    return i;
+}
+
+int comparestring(char *s1,char *s2, int i)
+{
+    int value = 0;
+    while( value == 0 && (*s1 != '\0' || *s2 != '\0') && i > 0 )
+    {
+        if( *s1 > 64 && *s1 < 91 )
+        {
+            *s1 += 32;
+        }
+        if( *s2 > 64 && *s2 < 91 )
+        {
+            *s2 += 32;
+        }
+        if( *s1 > * s2 )
+        {
+            value = 1;
+        }
+        else if( *s1 < *s2 )
+        {
+            value = -1;
+        }
+        s1++;
+        s2++;
+        i--;
+    }
+    return value;
+}
+
+Output:
+
+Enter The First String : PrADip
+Enter The Second String : pradip
+Enter the Limit for Comparing : 5
+0
+
+
+Enter The First String : KarNaKar
+Enter The Second String : KarMakar
+Enter the Limit for Comparing : 5
+1
+
+
+Enter The First String : KArmAkar
+Enter The Second String : KarNAkar
+Enter the Limit for Comparing : 5
+-1
+
+
+**************************************************************************************************************************************************************************************/

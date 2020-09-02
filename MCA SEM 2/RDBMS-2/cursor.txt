@@ -1,0 +1,116 @@
+/*********************************************************************************************************
+
+Name : Pradip S Karmakar
+Class : M.C.A 2
+Roll_No : 10
+Subject : RDBMS
+
+**********************************************************************************************************
+
+Question : Creare a procedure for emp which will fetch all employees details and display on screen.
+
+*********************************************************************************************************/
+
+// Procedure For Creating Tables
+
+DELIMITER //            
+CREATE PROCEDURE create_table()
+BEGIN
+    create table emp(
+        emp_id int primary key auto_increment,
+        empname varchar(50),
+        position varchar(50),
+        salary decimal(8,2)
+    );
+END //
+
+
+// Procedure For Inserting Data in Tables
+
+CREATE PROCEDURE insert_data()
+BEGIN
+    insert into emp values(1,'Pradip','CEO_APPLE',80000),
+    (2,'Ajinkya','CEO_GOOGLE','60000'),
+    (3,'Nirav','CEO_MIRCOSOFT','50000'),
+    (4,'Milind','CEO_SAMSUNG','60000'),
+    (5,'Lakshya','CEO_FACEBOOK','90000');
+END //
+
+
+// Procedure With CURSORS for Display Data on the Screen
+
+CREATE PROCEDURE cur_pro()
+BEGIN
+    DECLARE emp_id int;
+    DECLARE emp_name varchar(50);
+    DECLARE position varchar(50);
+    DECLARE salary decimal(8,2);
+    DECLARE c_finish integer DEFAULT 0;
+    DECLARE curs cursor for select * from emp;
+    DECLARE CONTINUE HANDLER for NOT FOUND set c_finish = 1;
+    OPEN curs;
+    get_line : LOOP
+        FETCH curs into emp_id,emp_name,position,salary;
+        IF c_finish = 1 THEN
+            LEAVE get_line;
+        END IF;
+        SELECT CONCAT(emp_id,CONCAT(' | ',CONCAT(emp_name,CONCAT(' | ',CONCAT(position,CONCAT(' | ',salary)))))) as Employee_Data;
+    END LOOP get_line;
+    CLOSE curs; 
+END //
+
+DELIMITER ;
+
+
+/*********************************************************************************************************
+
+OUTPUT : 
+
+MariaDB [test]> call create_table();    
+Query OK, 0 rows affected (0.042 sec)
+
+
+MariaDB [test]> call insert_data();
+Query OK, 5 rows affected (0.022 sec)
+
+
+MariaDB [test]> call cur_pro;
++-----------------------------------+
+| Employee_Data                     |
++-----------------------------------+
+| 1 | Pradip | CEO_APPLE | 80000.00 |
++-----------------------------------+
+1 row in set (0.001 sec)
+
++-------------------------------------+
+| Employee_Data                       |
++-------------------------------------+
+| 2 | Ajinkya | CEO_GOOGLE | 60000.00 |
++-------------------------------------+
+1 row in set (0.003 sec)
+
++--------------------------------------+
+| Employee_Data                        |
++--------------------------------------+
+| 3 | Nirav | CEO_MIRCOSOFT | 50000.00 |
++--------------------------------------+
+1 row in set (0.005 sec)
+
++-------------------------------------+
+| Employee_Data                       |
++-------------------------------------+
+| 4 | Milind | CEO_SAMSUNG | 60000.00 |
++-------------------------------------+
+1 row in set (0.007 sec)
+
++---------------------------------------+
+| Employee_Data                         |
++---------------------------------------+
+| 5 | Lakshya | CEO_FACEBOOK | 90000.00 |
++---------------------------------------+
+1 row in set (0.011 sec)
+
+Query OK, 0 rows affected (0.013 sec)
+
+
+*********************************************************************************************************/

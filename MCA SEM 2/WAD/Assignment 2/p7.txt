@@ -1,0 +1,144 @@
+
+	********************************************
+		NAME : YASH PALSANAWALA
+		CLASS : MCA - 2
+		ROLLNO : 32
+		SUBJECT : Web Application Development
+	********************************************
+
+****************************************************************************************
+Q. 7. Create a class Car which is child class of the class Vehicle. Add the operation maintenance for 
+      car class. The maintenance class has a property to calculate cost to maintain a car in good 
+      condition for a month. Write a function which provides the total maintenance cost of a car for the 
+      year.
+****************************************************************************************
+
+********************************************
+	vehicle.html
+********************************************
+
+<html>
+<head>
+</head>
+<body>
+	<form method="post" action="vehicle.php">
+	<table>
+	<tr>
+		<td>  Enter Vehicle ID : </td>
+		<td> <input type='text' name='vid' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Model No : </td>
+		<td> <input type='text' name='model' required> </td>
+	<tr>
+	
+	<tr>
+		<td> Enter Mileage :  </td>
+		<td> <input type='number' name='mil' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Car Number :  </td>
+		<td> <input type='text' name='cno' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Car Name :  </td>
+		<td> <input type='text' name='cname' required> </td>
+	</tr>
+	
+	<tr>
+		<td> Enter Car Maintenence per Month :  </td>
+		<td> <input type='number' name='cost' required> </td>
+	</tr>
+	
+	<tr>
+		<td> <input type='submit' name='submit' value="submit" > </td>
+		<td> <input type='reset' name='reset' value="reset" > </td>
+	<tr>
+		
+	</table>
+	</form>
+</body>
+</html>
+
+
+********************************************
+	vehicle.php
+********************************************
+
+<?php
+
+class vehicle
+{
+	private
+		$vid,$modelno,$mileage;
+	public
+		function __construct($vid1,$model1,$mi1)
+		{
+			$this->vid = $vid1;
+			$this->modelno = $model1;
+			$this->mileage = $mi1;
+		}		
+		function display()
+		{		
+			echo "<br> Vehicle ID : ".$this->vid;
+			echo "<br> Model No : ".$this->modelno;
+			echo "<br> Mileage : ".$this->mileage;		
+		}
+};
+
+class car extends vehicle
+{
+	private
+		$carno,$carname;
+	public		
+		function __construct($vid,$modelno,$mil,$carno,$cname)
+		{
+			$this->carno = $carno;
+			$this->carname = $cname;
+			
+			parent :: __construct($vid,$modelno,$mil);
+		}
+		function display()
+		{
+			parent :: display();
+			
+			echo "<br> <br> CAR Number : ".$this->carno;
+			echo "<br> CAR NAME : ".$this->carname;
+		}
+};
+
+class maintenence extends car
+{
+	private
+		$cost;
+	public
+		function __construct($vid,$modelno,$mil,$carno,$cname,$cost)
+		{
+			$this->cost = $cost;
+			parent :: __construct($vid,$modelno,$mil,$carno,$cname);
+		}
+		function display()
+		{
+			parent :: display();
+			
+			echo "<br> <br> MONTHLY MAINTENENCE : ".$this->cost;
+			echo "<br> YEARLY MAINTENENCE : ".($this->cost*12);			
+		}
+};
+
+$vid = $_POST['vid'];
+$modelno = $_POST['model'];
+$mil = $_POST['mil'];
+$carno = $_POST['cno'];
+$cname = $_POST['cname'];
+$cost = $_POST['cost'];
+
+$m = new maintenence($vid,$modelno,$mil,$carno,$cname,$cost);
+$m -> display();
+
+?>
+
+*******************************************************************************************************

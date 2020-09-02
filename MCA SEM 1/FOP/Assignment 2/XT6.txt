@@ -1,0 +1,78 @@
+/************************************************************************************************************************************
+
+Roll No: 10
+Name:	 Pradip S Karmakar
+Class:	 MCA SEM-1
+Subject: Fundamentals of Programming(FOP)
+
+************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+void main()
+{
+	int i, j, k = 0, limit, token = 0, put = 0;
+	char name[20][20], temp[20], temp2[20];
+	printf("Enter The Limit Of String : ");
+	scanf("%d",&limit);
+	for(i = 0; i < limit; i++)
+	{
+		printf("Enter The %d String : ", i + 1);
+		scanf("%s",name[i]);
+	}
+	
+	for(j = 0; j < limit; j++)
+	{
+		strcpy(temp,name[j]);
+		for(i = j+1; i < limit; i++)
+		{			
+			token = strcmp(name[i],temp);
+			if(token < 0)
+			{
+				strcpy(temp,name[i]);	
+				k=i;
+			}
+		}
+
+		strcpy(temp2,name[j]);
+		strcpy(name[j],temp);
+		strcpy(name[k],temp2);
+		printf("%s\n",name[j]);
+		k=0;
+	}
+getch();
+}
+
+/************************************************************************************************************************************
+
+Output :
+
+Enter The Limit Of String : 6
+
+Enter The 1 String : Pradip
+
+Enter The 2 String : Ajinkya
+
+Enter The 3 String : Kamal
+
+Enter The 4 String : Lakshya
+
+Enter The 5 String : Nirav
+
+Enter The 6 String : Dhaval
+
+Ajinkya
+
+Dhaval
+
+Kamal
+
+Lakshya
+
+Nirav
+
+Pradip
+
+************************************************************************************************************************************/
+

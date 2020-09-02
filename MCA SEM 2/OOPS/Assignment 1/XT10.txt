@@ -1,0 +1,203 @@
+*****************************************************************************************************************************************
+
+Name   : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(1):Write a program to create class ‘Search’ having data members (int a[ ], x) and define member functions as void input(), 
+	void output(), void search(int position), void add(int value) to display result (Use New and Delete).	
+
+*****************************************************************************************************************************************
+#include<iostream>
+using namespace std;
+
+class Search
+{
+	static int x;
+	int *a;
+
+public: 
+	void input()
+	{
+		a=new int[5];
+		x=5;
+		cout<<"Enter "<<x<<" numbers: "<<endl;
+		for(int i=0;i<x;i++)
+		{
+			cin>>*(a+i);
+		}
+	}
+
+	void output()
+	{
+		cout<<"Your numbers: \n";
+		for(int i=0;i<x;i++)
+		{
+			cout<<*(a+i)<<endl;
+		}
+	}
+	void add(int n)
+	{
+		int *ptr;
+		ptr= new int[x+1];
+		for(int i=0;i<x;i++)
+		{
+			*(ptr+i)=*(a+i);
+		}
+		delete[] a;
+		a=ptr;
+		*(a+x)=n;
+		x++;
+	}
+
+	void search(int n)
+	{
+		if(n>x)
+			cout<<"Invalid Index!!"<<endl;
+		else
+		{
+			cout<<"Number at index "<<n<<" is: ";
+			cout<<*(a+n)<<endl;
+		}
+	}
+};
+
+int Search::x=0;
+void main()
+{
+	int key;
+	Search s;
+	s.input();
+	do
+	{
+		cout<<"1-Add number in array\n2-Search Number\n3-Display Result\n4-exit";
+		cout<<"\nChoose one option: ";
+		cin>>key;
+		if(key==1)
+		{
+			int x;
+			int key2;
+			do
+			{
+				cout<<"Enter the number to add: ";
+				cin>>x;
+				s.add(x);
+				cout<<"Enter 1 to add again: ";
+				cin>>key2;
+			}while(key2==1);
+		}
+		else if(key==2)
+		{
+			int key2,x;
+			do
+			{
+				cout<<"Enter index position to search number in array: ";
+				cin>>x;
+				s.search(x);
+				cout<<"Enter 1 to search again: ";
+				cin>>key2;
+			}while(key2==1);
+
+		}
+		else if(key==3)
+			s.output();
+	}while(key !=4);
+}
+
+*****************************************************************************************************************************************
+*****************************************************************************************************************************************
+output:
+Enter 5 numbers:
+1 2 3 4 5
+1-Add number in array
+2-Search Number
+3-Display Result
+4-exit
+Choose one option: 1
+Enter the number to add: 6
+Enter 1 to add again: 1
+Enter the number to add: 7
+Enter 1 to add again: 1
+Enter the number to add: 8
+Enter 1 to add again: 1
+Enter the number to add: 9
+Enter 1 to add again: 1
+Enter the number to add: 10
+Enter 1 to add again: 0
+1-Add number in array
+2-Search Number
+3-Display Result
+4-exit
+Choose one option: 3
+Your numbers:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+1-Add number in array
+2-Search Number
+3-Display Result
+4-exit
+Choose one option: 2
+Enter index position to search number in array: 0
+Number at index 0 is: 1
+Enter 1 to search again: 1
+Enter index position to search number in array: 5
+Number at index 5 is: 6
+Enter 1 to search again: 0
+1-Add number in array
+2-Search Number
+3-Display Result
+4-exit
+Choose one option: 3
+Your numbers:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+1-Add number in array
+2-Search Number
+3-Display Result
+4-exit
+Choose one option: 1
+Enter the number to add: 11
+Enter 1 to add again: 2
+1-Add number in array
+2-Search Number
+3-Display Result
+4-exit
+Choose one option: 3
+Your numbers:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+1-Add number in array
+2-Search Number
+3-Display Result
+4-exit
+Choose one option: 4
+
+*****************************************************************************************************************************************

@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>
+			Result
+		</title>
+		<style>
+			h1{
+				text-align:center;
+			}
+			.data{
+				margin-top:4em;	
+			}
+			p{
+				margin-top:2em;
+				text-align:center;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Result</h1>
+		<div class="data">
+			<p id="name1"></p>
+			<P id="m1"></P>
+			<P id="m2"></P>
+			<P id="m3"></P>
+			<p id="tot"></p>
+			<p id="result"></p>
+		</div>
+	</body>
+</html>
+<script>
+	var getque = new URLSearchParams(location.search);
+	document.getElementById('name1').innerHTML = "Name : "+getque.get('name');
+	document.getElementById('m1').innerHTML = "INWD : "+getque.get('st_one');
+	document.getElementById('m2').innerHTML = "FOP : "+getque.get('st_two');
+	document.getElementById('m3').innerHTML = "BCO : "+getque.get('st_three');
+	var marks1 = getque.get('st_one');
+	var marks2 = getque.get('st_two');
+	var marks3 = getque.get('st_three');
+	var total = parseInt(marks1) +  parseInt(marks2)  +  parseInt(marks3);
+	document.getElementById('tot').innerHTML = "Total : " +total;
+	var avg = total/3;
+		if(avg>=70)
+			document.getElementById('result').innerHTML ="Grade : Distinction";
+		else if(avg>=60)
+			document.getElementById('result').innerHTML = "Grade : First Class";
+		else if(avg>=50)
+			document.getElementById('result').innerHTML = "Grade : Second Class";
+		else if(avg>=40)
+			document.getElementById('result').innerHTML = "Grade : Third Class";
+		else
+			document.getElementById('result').innerHTML = "Grade : Fail";
+</script>

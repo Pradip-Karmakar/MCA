@@ -1,0 +1,704 @@
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+Name: Pradip S Karmakar
+Roll-no: 10
+Class: MCA 2
+Subject: Web Application Development (WAD)
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+							ASSIGNMENT 4
+*************************************************************************************************************************************
+*************************************************************************************************************************************
+
+Q1) Write a php script to upload a file. 
+
+*************************************************************************************************************************************	
+		p1.html:
+			<!DOCTYPE html>
+			<html>
+				<body>
+				<form action="p1.php" method="post" enctype="multipart/form-data">
+					<h2>File Upload</h2>
+					Select image to upload:
+					<input type="file" name="fileToUpload" id="fileToUpload">
+					<input type="submit" value="Upload Image" name="submit">
+				</form>
+				</body>
+			</html>
+
+		p1.php:
+			<?php
+				$target_file = basename($_FILES["fileToUpload"]["name"]);
+				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+						echo "Upload success";
+					} else {
+						echo "Sorry, there was an error uploading your file.";
+					}
+			?>
+
+	OUTPUT :
+	
+		File Upload
+		Select image to upload:   Capture2.PNG
+		
+		Upload success
+
+*************************************************************************************************************************************
+
+Q2) Write a php script which reads and display each directory as a bulleted list.
+
+************************************************************************************************************************************
+	
+		<?php
+			$cwd = getcwd();
+			$dir = scandir($cwd);
+			foreach($dir as $d)
+			{
+				if(is_dir($d))	
+					echo "<br> $d";
+			}
+		?>
+
+	OUTPUT :
+		
+		Practical1
+		Practical2
+		Practical3
+		Practical4
+		
+*************************************************************************************************************************************
+
+Q3) Write a php script which reads and display each file of a specified directory.
+
+*************************************************************************************************************************************
+		<?php
+			$cwd = getcwd();
+			$dir = scandir($cwd);
+			foreach($dir as $d)
+			{
+				if(is_file($d))		
+					echo "<br> $d";
+			}
+		?>
+		
+	OUTPUT :
+	
+		p1.php
+		p2.php
+		p3.php
+
+*************************************************************************************************************************************
+
+Q4) Write a php script which reads and display each file details of a specified directory. The file details include file last access date, last modified date, owner etc. 
+
+*************************************************************************************************************************************
+		<?php
+			$cwd = getcwd();
+			$dir = scandir($cwd);
+			foreach($dir as $d)
+			{
+				if(is_file($d))
+					echo "<br>" .$d. " create date : ".date('d-m-Y',fileatime($d))." access date : ".date('d-m-Y',fileatime($d)). " author : ".fileowner($d);
+			}
+		?>
+		
+	OUTPUT :
+	
+		p1.php create date : 06-12-2018 access date : 06-12-2018 author : ZK\ZK
+		p2.php create date : 06-12-2018 access date : 06-12-2018 author : ZK\ZK
+		p3.php create date : 03-12-2018 access date : 03-12-2018 author : ZK\ZK
+		
+*************************************************************************************************************************************
+
+Q5) Write a php script which reads and display each file of each directory
+
+*************************************************************************************************************************************
+		<?php
+			lists(getcwd());
+			function lists($dir){
+				$ffs = scandir($dir);
+				unset($ffs[array_search('.', $ffs, true)]);
+				unset($ffs[array_search('..', $ffs, true)]); 
+				foreach($ffs as $ff){		
+					if(is_dir($dir.'/'.$ff)) { 
+						echo "<br/>$ff<br/>";
+						lists($dir.'/'.$ff);
+						echo "<br/>";
+					}
+					else
+						echo $ff."<br/>";
+				}
+			}
+		?>
+
+	OUTPUT :
+	
+		Practical1
+		p1.php
+		p2.php
+
+		Practical2
+		p1.php
+		p2.php
+		
+		Practical3
+		p1.php
+		p2.php
+
+*************************************************************************************************************************************
+
+Q6) Write a program to create, copy and delete a directory using php.
+
+*************************************************************************************************************************************
+
+		<?php
+			mkdir("xyz");	
+			function copyr($source, $dest){
+				if (is_link($source)) 
+					return symlink(readlink($source), $dest);
+				if (is_file($source)) 
+					return copy($source, $dest);
+				if (!is_dir($dest)) 
+					mkdir($dest);
+				$dir = dir($source);
+				while (false !== $entry = $dir->read()) {
+					if ($entry == '.' || $entry == '..') 
+						continue;
+					copyr("$source/$entry", "$dest/$entry");
+				}
+				$dir->close();
+				return true;
+			}
+			copyr("xyz","abc");
+			rmdir("xyz");
+		?>
+
+*************************************************************************************************************************************
+
+Q10) Create a database in named Samay in mysql.The samay database has a table named Watch.In the  Watch table perform the followings:
+			 i. insert a record with date and time 
+			 ii. Insert a record with only date 
+			 iii. Insert a record with only time 
+			 iv. Retrieve a record which will display only date in the format dd/mm/yyyy 
+			 v. Retrieve a record which will display date in the format mm/dd/yyyy 
+			 vi. Retrieve a record which will display date in the format yyyy-mm-dd 
+			 vii. Retrieve a record which will display date and time in the format dd/mm/yyyy hh:mi:ss
+			 viii. What is the date of a record in which you have inserted time only?
+	What is the time of a record in which you have inserted date only?
+
+ *************************************************************************************************************************************
+
+		<?php 	
+			$link=mysqli_connect("localhost","root","") or die(mysqli_error($link));
+			mysqli_query($link,"create database if not exists samay") or die(mysqli_error($link));
+			mysqli_select_db($link,"samay") or die(mysqli_error($link));
+			mysqli_query($link,"create table if not exists watch(`date` date)") or die(mysqli_error($link));
+			
+			echo " <h2> insert a record with date and time </h2> ";
+			$date = date("Y-m-d H:i:s");
+			$insert = "INSERT INTO watch (date) VALUES ('$date')";
+			if (mysqli_query($link,$insert)) 
+				echo "record inserted data $date";
+			else
+				echo "Failed";
+
+			echo " <h2> Insert a record with only date </h2> ";
+			$date = date('Y-m-d');
+			$insert = "INSERT INTO watch (date) VALUES ('$date')";
+			if (mysqli_query($link,$insert)) 
+				echo "record inserted date $date";
+			else
+				echo "Failed";
+			
+			echo " <h2> Insert a record with only Time </h2> ";
+			date_default_timezone_set("Asia/Kolkata");
+			$date = date("H:m:s");
+			$insert = "INSERT INTO watch (date) VALUES ('$date')";
+			if (mysqli_query($link,$insert)) 
+				echo "record inserted time $date";
+				else
+					echo "Failed";
+
+			echo " <h2> Retrieve a record which will display only date in the format dd/mm/yyyy </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%d/%m/%Y') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					if($row[0] == '00/00/0000')
+						continue;
+					echo $row[0]."<br>";	
+				}
+
+			echo " <h2> Retrieve a record which will display date in the format mm/dd/yyyy </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%m/%d/%Y') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					if($row[0] == '00/00/0000')
+						continue;
+					echo $row[0]."<br>";	
+				}
+
+			echo " <h2> Retrieve a record which will display date in the format yyyy-mm-dd </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%Y-%m-%d') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					if($row[0] == '0000-00-00')
+						continue;
+					echo $row[0]."<br>";	
+				}
+				
+			echo " <h2> Retrieve a record which will display date and time in the format dd/mm/yyyy hh:mi:ss </h2> ";
+			$sql = "SELECT DATE_FORMAT(date, '%d/%m/%y  %h:%i:%s') FROM watch";
+			$result = mysqli_query($link,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					echo $row[0]."<br>";	
+				}
+		?>
+
+	OUTPUT :
+		
+		insert a record with date and time
+		record inserted date and time 2018-12-07 09:39:11
+		
+		Insert a record with only date
+		record inserted date 2018-12-07
+		
+		Insert a record with only Time
+		record inserted time 14:12:11
+		
+		Retrieve a record which will display only date in the format dd/mm/yyyy
+		07/12/2018
+		07/12/2018
+		07/12/2018
+		07/12/2018
+		11/12/2014
+		
+		Retrieve a record which will display date in the format mm/dd/yyyy
+		12/07/2018
+		12/07/2018
+		12/07/2018
+		12/07/2018
+		12/11/2014
+		
+		Retrieve a record which will display date in the format yyyy-mm-dd
+		2018-12-07
+		2018-12-07
+		2018-12-07
+		2018-12-07
+		2014-12-11
+		
+		Retrieve a record which will display date and time in the format dd/mm/yyyy hh:mi:ss
+		07/12/18 12:00:00
+		07/12/18 12:00:00
+		00/00/00 12:00:00
+		07/12/18 12:00:00
+		07/12/18 12:00:00
+		11/12/14 12:00:00
+
+
+*************************************************************************************************************************************
+
+Q11) Write a php script which will ask user to provide caption and background color of a button. The script will display the text in center of the
+button with background color selected by user
+
+*************************************************************************************************************************************
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button</title>
+    <style>
+    body{
+            margin: 0;
+            background-color:black; 
+        }
+        .content{
+            text-align: center;
+            margin: 10% 0 0 0;
+        }
+        .form_element{
+            width: 28%;
+            height: 55px;
+            border-radius: 5px;
+            border: 2px solid aquamarine;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: medium;
+        }
+
+        .form_button{
+            width: 35%;
+            height: 45px;
+            border-radius: 5px;
+            border: 0px;
+            background-color: red;
+            margin: 10px 0 20px 0;
+            font-weight: bold;
+        }
+
+        .form_button:hover{
+            cursor: pointer;
+            background-color: greenyellow;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <form method="POST">
+            <div>
+                <input type="text" name="cap" class="form_element" placeholder="Write Caption"/>
+            </div>
+            <div>
+                <input type="text" name="color" class="form_element" placeholder="Write Color Name"/>
+                <br><p style="color:#fff;"><span style="color:red;">* </span>Please Provide Proper Color Name otherwise won't effect.</p>
+            </div>
+            <div>
+                <input type="submit" name="submit" value="submit" class="form_button">
+            </div>
+        </form>
+        <?php
+            if(isset($_POST['submit']))
+            {
+                $caption = $_POST['cap'];
+                $color = $_POST['color'];
+        ?>
+            <div>
+                <input type="button" value="<?= $caption; ?>" class="form_button" style="background-color:<?= $color; ?>">
+            </div>
+        <?php
+            }
+        ?>
+    </div>
+</body>
+</html>
+
+
+*************************************************************************************************************************************
+
+Q13) Write a php script which allows user to store one or more itmes in a shopping cart. When user click on continue button it moves to the previous page 
+and allows user to change quantity of selected items. If user click on show cart button it will display shopping cart with items.  
+
+*************************************************************************************************************************************
+
+***************
+cart.sql
+***************
+
+CREATE TABLE `cart` (
+  `cart_id` int(2) NOT NULL,
+  `pro_id` int(2) NOT NULL,
+  `pro_name` varchar(30) NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `qty` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `pro_id` (`pro_id`);
+
+
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart` FOREIGN KEY (`pro_id`) REFERENCES `products` (`pro_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+
+***************
+products.sql
+***************
+
+CREATE TABLE `products` (
+  `pro_id` int(2) NOT NULL,
+  `pro_name` varchar(30) NOT NULL,
+  `price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `products` (`pro_id`, `pro_name`, `price`) VALUES
+(1, 'Desktop', '30000.00'),
+(2, 'Laptop', '35000.00'),
+(3, 'Gaming Set', '5500.00'),
+(4, 'Extentions', '800.00'),
+(5, 'Softwares', '16000.00');
+
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`pro_id`);
+
+ALTER TABLE `products`
+  MODIFY `pro_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
+
+***************
+Dataclass.php
+***************
+
+<?php
+class Dataclass
+{
+    
+	private $conn;
+
+
+    public function __construct()
+    {
+       $this->conn=mysqli_connect("localhost","root","","wad") or die('connection Failed');
+    }
+    public function getConn()
+    {
+        return $this->conn;
+    }
+
+    public function saveRecord($query)
+    {
+    	$res=mysqli_query($this->conn,$query);
+	    return $res;
+    }
+    public function getTable($query)
+    {
+    	$table = mysqli_query($this->conn,$query);
+
+    	return $table;
+    }
+
+    public function getRow($query)
+    {
+    	$table = mysqli_query($this->conn,$query);
+    	$row = mysqli_fetch_assoc($table);
+    	return $row;
+    }
+}
+?>
+
+
+***************
+Shop.php : 
+*************** 
+
+<?php
+    session_start();
+    $j = 1;
+    $qty = 1;
+    require_once('dataclass.php');
+    $dc = new Dataclass();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<form method="POST">
+    
+        <?php $getusers = $dc->getTable("select pro_id from cart"); 
+		    $sum = $getusers->num_rows;
+		?>   
+    <div class="box">
+        <?php
+            $get = $dc->getTable("select * from products");
+            while ($rw=mysqli_fetch_assoc($get))
+            {
+        ?>
+            <div class="product">
+            <h2><?= $rw['pro_name'] ?></h2>
+            <h3>Rs <?= $rw['price'] ?></h3>
+            <br>
+            <input type="hidden" name="id" value="<?= $rw['pro_id'] ?>">
+            <input type="submit" name="pro<?= $rw['pro_id'] ?>" class="form_button" value="Add">
+            </div>
+        <?php
+            }
+        ?>
+    </div>
+    <?php
+        while($j < 6)
+        {
+            $x = "pro".$j;
+        if(isset($_POST[$x])){
+            $proid = $j;
+            $check = "select pro_id from cart where pro_id = $proid";
+            $getcheck = $dc->getTable($check);
+            $data = $dc->getRow("select pro_id,pro_name,price from products where pro_id = $proid");
+            $id = $data['pro_id'];
+            $product = $data['pro_name'];
+            $price = $data['price'];
+            if($getcheck->num_rows == 0)
+            {
+                $save = "insert into cart(pro_id,pro_name,price,qty) values('$id','$product','$price','$qty')";
+                if($dc->saveRecord($save))
+                {
+                    header("location:shop.php");
+                }
+                else{
+                    echo "<script> alert('Error'); </script>";
+                }
+            }
+            else{
+                $update = $dc->getTable("update cart set qty = qty+1 where pro_id = $id");
+                if($update)
+                {
+                    echo "<script> alert('Product Updated Successfully'); </script>";
+                }
+                else{
+                    echo "<script> alert('Error in Update'); </script>";
+                }
+            }
+        }
+    $j++;
+    }
+    ?>
+    <div class="continue"> <h1>Cart Count : <?= $sum ?></h1></div> 
+    <div class="continue">
+        <input type="submit" name="continue" value="Continue" class="form_button">
+        <input type="submit" name="clear" value="Clear Cart" class="form_button">
+    </div>
+    <?php
+        if(isset($_POST['continue'])){
+            header('Location:cart.php');
+        }
+
+        if(isset($_POST['clear'])){
+            if($dc->saveRecord("delete from cart"))
+            {
+                echo "<script> alert('Cart Is Empty Now'); </script>";
+                header("location:shop.php");
+            }
+            else{
+                echo "<script> alert('Error in Deletion'); </script>";
+            }
+        }
+    ?>
+</form>
+</body>
+</html>
+
+
+*******************
+Cart.php
+*******************
+
+<?php
+session_start();
+require_once('dataclass.php');
+$dc = new Dataclass();
+$total = 0;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="cart">
+        <h1>Cart</h1>
+        <form method="POST">
+            <div class="innertable">    
+                <table>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    <?php 
+                        $get = $dc->getTable("select * from cart");
+                        while ($rw=mysqli_fetch_assoc($get))
+                        {
+                    ?>  
+                        <tr>
+                            <td><?= $rw['pro_name'] ?></td>
+                            <td><?= $rw['price'] ?></td>
+                            <td><?= $rw['qty'] ?></td>
+                            <td><?= $rw['price'] * $rw['qty'] ?></td>
+                        </tr>
+                    <?php
+                        $total += $rw['price'] * $rw['qty'];
+                        }
+                    ?>
+                    <tr>
+                        <th colspan="3">Total</th>
+                        <th><?= $total ?></th>
+                    </tr>  
+                </table>
+            </div>
+            <div>
+                <input type="submit" value="Home" name="submit" class="form_button">
+                <?php
+                    if(isset($_POST['submit']))
+                    {
+                        header("location:shop.php");
+                    }
+                ?>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+**************
+main.css
+**************
+
+body{
+    margin: 0 auto;
+    background-color:beige; 
+}
+.box{
+    text-align: center;
+    margin: 10% 0 0 0;
+    display: flex;
+}
+.cart{
+    text-align: center;
+    margin: 5% 0 0 0;
+}
+.continue{
+    text-align: center;
+    margin: 5% 0 0 0;
+}
+.product{
+    width: 33.33%;
+}
+.form_button{
+    width: 35%;
+    height: 45px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: red;
+    margin: 10px 0 20px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+.form_button:hover{
+    cursor: pointer;
+    background-color: greenyellow;
+}
+table{
+    width: 80%;
+    margin-left: 10%;
+    border-collapse: collapse;
+    border:1px solid black;
+    border-radius: 5%;
+}
+td,th,tr{
+    border:1px solid black;
+    padding: 2%;
+    border-spacing: -10px;
+}
+
+
+
+*************************************************************************************************************************************
+*************************************************************************************************************************************

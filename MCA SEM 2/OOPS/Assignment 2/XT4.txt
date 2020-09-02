@@ -1,0 +1,82 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(4):	WAP to define an object m1 of matrix class, use m1<<cout.
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+#include<string>
+#include<conio.h>
+using namespace std;
+
+class Matrix
+{
+	int matrix[10][10];
+
+public:
+	Matrix(){}
+
+ostream & operator <<(ostream & out)
+{
+	for(int i=0;i<2;i++)
+	{
+		for(int j=0;j<2;j++)
+		{
+			out<<matrix[i][j]<<" ";
+			
+		}
+		printf("\n");
+	}
+	return out;
+}
+
+istream & operator >>(istream & in)
+{
+	for(int i=0;i<2;i++)
+	{
+		for(int j=0;j<2;j++)
+		{
+			cout<<"\n Enter Value:";
+			in>>matrix[i][j];
+		}
+	}
+	return in;
+}
+
+};
+void main()
+{
+	Matrix m1;
+	
+	cout<<"\n Enter Matrix:";
+	m1>>cin;
+	cout<<"\n matrix is:";
+	m1<<cout;
+	getch();
+}
+
+*****************************************************************************************************************************************
+
+Output:
+
+ Enter Matrix:
+ Enter Value:1
+
+ Enter Value:2
+
+ Enter Value:3
+
+ Enter Value:4
+
+ matrix is:
+ 1 2
+ 3 4
+
+ *****************************************************************************************************************************************

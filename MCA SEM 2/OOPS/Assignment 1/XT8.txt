@@ -1,0 +1,179 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(8):Use Employee and EmpCollection classes. Employee class contains details about employee and EmpCollection contains 
+	 collection of employees in form of an array. Provide GetSubordinates friend function which returns an object of
+	 EmpCollection class which contains details of subordinates of a manager. The employee object describing manager is to be 
+	 passed as a parameter.
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+#include<string>
+#include<string.h>
+
+using namespace std;
+
+class Employee
+{
+	string name,dept;
+	int id;
+public:
+	string designation;
+	void input()
+	{
+		cout<<"\n-----------------------\n";
+		cout<<"Enter Employee ID: ";
+		cin>>id;
+		cout<<"Enter Employee Name: ";
+		cin>>name;
+		cout<<"Enter Department of employee: ";
+		cin>>dept;
+		cout<<"Enter Designation Of Employee:";
+		cin>>designation;
+	}
+
+	void output()
+	{
+		cout<<"\n-----------------\n";
+		cout<<"Employee ID: "<<id<<endl;
+		cout<<"Employee Name: "<<name<<endl;
+		cout<<"Employee Department: "<<dept<<endl;
+		cout<<"Employee Designation: "<<designation<<endl;
+
+	}
+
+};
+
+class EmpCollection
+{
+	Employee e[10];
+	int limit;
+public:
+	void input()
+	{
+		cout<<"Enter number of Employees: ";
+		cin>>limit;
+		for(int i=0;i<limit;i++)
+			e[i].input();
+	}
+
+	void output()
+	{
+		cout<<"\n=======================================\n";
+		for(int i=0;i<limit;i++)
+		{
+			e[i].output();
+		}
+	}
+
+	friend EmpCollection GetSubordinates(EmpCollection);
+};
+
+EmpCollection GetSubordinates(EmpCollection e1)
+{
+	int i,j=0;
+	EmpCollection e2;
+	for(i=0;i<e1.limit;i++)
+	{
+		if(e1.e[i].designation !="Manager")
+		{
+			e2.e[j]=e1.e[i];
+			j++;
+		}
+	}
+	e2.limit=j;
+	return e2;
+}
+void main()
+{
+	EmpCollection e1,e3;
+	e1.input();
+	e1.output();
+	e3=GetSubordinates(e1);
+	cout<<"\n--------------------------Details of subordinates of Manager :"<<endl;
+	e3.output();
+}
+
+*****************************************************************************************************************************************
+*****************************************************************************************************************************************
+output:
+Enter number of Employees: 4
+
+-----------------------
+Enter Employee ID: 10
+Enter Employee Name: Pradip
+Enter Department of employee: IT
+Enter Designation Of Employee:senior Developer
+
+-----------------------
+Enter Employee ID: 7
+Enter Employee Name: Lakshya
+Enter Department of employee: IT
+Enter Designation Of Employee:junior developer
+
+-----------------------
+Enter Employee ID: 30
+Enter Employee Name: Ajinkya
+Enter Department of employee: IT
+Enter Designation Of Employee:Backend dev
+
+-----------------------
+Enter Employee ID: 5
+Enter Employee Name: nirav
+Enter Department of employee: IT
+Enter Designation Of Employee:Manager
+
+=======================================
+-----------------
+Employee ID: 10
+Employee Name: Pradip
+Employe Department: IT
+Employee Designation:senior Developer
+
+-----------------
+Employee ID: 7
+Employee Name: Lakshya
+Employee Department: IT
+Employee Designation: junior Developer
+
+-----------------
+Employee ID: 30
+Employee Name: Ajinkya
+Employee Department: IT
+Employee Designation: Backend dev
+
+-----------------
+Employee ID: 5
+Employee Name: Nirav
+Employee Department: IT
+Employee Designation: Manager
+
+Details of subordinates of Manager :
+-----------------
+Employee ID: 10
+Employee Name: Pradip
+Employe Department: IT
+Employee Designation:senior Developer
+
+-----------------
+Employee ID: 7
+Employee Name: Lakshya
+Employee Department: IT
+Employee Designation: junior Developer
+
+-----------------
+Employee ID: 30
+Employee Name: Ajinkya
+Employee Department: IT
+Employee Designation: Backend dev
+
+*****************************************************************************************************************************************
+
+

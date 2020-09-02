@@ -1,0 +1,52 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(9):	Design a manipulator to provide the following output specifications for
+printing float values
+
+(i) 5 column width
+(ii) Right justified
+(iii) 2 digits precision
+(iv) Filling unused spaces with +
+
+*****************************************************************************************************************************************
+
+#include<stdio.h>
+#include<conio.h>
+#include<iostream>
+#include<iomanip>
+#include<string>
+using namespace std;
+
+ostream & convert(ostream & pout)
+{
+		pout<<setw(5)<<setprecision(5)<<setfill('+')<<setiosflags(ios::right);
+		return pout;
+}
+	
+void main()
+{
+
+	float amt;
+	cout<<"\n Enter Amount:";
+	cin>>amt;
+	cout<<convert;
+	cout<<amt;
+	
+	getch();
+}
+
+*****************************************************************************************************************************************
+
+Output:
+
+ Enter Amount:1.2
+	++1.2
+
+ *****************************************************************************************************************************************

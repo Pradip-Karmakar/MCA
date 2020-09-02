@@ -1,0 +1,608 @@
+/**************************************************************************************************************************************************************************************
+
+NAME     : Pradip S Karmakar
+ROLL NO  : 10
+CLASS    : MCA (SEM-2)
+SUBJECT  : Advance Programing (AP)
+
+**************************************************************************************************************************************************************************************/
+
+
+/**************************************************************************************************************************************************************************************
+
+DEFINE :
+
+	2.	 Write a complete 'c' program that will accept the following information for each team in      
+	      	 either football or baseball league:          
+			a. Team name
+	        	b. City 
+	       		c. Number of wins
+		 For a baseball team, add the following information
+        	        I.       Number of hits
+        	        II.      Number of runs
+		        III.     No. of errors
+        	        IV.      No. of extra-timing games
+ 
+		 Similarly add the following for a football team
+	                I.       No. of ties   
+       		        II.      No. of field goals     
+                	III.     No. of touchdowns
+	                IV.      No. of turn overs
+		 Enter this information for all the teams in the league then reorder and print the list of teams 
+		 according to their win-lose records. 
+ 
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+union Game{
+	struct football{
+		char coachname[15];
+		int played,wins,lose,draw,goals;
+	}football;
+
+	struct baseball{
+		char coachname[15];
+		int played,wins,lose,draw,homeruns;
+	}baseball;
+}games;
+
+
+struct league{
+	int Game_Id;
+	char Team_Name[20];
+	char city[15];
+	union Game games;
+};
+
+int getData(struct league[]);
+void setPrint(struct league[],int);
+void menudriven(struct league[],int);
+
+void main()
+{
+	struct league game[15];
+	int i,j,n;
+	n = getData(game);
+	/*printf("")*/
+	setPrint(game,n);
+	menudriven(game,n);
+}
+
+int getData(struct league p[])
+{
+	int i,j,total_league;
+	printf("Enter Total Leagues : ");
+	scanf("%d",&total_league);
+	for( i = 0;i < total_league; i++ )
+	{
+		printf("\n\nPress 1 For Football \n\nPress 2 For Baseball\n\n");
+		scanf("%d",&p[i].Game_Id);
+		
+		if(p[i].Game_Id == 1)
+		{
+			printf("\nEnter Team Name : ");
+			scanf("%s",p[i].Team_Name);
+			printf("\nEnter City : ");
+			scanf("%s",p[i].city);
+			printf("\nEnter Coach Name : ");
+			scanf("%s",p[i].games.football.coachname);
+			printf("\nEnter Total Numbers of Matches Played : ");
+			scanf("%d",&p[i].games.football.played);
+			printf("\nEnter Total Numbers of Wins : ");
+			scanf("%d",&p[i].games.football.wins);
+			printf("\nEnter Total Numbers of Loses : ");
+			scanf("%d",&p[i].games.football.lose);
+			printf("\nEnter Total Numbers of Goals : ");
+			scanf("%d",&p[i].games.football.goals);
+			p[i].games.football.draw = p[i].games.football.played-p[i].games.football.wins-p[i].games.football.lose;
+			printf("______________________________________________________");
+		}
+		else if(p[i].Game_Id == 2)
+		{
+			printf("\nEnter Team Name : ");
+			scanf("%s",p[i].Team_Name);
+			printf("\nEnter City : ");
+			scanf("%s",p[i].city);
+			printf("\nEnter Coach Name : ");
+			scanf("%s",p[i].games.baseball.coachname);
+			printf("\nEnter Total Numbers of Matches Played : ");
+			scanf("%d",&p[i].games.baseball.played);
+			printf("\nEnter Total Numbers of Wins : ");
+			scanf("%d",&p[i].games.baseball.wins);
+			printf("\nEnter Total Numbers of Loses : ");
+			scanf("%d",&p[i].games.baseball.lose);
+			printf("\nEnter Total Numbers of Homeruns : ");
+			scanf("%d",&p[i].games.baseball.homeruns);
+			p[i].games.baseball.draw = p[i].games.baseball.played-p[i].games.baseball.wins-p[i].games.baseball.lose;
+			printf("__________________________________________________________");
+		}
+		else
+		{
+			printf("\nPlease Select Proper Options\n");
+			--i;
+		}
+	}
+	return total_league;
+}
+
+void setPrint(struct league p[], int n)
+{
+	int i;
+	for( i = 0; i < n; i++ )
+	{
+		if(p[i].Game_Id == 1)
+		{
+			printf("\n\n\tLeague : Football\n\tTeam Name : %s\n\tCity : %s\n\tCoach : %s\n\tMatch Played : %d\n\tWins : %d\n\tLoses : %d\n\tDraws : %d\n\tTotal Goals : %d\n\n______________________________________________________________________________",p[i].Team_Name,p[i].city,p[i].games.football.coachname,p[i].games.football.played,p[i].games.football.wins,p[i].games.football.lose,p[i].games.football.draw,p[i].games.football.goals);
+		}
+		else{
+			printf("\n\n\tLeague : Baseball\n\tTeam Name : %s\n\tCity : %s\n\tCoach : %s\n\tMatch Played : %d\n\tWins : %d\n\tLoses : %d\n\tDraws : %d\n\tTotal Goals : %d\n\n______________________________________________________________________________",p[i].Team_Name,p[i].city,p[i].games.baseball.coachname,p[i].games.baseball.played,p[i].games.baseball.wins,p[i].games.baseball.lose,p[i].games.baseball.draw,p[i].games.baseball.homeruns);
+		}
+	}
+}
+
+void menudriven(struct league p[],int n)
+{
+	int i,j,option = 0;
+	struct league temp;
+	printf("\n\nPress 1 To Display Data in Win Wise. \n\nPress 2 To Display Data in Lose Wise. \n\nPress 3 To Display Data in Draw Wise. \n\nPress 4 To Exit Program.\n\n");\
+	scanf("%d",&option);
+	if(option == 1)
+	{
+		for( i = 0; i < n; i++ )
+		{
+			for( j = 0; j < n-i-1; j++ )
+			{
+				if(p[j].games.football.wins < p[j+1].games.football.wins ||  p[j].games.football.wins < p[j+1].games.baseball.wins || p[j].games.baseball.wins < p[j+1].games.baseball.wins || p[j].games.baseball.wins < p[j+1].games.football.wins)
+				{
+					temp = p[j];
+					p[j] = p[j+1];
+					p[j+1] = temp;
+				}
+			}
+		}
+		setPrint(p,n);
+		menudriven(p,n);
+	}
+	else if(option == 2)
+	{
+		for( i = 0; i < n; i++ )
+		{
+			for( j = 0; j < n-i-1; j++ )
+			{
+				if(p[j].games.football.lose < p[j+1].games.football.lose ||  p[j].games.football.lose < p[j+1].games.baseball.lose || p[j].games.baseball.lose < p[j+1].games.baseball.lose || p[j].games.baseball.lose < p[j+1].games.football.lose)
+				{
+					temp = p[j];
+					p[j] = p[j+1];
+					p[j+1] = temp;
+				}
+			}
+		}
+		setPrint(p,n);
+		menudriven(p,n);
+	}
+	else if(option == 3)
+	{
+		for( i = 0; i < n; i++ )
+		{
+			for( j = 0; j < n-i-1; j++ )
+			{
+				if(p[j].games.football.draw < p[j+1].games.football.draw ||  p[j].games.football.draw < p[j+1].games.baseball.draw || p[j].games.baseball.draw < p[j+1].games.baseball.draw || p[j].games.baseball.draw < p[j+1].games.football.draw)
+				{
+					temp = p[j];
+					p[j] = p[j+1];
+					p[j+1] = temp;
+				}
+			}
+		}
+		setPrint(p,n);
+		menudriven(p,n);
+	}
+	else if(option == 4)
+	{
+		exit(0);
+	}
+	else
+	{
+		printf("Please Select Proper Option.");
+		menudriven(p,n);
+	}
+	
+}
+
+
+/**************************************************************************************************************************************************************************************
+
+OUTPUT :
+
+
+Enter Total Leagues : 5
+
+
+Press 1 For Football
+
+Press 2 For Baseball
+
+1
+
+Enter Team Name : Xload
+
+Enter City : Navsari
+
+Enter Coach Name : Pradip
+
+Enter Total Numbers of Matches Played : 34
+
+Enter Total Numbers of Wins : 30
+
+Enter Total Numbers of Loses : 2
+
+Enter Total Numbers of Goals : 90
+______________________________________________________
+
+Press 1 For Football
+
+Press 2 For Baseball
+
+1
+
+Enter Team Name : Unofficial
+
+Enter City : Kutch
+
+Enter Coach Name : Nirav
+
+Enter Total Numbers of Matches Played : 40
+
+Enter Total Numbers of Wins : 32
+
+Enter Total Numbers of Loses : 3
+
+Enter Total Numbers of Goals : 72
+______________________________________________________
+
+Press 1 For Football
+
+Press 2 For Baseball
+
+2
+
+Enter Team Name : Loafer
+
+Enter City : Ahmedabad
+
+Enter Coach Name : Monil
+
+Enter Total Numbers of Matches Played : 27
+
+Enter Total Numbers of Wins : 12
+
+Enter Total Numbers of Loses : 5
+
+Enter Total Numbers of Homeruns : 56
+__________________________________________________________
+
+Press 1 For Football
+
+Press 2 For Baseball
+
+2
+
+Enter Team Name : Bittu
+
+Enter City : Mundra
+
+Enter Coach Name : Lakshya
+
+Enter Total Numbers of Matches Played : 70
+
+Enter Total Numbers of Wins : 37
+
+Enter Total Numbers of Loses : 12
+
+Enter Total Numbers of Homeruns : 102
+__________________________________________________________
+
+Press 1 For Football
+
+Press 2 For Baseball
+
+1
+
+Enter Team Name : Google
+
+Enter City : Surat
+
+Enter Coach Name : Ajinkya
+
+Enter Total Numbers of Matches Played : 103
+
+Enter Total Numbers of Wins : 20
+
+Enter Total Numbers of Loses : 49
+
+Enter Total Numbers of Goals : 60
+______________________________________________________
+
+        League : Football
+        Team Name : Xload
+        City : Navsari
+        Coach : Pradip
+        Match Played : 34
+        Wins : 30
+        Loses : 2
+        Draws : 2
+        Total Goals : 90
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Unofficial
+        City : Kutch
+        Coach : Nirav
+        Match Played : 40
+        Wins : 32
+        Loses : 3
+        Draws : 5
+        Total Goals : 72
+
+______________________________________________________________________________
+
+        League : Baseball
+        Team Name : Loafer
+        City : Ahmedabad
+        Coach : Monil
+        Match Played : 27
+        Wins : 12
+        Loses : 5
+        Draws : 10
+        Total Goals : 56
+
+______________________________________________________________________________
+
+        League : Baseball
+        Team Name : Bittu
+        City : Mundra
+        Coach : Lakshya
+        Match Played : 70
+        Wins : 37
+        Loses : 12
+        Draws : 21
+        Total Goals : 102
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Google
+        City : Surat
+        Coach : Ajinkya
+        Match Played : 103
+        Wins : 20
+        Loses : 49
+        Draws : 34
+        Total Goals : 60
+
+______________________________________________________________________________
+
+Press 1 To Display Data in Win Wise.
+
+Press 2 To Display Data in Lose Wise.
+
+Press 3 To Display Data in Draw Wise.
+
+Press 4 To Exit Program.
+
+1
+
+
+        League : Baseball
+        Team Name : Bittu
+        City : Mundra
+        Coach : Lakshya
+        Match Played : 70
+        Wins : 37
+        Loses : 12
+        Draws : 21
+        Total Goals : 102
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Unofficial
+        City : Kutch
+        Coach : Nirav
+        Match Played : 40
+        Wins : 32
+        Loses : 3
+        Draws : 5
+        Total Goals : 72
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Xload
+        City : Navsari
+        Coach : Pradip
+        Match Played : 34
+        Wins : 30
+        Loses : 2
+        Draws : 2
+        Total Goals : 90
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Google
+        City : Surat
+        Coach : Ajinkya
+        Match Played : 103
+        Wins : 20
+        Loses : 49
+        Draws : 34
+        Total Goals : 60
+
+______________________________________________________________________________
+
+        League : Baseball
+        Team Name : Loafer
+        City : Ahmedabad
+        Coach : Monil
+        Match Played : 27
+        Wins : 12
+        Loses : 5
+        Draws : 10
+        Total Goals : 56
+
+______________________________________________________________________________
+
+Press 1 To Display Data in Win Wise.
+
+Press 2 To Display Data in Lose Wise.
+
+Press 3 To Display Data in Draw Wise.
+
+Press 4 To Exit Program.
+
+2
+
+
+        League : Football
+        Team Name : Google
+        City : Surat
+        Coach : Ajinkya
+        Match Played : 103
+        Wins : 20
+        Loses : 49
+        Draws : 34
+        Total Goals : 60
+
+______________________________________________________________________________
+
+        League : Baseball
+        Team Name : Bittu
+        City : Mundra
+        Coach : Lakshya
+        Match Played : 70
+        Wins : 37
+        Loses : 12
+        Draws : 21
+        Total Goals : 102
+
+______________________________________________________________________________
+
+        League : Baseball
+        Team Name : Loafer
+        City : Ahmedabad
+        Coach : Monil
+        Match Played : 27
+        Wins : 12
+        Loses : 5
+        Draws : 10
+        Total Goals : 56
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Unofficial
+        City : Kutch
+        Coach : Nirav
+        Match Played : 40
+        Wins : 32
+        Loses : 3
+        Draws : 5
+        Total Goals : 72
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Xload
+        City : Navsari
+        Coach : Pradip
+        Match Played : 34
+        Wins : 30
+        Loses : 2
+        Draws : 2
+        Total Goals : 90
+
+______________________________________________________________________________
+
+Press 1 To Display Data in Win Wise.
+
+Press 2 To Display Data in Lose Wise.
+
+Press 3 To Display Data in Draw Wise.
+
+Press 4 To Exit Program.
+
+3
+
+
+        League : Football
+        Team Name : Google
+        City : Surat
+        Coach : Ajinkya
+        Match Played : 103
+        Wins : 20
+        Loses : 49
+        Draws : 34
+        Total Goals : 60
+
+______________________________________________________________________________
+
+        League : Baseball
+        Team Name : Bittu
+        City : Mundra
+        Coach : Lakshya
+        Match Played : 70
+        Wins : 37
+        Loses : 12
+        Draws : 21
+        Total Goals : 102
+
+______________________________________________________________________________
+
+        League : Baseball
+        Team Name : Loafer
+        City : Ahmedabad
+        Coach : Monil
+        Match Played : 27
+        Wins : 12
+        Loses : 5
+        Draws : 10
+        Total Goals : 56
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Unofficial
+        City : Kutch
+        Coach : Nirav
+        Match Played : 40
+        Wins : 32
+        Loses : 3
+        Draws : 5
+        Total Goals : 72
+
+______________________________________________________________________________
+
+        League : Football
+        Team Name : Xload
+        City : Navsari
+        Coach : Pradip
+        Match Played : 34
+        Wins : 30
+        Loses : 2
+        Draws : 2
+        Total Goals : 90
+
+______________________________________________________________________________
+
+Press 1 To Display Data in Win Wise.
+
+Press 2 To Display Data in Lose Wise.
+
+Press 3 To Display Data in Draw Wise.
+
+Press 4 To Exit Program.
+******************************************************************************************************************************************************************************************/

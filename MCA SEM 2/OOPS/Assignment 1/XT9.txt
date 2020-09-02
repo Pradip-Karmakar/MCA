@@ -1,0 +1,230 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(1):A book shop maintains the inventory of books that are being sold at the shop. The list includes details such as author, 
+	title, price, publisher and stock position. Whenever a customer wants a book, the sales person inputs the title and author 
+	and the system searches the list and displays whether it is available or not. If it is not, an appropriate message is displayed. 
+	If it is, then the system displays the book details and requests for the number of copies required. If the requested copies are 
+	available, the total cost of the requested copies is displayed; otherwise the message "Required copies not in stock" is display 
+	Design a system using a class called books with suitable member functions and constructors. Include the following features also :
+	(a)The number of successful and unsuccessful transaction should be recorded for the purpose of the statistical analysis. 
+	   Use static data members to keep count of transactions.
+	(b) The price of the books should be updated as and when required. Use a private member function to implement this. 	
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class books
+{
+	
+	int stock[20];
+	float price[20];
+	string author[20],title[20],publisher[20];
+
+public:
+	static int un_transaction,sc_transaction,limit;
+	books()
+	{
+		stock[0]=0;
+		price[0]=0.0;
+		author[0]="";
+		title[0]="";
+		publisher[0]="";
+	}
+
+	void input_books()
+	{
+		int i,temp_limit;
+		cout<<"\n\nEnter Total Number of books you want to enter: ";
+		cin>>temp_limit;
+		for(i=limit;i<temp_limit+limit;i++)
+		{
+			cout<<"\n****************************\n";
+			cout<<"Enter Title of the book: ";
+			cin>>title[i];
+			cout<<"Enter author of the book: ";
+			cin>>author[i];
+			cout<<"Enter publisher of the book: ";
+			cin>>publisher[i];
+			cout<<"Enter price of the book: ";
+			cin>>price[i];
+			cout<<"Enter stock of the book: ";
+			cin>>stock[i];			
+		}
+		limit+=temp_limit;
+	}
+	void search_book(string t_title,string t_author)
+	{
+		int i,flag=0,n;
+		for(i=0;i<limit;i++)
+		{
+			if(title[i].compare(t_title)==0 && author[i].compare(t_author)==0)
+			{
+				flag=1;
+				break;
+			}
+		}
+		if (!flag)
+		{
+			cout<<"Your requested book is not available!!";
+			un_transaction++;
+		}
+		else
+		{
+			cout<<"------------Book Details--------------"<<endl;
+			cout<<"Book Title: "<<title[i]<<endl;
+			cout<<"Author Name: "<<author[i]<<endl;
+			cout<<"Publisher Name: "<<publisher[i]<<endl;
+			cout<<"Book price: "<<price[i]<<endl;
+			cout<<"Enter the number of copies required: ";
+			cin>>n;
+			if(n>stock[i])
+			{
+				cout<<"Required copies not in stock!!";
+				un_transaction++;
+			}
+			else
+			{
+				cout<<"The cost of the requested copies: "<<price[i]*n;
+				sc_transaction++;
+			}
+		}
+		
+	}
+
+	void update_price()
+	{
+		int i,flag=0;
+		float t_price;
+		string t_title,t_author;
+		cout<<"Enter tile of the book you want to update price: ";
+		cin>>t_title;
+		cout<<"Enter author of thge book you want to update price: ";
+		cin>>t_author;
+
+		for(i=0;i<limit;i++)
+		{
+			if(title[i].compare(t_title)==0 && author[i].compare(t_author)==0)
+			{
+				flag=1;
+				cout<<"Enter new Price to update: ";
+				cin>>t_price;
+				price[i]=t_price;
+				break;
+			}
+		}
+		if (!flag)
+		{
+			cout<<"Your requested book is not available!!";
+		}
+		
+	
+	}
+};
+
+int books::limit=0;
+int books::un_transaction=0;
+int books::sc_transaction=0;
+void main()
+{
+	int key;
+	books b;
+	do{
+		cout<<"\n1-input books\n2-Search Book\n3-update price\n4-Exit\nplease choose: ";
+		cin>>key;
+		if(key==1)
+			b.input_books();
+		else if (key==2)
+		{
+			string title,author;
+			cout<<"Enter tile of the book you want to search: ";
+			cin>>title;
+			cout<<"Enter author of thge book you want ot search: ";
+			cin>>author;
+			b.search_book(title,author);
+		}
+		else if(key==3)
+			b.update_price();
+	}while(key!=4);
+	cout<<"\nNumber of succefull transaction: "<<books::sc_transaction;
+	cout<<"\nNumber of unsuccefull transaction: "<<books::un_transaction;
+}
+*****************************************************************************************************************************************
+*****************************************************************************************************************************************
+output:
+
+1-input books
+2-Search Book
+3-update price
+4-Exit
+please choose: 1
+
+
+Enter Total Number of books you want to enter: 2
+
+****************************
+Enter Title of the book: c++
+Enter author of the book: Dey
+Enter publisher of the book: Kumar
+Enter price of the book: 980
+Enter stock of the book: 23
+
+****************************
+Enter Title of the book: Maths
+Enter author of the book: Ramanujan
+Enter publisher of the book: Golden
+Enter price of the book: 780
+Enter stock of the book: 10
+
+1-input books
+2-Search Book
+3-update price
+4-Exit
+please choose: 2
+Enter tile of the book you want to search: c++
+Enter author of thge book you want ot search: ramanujan
+Your requested book is not available!!
+1-input books
+2-Search Book
+3-update price
+4-Exit
+please choose: 2
+Enter tile of the book you want to search: Maths
+Enter author of thge book you want ot search: Ramanujan
+------------Book Details--------------
+Book Title: Maths
+Author Name: Ramanujan
+Publisher Name: Golden
+Book price: 780
+Enter the number of copies required: 2
+The cost of the requested copies: 1560
+1-input books
+2-Search Book
+3-update price
+4-Exit
+please choose: 3
+Enter tile of the book you want to update price: c++
+Enter author of thge book you want to update price: Dey
+Enter new Price to update: 450
+
+1-input books
+2-Search Book
+3-update price
+4-Exit
+please choose: 4
+
+Number of succefull transaction: 1
+Number of unsuccefull transaction: 2
+
+*****************************************************************************************************************************************
+
+

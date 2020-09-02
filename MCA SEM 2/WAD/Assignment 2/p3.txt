@@ -1,0 +1,52 @@
+
+	********************************************
+		NAME : YASH PALSANAWALA
+		CLASS : MCA - 2
+		ROLLNO : 32
+		SUBJECT : Web Application Development
+	********************************************
+
+****************************************************************************************
+Q. 3. Write a PHP function which ask the user number of tickets to be booked. The function get the no.
+of booked tickets and create a table based on that which have exactly same rows as number
+entered by user. The value for rows are booked ticket numbers.
+****************************************************************************************
+
+********************************************
+	ticket.php
+********************************************
+
+<?php
+	echo "<form method='post' action='ticket.php'>";
+	echo "<br>Enter Total Number of Movie Ticket : ";
+	echo "<input type = 'number' name='txt' >";
+	echo "<br> <input type='submit' name='submit' value='Book Ticket' > <br> <br>";
+
+	if(isset($_POST['submit']))
+	{
+		function ticket($n)
+		{
+			echo "<table border='1'>";
+			echo "<tr>";
+			echo "<th> No. </th>";
+			echo "<th> Ticket </th>";
+			echo "</tr>";
+			for($i=1;$i <= $n;$i++)
+			{
+				echo "<tr>";
+				echo "<td> $i </td>";
+				echo "<td>  A ". $i ."</td>";
+				echo "</tr>";
+			}
+
+			echo "</table>";
+		}
+	
+		$n = $_POST['txt'];
+		ticket($n);
+	}
+
+	echo "</form>";
+?>
+
+*******************************************************************************************************

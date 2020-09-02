@@ -1,0 +1,355 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(6):Define a class Student. Add data members as Rollno, Name, Marks_obtained, Max_marks and Percentage. Write member functions for
+     reading values, calculating percentage and printing values of student. Define one more class as MCA_II. MCA_II contains array
+     of students. MCA_II class should contain member functions as Add, delete, modify and replace. 
+     MCA_II is to be defined as friend of Student class. 
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class student
+{
+	int roll_no;
+	float marks_obtained,max_marks,percentage;
+	string name;
+
+public:
+	void read()
+	{
+		cout<<"\n==============================================\n";
+		cout<<"Enter Roll Number: ";
+		cin>>roll_no;
+		cout<<"Enter Name: ";
+		cin>>name;
+		cout<<"Enter Maximum marks: ";
+		cin>>max_marks;
+		cout<<"Enter marks obtained: ";
+		cin>>marks_obtained;
+	}
+
+	float calc_per()
+	{
+		percentage=(100*marks_obtained)/max_marks;
+		return percentage;
+	}
+
+	void display()
+	{
+		cout<<"\nRoll number: "<<roll_no<<endl;
+		cout<<"Name: "<<name<<endl;
+		cout<<"Marks obtained out of "<<max_marks<<" is "<<marks_obtained<<endl;
+		cout<<"Percentage: "<<calc_per()<<"%"<<endl;
+	}
+	friend class mca2;
+};
+
+class mca2
+{
+	student s[10];
+	static int limit;
+public:
+	void add()
+	{
+		int count,i;
+		cout<<"Enter How many students you want to add: ";
+		cin>>count;
+		for(i=limit;i<limit+count;i++)
+		{
+			s[i].read();
+		}
+		limit+=count;
+	}
+	void Delete()
+	{
+		int i,r_no;
+		bool flag=false;
+		cout<<"Enter roll number of which student you want to delete: ";
+		cin>>r_no;
+		for(i=0;i<limit;i++)
+		{
+			if(s[i].roll_no==r_no)
+			{
+				flag=true;
+				while(i<limit-1)
+				{
+					s[i]=s[i+1];
+					i++;
+				}
+				limit--;
+				break;
+			}
+		}
+		if(!flag)
+		{
+			cout<<"\n-------------------Invalid roll number!!\n";
+		}
+	}
+	void modify()
+	{
+		int i,r_no;
+		bool flag=false;
+		cout<<"Enter Roll number of student which you want to modify: "<<endl;
+		cin>>r_no;
+		for(i=0;i<limit;i++)
+		{
+			if(s[i].roll_no==r_no)
+			{
+				flag=true;
+				cout<<"Enter maximum marks: ";
+				cin>>s[i].max_marks;
+				cout<<"Enter marks obtained: ";
+				cin>>s[i].marks_obtained;
+				break;
+			}
+		}
+
+		if(!flag)
+		{
+			cout<<"\n-----------------Invalid roll number!!\n";
+		}
+	}
+	void replace()
+	{
+		int i,j,r_no;
+		bool flag=false;
+		cout<<"Enter Roll number of student which you want to replace: "<<endl;
+		cin>>r_no;
+
+		for(i=0;i<limit;i++)
+		{
+			if(s[i].roll_no==r_no)
+			{
+				flag=true;
+				cout<<"Enter roll number of student which you want to replace with: ";
+				cin>>r_no;
+				for(j=0;j<limit;j++)
+				{
+					if(s[j].roll_no==r_no)
+					{
+						s[i]=s[j];
+						break;
+					}
+				}
+				while(j<limit-1)
+				{
+					s[j]=s[j+1];
+					j++;
+				}
+				limit--;
+			}
+		}
+		if(!flag)
+		{
+			cout<<"\n------------------Invalid roll number!!\n";
+		}
+	}
+	void show()
+	{
+		if(limit==0)
+			cout<<"\n-------------List is Empty!!!";
+		else
+		{
+			for(int i=0;i<limit;i++)
+			{
+				s[i].display();
+			}
+		}
+	}
+};
+
+int mca2::limit=0;
+
+ void main()
+{
+	int key;
+	mca2 m;
+	do
+	{
+		cout<<"----------------------------------------------------\n";
+		cout<<"1-Add Students\n2-Delete Students\n3-Modify Marks of student";
+		cout<<"\n4-Replace student\n5-Display Students\n6-Exit\nEnter Your Choice: ";
+		cin>>key;
+		if(key==1)
+			m.add();
+		else if(key==2)
+			m.Delete();
+		else if(key==3)
+			m.modify();
+		else if(key==4)
+			m.replace();
+		else if(key==5)
+			m.show();
+	}while(key!=6);
+}
+
+*****************************************************************************************************************************************
+output:
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 1
+Enter How many students you want to add: 2
+
+==============================================
+Enter Roll Number: 10
+Enter Name: Pradip
+Enter Maximum marks: 500
+Enter marks obtained: 495
+
+==============================================
+Enter Roll Number: 05
+Enter Name: Nirav
+Enter Maximum marks: 500
+Enter marks obtained: 499
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 5
+
+Roll number: 10
+Name: Pradip
+Marks obtained out of 500 is 495
+Percentage: 99.8%
+
+Roll number: 5
+Name: Nirav
+Marks obtained out of 500 is 499
+Percentage: 98%
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 1
+Enter How many students you want to add: 1
+
+==============================================
+Enter Roll Number: 07
+Enter Name: Lakshya
+Enter Maximum marks: 500
+Enter marks obtained: 480
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 5
+
+Roll number: 10
+Name: Pradip
+Marks obtained out of 500 is 495
+Percentage: 99.8%
+
+Roll number: 5
+Name: Nirav
+Marks obtained out of 500 is 499
+Percentage: 98%
+
+Roll number: 7
+Name: Lakshya
+Marks obtained out of 500 is 480
+Percentage: 96%
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+
+Enter Your Choice: 2
+Enter roll number of which student you want to delete: 50
+Invalid roll number!!
+
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 2
+Enter roll number of which student you want to delete: 10
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 5
+
+Roll number: 5
+Name: Nirav
+Marks obtained out of 500 is 499
+Percentage: 98%
+
+Roll number: 7
+Name: Lakshya
+Marks obtained out of 500 is 480
+Percentage: 96%
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 3
+Enter Roll number of student which you want to modify:
+7
+Enter maximum marks: 500
+Enter marks obtained: 485
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 5
+
+Roll number: 5
+Name: Nirav
+Marks obtained out of 500 is 499
+Percentage: 98%
+
+Roll number: 7
+Name: Lakshya
+Marks obtained out of 500 is 485
+Percentage: 97%
+----------------------------------------------------
+1-Add Students
+2-Delete Students
+3-Modify Marks of student
+4-Replace student
+5-Display Students
+6-Exit
+Enter Your Choice: 6
+
+*****************************************************************************************************************************************
+
+

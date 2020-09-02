@@ -1,0 +1,19 @@
+//Generic interface definition
+interface GenericInterface<T1, T2>
+{
+T2 PerformExecution(T1 x);
+T1 ReverseExecution(T2 x);
+}
+ 
+//A class implementing generic interface
+class Genericclass implements GenericInterface<String, Integer>
+{
+public Integer PerformExecution(String x)
+{
+//execution code
+}
+public String ReverseExecution(Integer x)
+{
+//execution code
+}
+}

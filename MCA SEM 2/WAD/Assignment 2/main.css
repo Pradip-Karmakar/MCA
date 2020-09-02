@@ -1,0 +1,24 @@
+.box{
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;	
+}
+input[type = number],input[type = text],select{
+	width: 20%;	
+	height: 40px;
+	font-size: medium;
+	padding: 5px;
+	margin-top: 0.5em;
+	border-radius: 5px;
+	border: 2px solid black;	
+}
+.submit{
+	width: 10%;
+	height: 30px;
+	margin-top: 0.8em;
+	cursor: pointer;
+}
+.submit:hover{
+	background-color: lightgreen;
+	font-weight: bold;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>XT11</title>
+<script>
+	do {
+		x=prompt("Enter a number to find factorial");
+	}while(x<1);
+	alert("Factorial of " + x + " is " + factorial(x));
+
+
+function factorial(n) {
+	if(n>=1)
+		return n*factorial(n-1);
+	else
+		return 1;
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+CREATING TABLES:
+
+	1 : MariaDB [XT]> create table deposit(actno varchar(5),cname varchar(18),bname varchar(18),amount float(8,2),adate date);
+	    Query OK, 0 rows affected (0.034 sec)
+
+
+	2 : MariaDB [XT]> create table branch(bname varchar(18),city varchar(18));
+	    Query OK, 0 rows affected (0.040 sec)
+
+
+	3 : MariaDB [XT]> create table customer(cname varchar(18), city varchar(18));
+	    Query OK, 0 rows affected (0.030 sec)
+
+
+	4 : MariaDB [XT]> create table borrow(loanno varchar(5),cname varchar(18),bname varchar(18),amount float(8,2));
+	    Query OK, 0 rows affected (0.035 sec)
+
+
+
+INSERTING DATA : 
+
+	1) DEPOSIT TABLE :
+ 	
+	MariaDB [XT]> insert into deposit values('100','Anil','VRCE',1000.00,'95-03-01');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into deposit values('101','Sunil','AJNI',5000.00,'98-01-04');
+	Query OK, 1 row affected (0.003 sec)
+
+	MariaDB [XT]> insert into deposit values('102','Mehul','KAROLBAGH',3500.00,'95-11-19');
+	Query OK, 1 row affected (0.001 sec)
+	
+	MariaDB [XT]> insert into deposit values('104','Madhuri','CHANDNI',1200.00,'9-12-17');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into deposit values('105','Pramod','MGROAD',3000.00,'96-03-27');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into deposit values('106','Sandip','ANDHERI',2000.00,'96-03-31');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into deposit values('107','Shivani','VIRAR',1000.00,'95-09-05');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into deposit values('108','Kranti','NEHRUPLACE',5000.00,'95-07-02');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into deposit values('109','Naren','POWAI',7000.00,'95-08-10');
+	Query OK, 1 row affected (0.002 sec)
+
+	
+	2) CUSTOMER TABLE: 
+
+	MariaDB [XT]> insert into customer values('Anil','Calcutta');
+	Query OK, 1 row affected (0.004 sec)
+
+	MariaDB [XT]> insert into customer values('Sunil','Delhi');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into customer values('Mehul','Baroda');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into customer values('Mandar','Patna');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into customer values('Madhuri','Nagpur');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into customer values('Pramod','Nagpur');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into customer values('Sandip','Surat');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into customer values('Shivani','Bombay');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into customer values('Kranti','Bombay');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into customer values('Naren','Bombay');
+	Query OK, 1 row affected (0.002 sec)
+
+
+
+	3) BRANCH TABLE: 
+
+	MariaDB [XT]> insert into branch values('VRCE','Nagpur');
+	Query OK, 1 row affected (0.003 sec)
+
+	MariaDB [XT]> insert into branch values('AJNI','Nagpur');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into branch values('KAROLBAGH','Delhi');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into branch values('CHANDNI','Delhi');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into branch values('DHARAMPETH','Nagpur');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into branch values('MGROAD','Bangalore');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into branch values('ANDHERI','Bombay');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into branch values('VIRAR','Bombay');
+	Query OK, 1 row affected (0.002 sec)
+
+	MariaDB [XT]> insert into branch values('NEHRUPLACE','Delhi');
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into branch values('POWAI','Bombay');
+	Query OK, 1 row affected (0.002 sec)
+
+	
+	4) BORROW TABLE: 
+
+	MariaDB [XT]> insert into borrow values	('201','Anil','VRCE',1000);
+	Query OK, 1 row affected (0.003 sec)
+
+	MariaDB [XT]> insert into borrow values	('206','Mehul','AJNI',5000);
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into borrow values	('311','Sunil','DHARAMPETH',3000);
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into borrow values	('321','Madhuri','ANDHERI',2000);
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into borrow values	('375','Pramod','VIRAR',8000);
+	Query OK, 1 row affected (0.001 sec)
+
+	MariaDB [XT]> insert into borrow values('481','Kranti','NEHRU 	PLACE',3000);
+	Query OK, 1 row affected (0.002 sec)
+
+Queries(Part 1) : 
+
+	1)  Give all the details of customer Anil.
+
+	MariaDB [XT]> select * from customer where cname = 'Anil';
+	+-------+----------+
+	| cname | city     |
+	+-------+----------+
+	| Anil  | Calcutta |
+	+-------+----------+
+	1 row in set (0.003 sec)
+	
+	2)  Give the name of customer having living city = Bombay and branch city = nagpur
+
+	
+	
+
+	3)  Give name of customer having same living city as their branch city.
+
+	MariaDB [XT]> select c.cname from customer c, deposit d, branch b where c.cname=d.cname and d.bname=b.bname and c.city=b.city;
+	+---------+
+	| cname   |
+	+---------+
+	| Shivani |
+	| Naren   |
+	+---------+
+	2 rows in set (0.000 sec)
+
+	5) Give the name of customers who are depositors having same branch city of Sunil.
+
+	select d.cname from deposit d, branch b where d.bname=b.bname and b.city in(select b.city from branch b, deposit d where b.bname=d.bname and d.cname='sunil');
+	+-------+
+	| cname |
+	+-------+
+	| Anil  |
+	| Sunil |
+	+-------+
+	2 rows in set (0.004 sec)

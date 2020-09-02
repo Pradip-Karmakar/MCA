@@ -1,0 +1,59 @@
+
+	********************************************
+		NAME : YASH PALSANAWALA
+		CLASS : MCA - 2
+		ROLLNO : 32
+		SUBJECT : Web Application Development
+	********************************************
+
+****************************************************************************************
+Q. 5. Write a program to calculate factorial value by using recursive function. 
+	The value must be entered by user.
+****************************************************************************************
+
+********************************************
+	recursion.php
+********************************************
+
+<?php
+
+	echo "<form method='post' action='recursion.php'>";
+	
+	echo "<br> Enter Number : ";
+	echo "<input type='number' name='num' required>";
+	echo "<br> <input type='submit' name='submit' value='submit'> <br>";
+	
+	if(isset($_POST['submit']))
+	{
+		
+		function fact($n)
+		{
+			$i;
+			if($n==1)
+			{
+				$i=1;
+				return $i;
+			}
+			else if($n==2)
+			{
+				$i=2;
+				return $i;
+			}
+			else
+			{
+				$i=$n*fact($n-1);
+			}
+			return	$i;		
+		}
+		
+		$n = $_POST['num'];
+		
+		$ans=0;
+		$ans=fact($n);
+		echo "<br> FACTORIAL = $ans";
+	}
+	
+	echo "</form>";
+?>
+
+*******************************************************************************************************

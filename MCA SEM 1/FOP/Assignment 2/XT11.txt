@@ -1,0 +1,52 @@
+/************************************************************************************************************************************
+
+Roll No: 10
+Name:	 Pradip S Karmakar
+Class:	 MCA SEM-1
+Subject: Fundamentals of Programming(FOP)
+
+************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int i, j, n, list[20], max = 0;
+
+	printf("Enter The Limit Of Array : ");
+	scanf("%d",&n);
+	for(i = 0; i < n; i++)
+	{
+		printf("\nEnter The %d Number : ",i+1);
+		scanf("%d",list[i]);
+		if(max < list[i])
+		{
+			max = list[i];
+			j = i;
+		}
+	}
+	printf("The Greatest Number is %d and Found At Index %d",max,j);
+	getch();
+}
+
+/************************************************************************************************************************************
+
+Output :
+
+Enter The Limit Of Array : 6
+
+Enter The 1 Number : 4
+
+Enter The 2 Number : 7
+
+Enter The 3 Number : 1
+
+Enter The 4 Number : 10
+
+Enter The 5 Number : 8
+
+Enter The 6 Number : 6
+
+The Greatest Number is 10 and Found At Index 3
+
+************************************************************************************************************************************/

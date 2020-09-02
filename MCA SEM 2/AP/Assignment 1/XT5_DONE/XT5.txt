@@ -1,0 +1,517 @@
+/**************************************************************************************************************************************************************************************
+
+NAME     : Pradip S Karmakar
+ROLL NO  : 10
+CLASS    : MCA (SEM-2)
+SUBJECT  : Advance Programing (AP)
+
+**************************************************************************************************************************************************************************************/
+
+
+/**************************************************************************************************************************************************************************************
+
+DEFINE :
+
+	5.   Write a complete 'C' program that will accept the following information for each vehicle
+	     either two-wheeler and four-wheeler :- 
+		a. Vehicle Name 
+		b. Vehicle Price
+		c. Vehicle Type [ 2/4]  
+		For a two-wheeler , add the following information
+                         I.      Mileage
+                         II.     Type ( Geared / Gearless)
+                Similarly add the following for a four-wheeler
+                         I.      Usage(Auto / Manual) 
+                         II.    Engine Number
+	                 III.    Type (Heavy / Light) 
+ 
+ 		Enter this information for atleast 10 vehicles and print list of 2 & 4 wheeler vehicles
+                accordingly.
+
+**************************************************************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct{
+	float mileage;
+	char type[10];
+}two;
+
+typedef struct{
+	float mileage;
+	char transmission[10],type[10];
+	int Eng_no;
+}four;
+
+typedef struct{
+	int vehi_type;
+	char vehi_name[15];
+	float price;
+	union{
+		two t;
+		four f;
+	};
+}vehicle;
+
+vehicle getData();
+
+void setPrint(vehicle[],int,int);
+
+void menudriven(vehicle[],int);
+
+void main()
+{
+	vehicle v[50];
+	int i,total_vehicles;
+	printf("Enter Total Number of Vehicles : ");
+	scanf("%d",&total_vehicles);
+	for( i = 0; i < total_vehicles; i++ )
+	{
+		v[i] = getData();
+	}
+
+	menudriven(v,total_vehicles);
+}
+
+vehicle getData()
+{
+	vehicle b;
+	printf("\nPress 1 for 2 Wheelers \nPress 2 for 4 Wheelers\n");
+	scanf("%d",&b.vehi_type);
+	if(b.vehi_type == 1)
+	{
+		printf("\nEnter Vehicle Name : ");
+		scanf("%s",b.vehi_name);
+		printf("\nEnter Vehicle Price : ");
+		scanf("%f",&b.price);
+		printf("\nEnter Vehicle Mileage : ");
+		scanf("%f",&b.t.mileage);
+		printf("\nEnter Vehicle Type(Gear/Gearless) : ");
+		scanf("%s",b.t.type);
+	}
+	else if(b.vehi_type == 2){
+		printf("\nEnter Vehicle Name : ");
+		scanf("%s",b.vehi_name);
+		printf("\nEnter Vehicle Price : ");
+		scanf("%f",&b.price);
+		printf("\nEnter Vehicle Engine Number : ");
+		scanf("%d",&b.f.Eng_no);
+		printf("\nEnter Vehicle Mileage : ");
+		scanf("%f",&b.f.mileage);
+		printf("\nEnter Vehicle Transmission Type : ");
+		scanf("%s",b.f.transmission);
+		printf("\nEnter Vehicle Type (Heavy/Light) : ");
+		scanf("%s",b.f.type);
+	}
+	return b;
+}
+
+void setPrint(vehicle b[], int tv, int v_type)
+{
+	int i;
+	for( i = 0; i < tv; i++ )
+	{
+		if( b[i].vehi_type == v_type )
+		{
+			if( v_type == 1 )
+			{
+				printf("\n\n\tVehicle Type = Two Wheeler \n\tVehicle Name = %s \n\tVehicle Price = %.2f \n\tMileage = %.2f \n\tGear Type = %s\n________________________________________________________",b[i].vehi_name,b[i].price,b[i].t.mileage,b[i].t.type);
+			}
+			else{
+				printf("\n\n\tVehicle Type = Four Wheeler \n\tVehicle Name = %s \n\tVehicle Price = %.2f \n\tMileage = %.2f \n\tTransmission Type = %s \n\t Type = %s \n\tEngine No = %d\n________________________________________________________",b[i].vehi_name,b[i].price,b[i].f.mileage,b[i].f.transmission,b[i].f.type,b[i].f.Eng_no);
+			}
+		}
+	}
+}
+
+void menudriven(vehicle b[],int tv)
+{
+	int i,j,option;
+	
+	printf("\n\n\tPress 1 To Display All Vehicles. \n\n\tPress 2 To Display Two Wheelers \n\n\tPress 3 To Display Four Wheelers \n\n\tPress 4 For Exit\n");
+	scanf("%d",&option);
+	if(option == 1)
+	{
+		printf("\n+++++++++++++++++++++Two Wheelers+++++++++++++++++++++");
+		setPrint(b,tv,1);
+		printf("\n+++++++++++++++++++++Four Wheelers+++++++++++++++++++++");
+		setPrint(b,tv,2);
+		menudriven(b,tv);
+	}
+	else if(option == 2)
+	{
+		printf("\n+++++++++++++++++++++Two Wheelers+++++++++++++++++++++");
+		setPrint(b,tv,1);
+		menudriven(b,tv);
+	}
+	else if(option == 3)
+	{
+		printf("\n+++++++++++++++++++++Four Wheelers+++++++++++++++++++++");
+		setPrint(b,tv,2);
+		menudriven(b,tv);
+	}
+	else if(option == 4)
+	{
+		exit(0);
+	}
+	else
+	{
+		printf("\nPlease Select Proper Options\n");
+		menudriven(b,tv);
+	}
+}
+
+/**************************************************************************************************************************************************************************************
+
+OUTPUT :
+
+
+Enter Total Number of Vehicles : 10
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+1
+
+Enter Vehicle Name : Activa
+
+Enter Vehicle Price : 62000
+
+Enter Vehicle Mileage : 60
+
+Enter Vehicle Type(Gear/Gearless) : Gearless
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+2
+
+Enter Vehicle Name : Scorpio
+
+Enter Vehicle Price : 450000
+
+Enter Vehicle Engine Number : 20395420
+
+Enter Vehicle Mileage : 32
+
+Enter Vehicle Transmission Type : Manual
+
+Enter Vehicle Type (Heavy/Light) : Heavy
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+2
+
+Enter Vehicle Name : Nano
+
+Enter Vehicle Price : 100000
+
+Enter Vehicle Engine Number : 23947832
+
+Enter Vehicle Mileage : 40
+
+Enter Vehicle Transmission Type : Manual
+
+Enter Vehicle Type (Heavy/Light) : Light
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+1
+
+Enter Vehicle Name : PassionPro
+
+Enter Vehicle Price : 59000
+
+Enter Vehicle Mileage : 70
+
+Enter Vehicle Type(Gear/Gearless) : Gear
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+1
+
+Enter Vehicle Name : Pleasure
+
+Enter Vehicle Price : 65000
+
+Enter Vehicle Mileage : 62
+
+Enter Vehicle Type(Gear/Gearless) : Gearless
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+2
+
+Enter Vehicle Name : Fortuner
+
+Enter Vehicle Price : 1200000
+
+Enter Vehicle Engine Number : 239847328
+
+Enter Vehicle Mileage : 28
+
+Enter Vehicle Transmission Type : Auto
+
+Enter Vehicle Type (Heavy/Light) : Heavy
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+2
+
+Enter Vehicle Name : i10
+
+Enter Vehicle Price : 460000
+
+Enter Vehicle Engine Number : 23986432
+
+Enter Vehicle Mileage : 30
+
+Enter Vehicle Transmission Type : Manual
+
+Enter Vehicle Type (Heavy/Light) : Light
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+2
+
+Enter Vehicle Name : Rapid
+
+Enter Vehicle Price : 2100000
+
+Enter Vehicle Engine Number : 298374833
+
+Enter Vehicle Mileage : 25
+
+Enter Vehicle Transmission Type : Auto
+
+Enter Vehicle Type (Heavy/Light) : Light
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+1
+
+Enter Vehicle Name : R15
+
+Enter Vehicle Price : 210000
+
+Enter Vehicle Mileage : 35
+
+Enter Vehicle Type(Gear/Gearless) : Gear
+
+Press 1 for 2 Wheelers
+Press 2 for 4 Wheelers
+1
+
+Enter Vehicle Name : Bullet
+
+Enter Vehicle Price : 250000
+
+Enter Vehicle Mileage : 40
+
+Enter Vehicle Type(Gear/Gearless) : Gear
+
+
+        Press 1 To Display All Vehicles.
+
+        Press 2 To Display Two Wheelers
+
+        Press 3 To Display Four Wheelers
+
+        Press 4 For Exit
+1
+
++++++++++++++++++++++Two Wheelers+++++++++++++++++++++
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = Activa
+        Vehicle Price = 62000.00
+        Mileage = 60.00
+        Gear Type = Gearless
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = PassionPro
+        Vehicle Price = 59000.00
+        Mileage = 70.00
+        Gear Type = Gear
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = Pleasure
+        Vehicle Price = 65000.00
+        Mileage = 62.00
+        Gear Type = Gearless
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = R15
+        Vehicle Price = 210000.00
+        Mileage = 35.00
+        Gear Type = Gear
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = Bullet
+        Vehicle Price = 250000.00
+        Mileage = 40.00
+        Gear Type = Gear
+________________________________________________________
++++++++++++++++++++++Four Wheelers+++++++++++++++++++++
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Scorpio
+        Vehicle Price = 450000.00
+        Mileage = 32.00
+        Transmission Type = Manual
+         Type = Heavy
+        Engine No = 20395420
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Nano
+        Vehicle Price = 100000.00
+        Mileage = 40.00
+        Transmission Type = Manual
+         Type = Light
+        Engine No = 23947832
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Fortuner
+        Vehicle Price = 1200000.00
+        Mileage = 28.00
+        Transmission Type = Auto
+         Type = Heavy
+        Engine No = 239847328
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = i10
+        Vehicle Price = 460000.00
+        Mileage = 30.00
+        Transmission Type = Manual
+         Type = Light
+        Engine No = 23986432
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Rapid
+        Vehicle Price = 2100000.00
+        Mileage = 25.00
+        Transmission Type = Auto
+         Type = Light
+        Engine No = 298374833
+________________________________________________________
+
+        Press 1 To Display All Vehicles.
+
+        Press 2 To Display Two Wheelers
+
+        Press 3 To Display Four Wheelers
+
+        Press 4 For Exit
+2
+
++++++++++++++++++++++Two Wheelers+++++++++++++++++++++
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = Activa
+        Vehicle Price = 62000.00
+        Mileage = 60.00
+        Gear Type = Gearless
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = PassionPro
+        Vehicle Price = 59000.00
+        Mileage = 70.00
+        Gear Type = Gear
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = Pleasure
+        Vehicle Price = 65000.00
+        Mileage = 62.00
+        Gear Type = Gearless
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = R15
+        Vehicle Price = 210000.00
+        Mileage = 35.00
+        Gear Type = Gear
+________________________________________________________
+
+        Vehicle Type = Two Wheeler
+        Vehicle Name = Bullet
+        Vehicle Price = 250000.00
+        Mileage = 40.00
+        Gear Type = Gear
+________________________________________________________
+
+        Press 1 To Display All Vehicles.
+
+        Press 2 To Display Two Wheelers
+
+        Press 3 To Display Four Wheelers
+
+        Press 4 For Exit
+3
+
++++++++++++++++++++++Four Wheelers+++++++++++++++++++++
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Scorpio
+        Vehicle Price = 450000.00
+        Mileage = 32.00
+        Transmission Type = Manual
+         Type = Heavy
+        Engine No = 20395420
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Nano
+        Vehicle Price = 100000.00
+        Mileage = 40.00
+        Transmission Type = Manual
+         Type = Light
+        Engine No = 23947832
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Fortuner
+        Vehicle Price = 1200000.00
+        Mileage = 28.00
+        Transmission Type = Auto
+         Type = Heavy
+        Engine No = 239847328
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = i10
+        Vehicle Price = 460000.00
+        Mileage = 30.00
+        Transmission Type = Manual
+         Type = Light
+        Engine No = 23986432
+________________________________________________________
+
+        Vehicle Type = Four Wheeler
+        Vehicle Name = Rapid
+        Vehicle Price = 2100000.00
+        Mileage = 25.00
+        Transmission Type = Auto
+         Type = Light
+        Engine No = 298374833
+________________________________________________________
+
+        Press 1 To Display All Vehicles.
+
+        Press 2 To Display Two Wheelers
+
+        Press 3 To Display Four Wheelers
+
+        Press 4 For Exit
+
+******************************************************************************************************************************************************************************************/

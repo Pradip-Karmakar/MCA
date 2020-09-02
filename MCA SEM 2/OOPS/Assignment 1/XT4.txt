@@ -1,0 +1,93 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(4):Create a class Rectangle. The class has attributes length and width, each of which defaults to 1. It has member functions that calculate the perimeter and the
+        area of the rectangle. It has set and get functions for both length and width. The set functions should verify that length and width are each floating-point
+        numbers larger than 0.0 and less than 20.0.  	
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+using namespace std;
+
+class rectangle
+{
+	float len,wid,perimeter,area;
+
+public:
+	rectangle()
+	{
+		len = 1;
+		wid = 1;
+	}
+
+	void set()
+	{
+		cout << "Enter length of Rectangle : ";
+		cin >> len;
+		while( len < 0 || len > 20 )
+		{
+			cout << "Length Must between 0.0 and 20.0" << endl;
+			cin >> len;
+		}
+
+		cout << "Enter Width of Rectangle : ";
+		cin >> wid;
+		while( wid < 0 || wid > 20)
+		{
+			cout << "Width Must between 0.0 and 20.0" << endl;
+			cin >> wid;
+		}
+	}
+
+	void cal_area()
+	{
+		area = len + wid;
+	}
+
+	void cal_peri()
+	{
+		perimeter = 2 * ( len + wid );
+	}
+
+	void get()
+	{
+		cout << endl << "Area of Ractangle : " << area << endl;
+		cout << endl << "Perimeter of Rectangle : " << perimeter << endl;
+	}
+
+};
+
+void main()
+{
+	rectangle rec;
+	rec.set();
+	rec.cal_area();
+	rec.cal_peri();
+	rec.get();
+}
+
+*****************************************************************************************************************************************
+
+output:
+
+Enter length of Rectangle : 25
+Length Must between 0.0 and 20.0
+7
+Enter Width of Rectangle: 100
+Width Must between 0.0 and 20.0
+12
+
+Area of Ractangle : 19
+
+Perimeter of Rectangle : 38
+
+*****************************************************************************************************************************************
+
+

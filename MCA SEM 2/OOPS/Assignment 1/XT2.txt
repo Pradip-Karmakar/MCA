@@ -1,0 +1,285 @@
+*****************************************************************************************************************************************
+
+Name   : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(2):Define a class to represent a bank account. Include the following members :
+        DATA MEMBERS   	MEMBER FUNCTIONS
+      ------------------------   ------------------------------      
+       Name of depositor  	(1) To assign initial values      
+       Account Number   	(2) To Deposit the amount      
+       Type of Account   	(3) To withdraw an amount after checking the Balance amount in account
+	                             (4) To display name and balance 
+       
+      Write C++ program to handle 10 customers. 
+  	
+*****************************************************************************************************************************************
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class bank_account
+{
+    string Name_of_Depositor;
+    int Account_Number;
+    string Account_Type;
+    int Balance;
+    public:
+    void initial_values()
+    {
+        cout << endl << "Enter Name Of Depositor : ";
+        cin >> Name_of_Depositor;
+        cout << "Enter The Account Number : ";
+        cin >> Account_Number;
+        cout << "Enter The Account Type : ";
+        cin >> Account_Type;
+        cout << "Enter The Balance : ";
+        cin >> Balance;
+    }
+    void Deposit()
+    {
+        int amount;
+        cout << "Enter The Amount You Want To Add : ";
+        cin >> amount;
+        Balance += amount;
+    }
+
+    void Withdraw()
+    {
+        int amount;
+        cout << "Enter The Amount You Want To Withdraw : ";
+        cin >> amount;
+        if( Balance < amount )
+        {
+            cout << "Insufficient Balance" << endl;
+        }
+        else{
+            Balance -= amount;
+        }
+    }
+
+    void Display()
+    {
+        cout << "Name : " << Name_of_Depositor << endl << "Balance : " << Balance << endl;
+    }
+ 
+    int check(int acc,int i)
+    {
+        if( Account_Number == acc )
+        {
+            return i;
+        }
+        else{
+            return -1;
+        }
+    } 
+};
+
+void menu(class bank_account []);
+
+int main()
+{
+    int n,index;
+    bank_account s[10];
+    for (int i = 0; i < 10; i++)
+    {
+        cout << "Enter Detail For "<< i+1 << " Customer" << endl;
+        s[i].initial_values();
+    }
+    menu(s);
+    return 0;
+}
+
+void menu(class bank_account s[])
+{
+    int n,account_no,index = -1;
+    cout << endl << " 1 . Deposit Amount." << endl << " 2 . Withdraw Amount." << endl << " 3 . Show Balnace." << endl << " 4 . Exit" << endl;
+    cin >> n;
+    switch (n)
+    {
+    case(1):
+        cout << "Enter Your Account_No : ";
+        cin >> account_no;
+        for( int i = 0; i < 10; i++ )
+        {
+            index = s[i].check(account_no,i);
+            if( index != -1 )
+            {
+                i = 10;
+            }
+        }
+        if(index == -1)
+        {
+            cout << "InValid Account Number" << endl;
+        }
+        else{
+            s[index].Deposit();
+        }
+        menu(s);
+    case(2):
+        cout << "Enter Your Account_No : ";
+        cin >> account_no;
+        for( int i = 0; i < 10; i++ )
+        {
+            index = s[i].check(account_no,i);
+            if( index != -1 )
+            {
+                i = 10;
+            }
+        }
+        if(index == -1)
+        {
+            cout << "InValid Account Number" << endl;
+        }
+        else{
+            s[index].Withdraw();
+        }
+        menu(s);
+    case(3):
+        cout << "Enter Your Account_No : ";
+        cin >> account_no;
+        for( int i = 0; i < 10; i++ )
+        {
+            index = s[i].check(account_no,i);
+            if( index != -1 )
+            {
+                i = 10;
+            }
+        }
+        if(index == -1)
+        {
+            cout << "InValid Account Number" << endl;
+        }
+        else{
+            s[index].Display();
+        }
+        menu(s);
+    case(4):
+        exit(0);
+    default:
+        cout << "Invalid Call" << endl;
+        menu(s);
+    }
+}
+
+*****************************************************************************************************************************************
+
+Output:
+
+Enter Detail For 1 Customer
+Enter Name Of Depositor : Pradip
+Enter The Account Number : 789
+Enter The Account Type : Saving
+Enter The Balance : 3400
+
+Enter Detail For 2 Customer
+Enter Name Of Depositor : Lakshya
+Enter The Account Number : 678
+Enter The Account Type : Saving
+Enter The Balance : 2000
+
+Enter Detail For 3 Customer
+Enter Name Of Depositor : Ajinkya
+Enter The Account Number : 123
+Enter The Account Type : Saving
+Enter The Balance : 4000
+
+Enter Detail For 4 Customer
+Enter Name Of Depositor : Nirav
+Enter The Account Number : 456
+Enter The Account Type : Current
+Enter The Balance : 5000 
+
+Enter Detail For 5 Customer
+Enter Name Of Depositor : Sudip
+Enter The Account Number : 367
+Enter The Account Type : Current
+Enter The Balance : 8700
+
+Enter Detail For 6 Customer
+Enter Name Of Depositor : Monil
+Enter The Account Number : 269
+Enter The Account Type : Current
+Enter The Balance : 4500
+
+Enter Detail For 7 Customer
+Enter Name Of Depositor : Tejas
+Enter The Account Number : 120
+Enter The Account Type : Current
+Enter The Balance : 10000
+
+Enter Detail For 8 Customer
+Enter Name Of Depositor : Dhaval
+Enter The Account Number : 638
+Enter The Account Type : Saving
+Enter The Balance : 900
+
+Enter Detail For 9 Customer
+Enter Name Of Depositor : Aditya
+Enter The Account Number : 333
+Enter The Account Type : Saving
+Enter The Balance : 9000
+
+Enter Detail For 10 Customer
+Enter Name Of Depositor : Ravi
+Enter The Account Number : 459
+Enter The Account Type : Current
+Enter The Balance : 16000
+
+ 1 . Deposit Amount.
+ 2 . Withdraw Amount.
+ 3 . Show Balnace.
+ 4 . Exit
+1
+Enter Your Account_No : 333
+Enter The Amount You Want To Add : 500
+
+ 1 . Deposit Amount.
+ 2 . Withdraw Amount.
+ 3 . Show Balnace.
+ 4 . Exit
+3
+Enter Your Account_No : 333
+Name : Aditya
+Balance : 9500
+
+ 1 . Deposit Amount.
+ 2 . Withdraw Amount.
+ 3 . Show Balnace.
+ 4 . Exit
+2
+Enter Your Account_No : 333
+Enter The Amount You Want To Withdraw : 10000
+Insufficient Balance
+
+ 1 . Deposit Amount.
+ 2 . Withdraw Amount.
+ 3 . Show Balnace.
+ 4 . Exit
+2    
+Enter Your Account_No : 333
+Enter The Amount You Want To Withdraw : 450
+
+ 1 . Deposit Amount.
+ 2 . Withdraw Amount.
+ 3 . Show Balnace.
+ 4 . Exit
+3
+Enter Your Account_No : 333
+Name : Aditya
+Balance : 9050
+
+ 1 . Deposit Amount.
+ 2 . Withdraw Amount.
+ 3 . Show Balnace.
+ 4 . Exit
+4
+
+*****************************************************************************************************************************************
+
+

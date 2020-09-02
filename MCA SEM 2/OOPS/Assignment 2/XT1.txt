@@ -1,0 +1,66 @@
+*****************************************************************************************************************************************
+
+Name    : Pradip S Karmakar.
+Roll No : 10
+Class   : M.C.A - 2
+Subject : Object Oriented Concepts and Programming
+
+*****************************************************************************************************************************************
+
+Q(1):	WAP to use binary operator + add two object of class Numbers having num1 and num2 as its data members and display result.
+
+*****************************************************************************************************************************************
+
+#include<iostream>
+using namespace std;
+
+class Addition 
+{
+	int num;
+public:
+	void getdata()
+	{
+		cout<<"\n Enter value:";
+		cin>>num;
+	}
+
+	void display()
+	{
+		cout<<"\n Value is:"<<num;
+	}
+	
+	Addition operator +(Addition tmp)
+	{
+
+		tmp.num = tmp.num+ num;
+		return tmp;
+	}
+
+};
+
+int main()
+{
+	Addition no1,no2,no3;
+	no1.getdata();
+	no1.display();
+	no2.getdata();
+	no2.display();
+
+	no3=no1+no2;
+	no3.display();
+	return 0;
+}
+
+*****************************************************************************************************************************************
+
+Output:
+
+ Enter value:45
+
+ Value is:45
+ Enter value:35
+
+ Value is:35
+ Value is:80
+
+ *****************************************************************************************************************************************

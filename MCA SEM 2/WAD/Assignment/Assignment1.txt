@@ -1,0 +1,212 @@
+/*********************************************************************************************
+
+Name : Pradip . S . Karmakar
+Roll-No : 10
+Class : MCA-2
+Subject : WAD
+
+**********************************************************************************************
+
+Questions 1: Create the following table with appropriate constraints. 
+	   Team (TeamID, TeamName)
+	   Cricketer (CID, CName, MPlayed, Runs, Wickets, TeamID)
+
+	   Make a GUI which allows the user to insert records for Cricketer. There are text boxes for all the fields
+	   except TeamID. Instead of TeamID, the team name will be displayed in dropdown and the   user    will 
+	   select any one team name. The team name must be dynamic and loaded from   Team   table’s    team 
+	   name attribute  values  When the user clicks the submit button to insert a record, a   record   will    be 
+	   inserted into the cricketer table. 
+
+*********************************************************************************************/
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+dataClass.php  File  
+---------------------------------------------------------------------------------------------------------------------------------
+
+<?php
+
+class Dataclass
+{
+    
+	private $conn;
+
+
+    public function __construct()
+    {
+       $this->conn=mysqli_connect("localhost","root","","wad") or die('connection Failed');
+    }
+    public function getConn()
+    {
+        return $this->conn;
+    }
+
+    public function saveRecord($query)
+    {
+    	$res=mysqli_query($this->conn,$query);
+	    return $res;
+    }
+
+    public function getTable($query)
+    {
+    	$table = mysqli_query($this->conn,$query);
+
+    	return $table;
+    }
+
+    public function getRow($query)
+    {
+    	$table = mysqli_query($this->conn,$query);
+    	$row = mysqli_fetch_assoc($table);
+    	return $row;
+    }
+}
+
+?>
+
+---------------------------------------------------------------------------------------------------------------------------------
+XT1.php File (Assignment 1 File)
+---------------------------------------------------------------------------------------------------------------------------------
+
+<?php
+include 'dataClass.php';  // include external dataclass.php file 
+$dc = new Dataclass();
+
+if(isset($_POST['submit']))
+{
+    $team = $_POST['team'];
+    $name = $_POST['cname'];
+    $match = $_POST['mplayed'];
+    $run = $_POST['run'];
+    $wicket = $_POST['wicket'];
+
+    $save = "insert into cricketer(C_Name,M_Played,Runs,Wickets,Team_id) values('$name','$match','$run','$wicket','$team')";
+    if ($dc->saveRecord($save))
+    {
+        echo '<script>alert("Data Inserted Succesfully");</script>';
+    }
+    else
+    {
+        echo '<script>alert("Error in Data Insertion");</script>';
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XT1</title>
+    <style>
+        
+        body{
+            margin: 0;
+            background-color:aqua; 
+        }
+
+        .box{
+            margin: 0 auto;
+            width: 30%;
+            margin-top : 5%;
+            border: 2px solid green;
+            border-radius: 5px;
+            text-align: center;
+            padding: 1%;
+            background-color:turquoise;
+        }
+
+        .header h1{
+            font-weight: lighter;
+            font-family: comic-sans;
+        }
+
+        .form_element{
+            width: 80%;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid aqua;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: medium;
+        }
+
+        .form_select{
+            width: 85%;
+            height: 55px;
+            border-radius: 5px;
+            border: 2px solid aquamarine;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: medium;
+        }
+
+        .form_button{
+            width: 85%;
+            height: 45px;
+            border-radius: 5px;
+            border: 0px;
+            background-color: red;
+            margin: 10px 0 20px 0;
+            font-weight: bold;
+        }
+
+        .form_button:hover{
+            cursor: pointer;
+            background-color: greenyellow;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        
+        <div class="header">
+            <h1> Cricketers Entry Form </h1>
+        </div>
+
+        <div class="form_box">
+            <form method="post">
+                <div>
+                    <select name="team" id="team" class="form_select">
+                        <?php
+                            $teams = $dc->getTable("select * from teams");
+                            while($row=mysqli_fetch_assoc($teams))
+                            {
+                        ?>
+                                <option value="<?= $row['Team_id'] ?>"> <?= $row['Team_name'] ?> </option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    <input type="text" name="cname" placeholder="Cricketer Name" class="form_element"/>   
+                </div>
+                <div>
+                    <input type="text" name="mplayed" placeholder="Total Match Played" onkeypress="return isNumber(event)"  class="form_element" required/>   
+                </div>
+                <div>
+                    <input type="text" name="run" placeholder="Total Runs Scored" onkeypress="return isNumber(event)" class="form_element" required/>   
+                </div>
+                <div>
+                    <input type="text" name="wicket" placeholder="Total Wicket Taken" onkeypress="return isNumber(event)" class="form_element" required/>   
+                </div>
+                <div>
+                    <input type="submit" name="submit" value="Submit" class="form_button"/>   
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function isNumber(evt) {
+	evt = (evt) ? evt : window.event;
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+		return false;
+	}
+	return true;
+       }
+    </script>
+</body>
+</html>
+

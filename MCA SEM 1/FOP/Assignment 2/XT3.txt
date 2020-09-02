@@ -1,0 +1,95 @@
+/************************************************************************************************************************************
+
+Roll No: 10
+Name:	 Pradip S Karmakar
+Class:	 MCA SEM-1
+Subject: Fundamentals of Programming(FOP)
+
+************************************************************************************************************************************/
+
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int rows,cols, matrix[10][10], j, i, upper = 1, lower = 1;
+	printf("Enter Rows : ");
+	scanf("%d",&rows);
+	printf("Enter Cols : ");
+	scanf("%d",&cols);
+	if(rows != cols) 
+	{
+		printf("\nNo possible Matrix in these rows and cols\n");
+	}
+	else
+	{
+		for(i = 0; i < rows; i++) 
+		{
+			for(j = 0; j < cols; j++) 
+			{
+				printf("Enter (%d,%d) Element : ",i,j);
+				scanf("%d",&matrix[i][j]);
+			}
+		}
+		for(i = 0; i < rows; i++) 
+		{
+			for(j = 0; j < cols; j++) 
+			{
+				if(j < i && matrix[i][j] != 0)
+				{
+					upper=0;
+				}
+				if(j > i && matrix[i][j] != 0)
+				{
+					lower=0;
+				}
+			}
+		}
+		if(upper && lower)
+		{
+			printf("\nThis is Diagonal Matrix");
+		}
+		else if(upper)
+		{
+			printf("\nThis is Upper Triangular\n");
+		}
+		else if(lower) 
+		{
+			printf("\nThis is Lower Triangular\n");
+		}
+		else
+		{
+			printf("\n Not Matching Patterns\n");
+		}
+	}
+getch();
+}    
+
+/************************************************************************************************************************************
+
+Output 1:			Output 2:			Output 3:			Output 4:
+
+Enter Rows : 3			Enter Rows : 3			Enter Rows : 3			Enter Rows : 3
+
+Enter Cols : 3			Enter Cols : 3			Enter Cols : 3			Enter Cols : 3
+
+Enter (0,0) Element : 4		Enter (0,0) Element : 1		Enter (0,0) Element : 1		Enter (0,0) Element : 3
+
+Enter (0,1) Element : 5		Enter (0,1) Element : 0		Enter (0,1) Element : 2		Enter (0,1) Element : 0
+
+Enter (0,2) Element : 3		Enter (0,2) Element : 0		Enter (0,2) Element : 3		Enter (0,2) Element : 0
+		
+Enter (1,0) Element : 6		Enter (1,0) Element : 3		Enter (1,0) Element : 0		Enter (1,0) Element : 0
+
+Enter (1,1) Element : 7		Enter (1,1) Element : 4		Enter (1,1) Element : 6		Enter (1,1) Element : 3
+
+Enter (1,2) Element : 8		Enter (1,2) Element : 0		Enter (1,2) Element : 5		Enter (1,2) Element : 0
+
+Enter (2,0) Element : 9		Enter (2,0) Element : 1		Enter (2,0) Element : 0		Enter (2,0) Element : 0
+
+Enter (2,1) Element : 3		Enter (2,1) Element : 2		Enter (2,1) Element : 0		Enter (2,1) Element : 0
+
+Enter (2,2) Element : 2		Enter (2,2) Element : 3		Enter (2,2) Element : 3		Enter (2,2) Element : 3
+
+Not Matching Patterns 		This is Lower Triangular	This is Upper Triangular 	This is Diagonal Matrix   
+
+************************************************************************************************************************************/
