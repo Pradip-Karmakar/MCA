@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int i, j, n, list[20], max = 0;
+
+	printf("Enter The Limit Of Array : ");
+	scanf("%d",&n);
+	for(i = 0; i < n; i++)
+	{
+		printf("\nEnter The %d Number : ",i+1);
+		scanf("%d",list[i]);
+		if(max < list[i])
+		{
+			max = list[i];
+			j = i;
+		}
+	}
+	printf("The Greatest Number is %d and Found At Index %d",max,j);
+	getch();
+}

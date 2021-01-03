@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>XT11</title>
+		<style>
+			.slidecontain {
+				width: 70%;
+			}
+			.slider, .slider1, .slider2 {
+				-webkit-appearance: none;
+				width: 100%;
+				height: 15px;
+				border-radius: 5px;
+				background: #d3d3d3;
+				outline: none;
+				opacity: 0.7;
+				-webkit-transition: .2s;
+				transition: opacity .2s;
+			}
+			.slider:hover, .slider1:hover, .slider2:hover {
+				opacity: 1;
+			}
+			.slider::-webkit-slider-thumb, .slider1::-webkit-slider-thumb, .slider2::-webkit-slider-thumb{
+				-webkit-appearance: none;
+				appearance: none;
+				width: 25px;
+				height: 25px;
+				border-radius: 50%;
+				cursor: pointer;
+			}
+			.slider::-webkit-slider-thumb{
+				background: #FF0000;
+			}
+			.slider1::-webkit-slider-thumb{
+				background: #00FF00;
+			}
+			.slider2::-webkit-slider-thumb{
+				background: #0000FF;
+			}
+
+			.hexcode{
+				border-radius: 5px;
+				border: 2px solid black;
+				width: 10em;
+				height: 2em;
+				text-align: right;
+				font-size: 15px;
+				font-weight: bold;
+				letter-spacing: 5px;	
+			}
+			.colorname{
+				border-radius: 5px;
+				border: 2px solid black;
+				width: 10em;
+				height: 2em;
+				font-size: 15px;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body> 
+		<div class="check">
+			<input type="radio" class="hex" id="hex" name="color" onclick="clr(1)"> HEX CODE
+			<input type="radio" class="rgb" id="rgb" name="color" onclick="clr(2)"> RGB
+			<input type="radio" class="cname" id="cname" name="color" onclick="clr(3)"> COLOR NAME
+		</div>
+		<div class="contain">
+			<div class="slidecontain" id="slidecontain" style="display:none">
+				<input type="range" min="0" max="255" value="255" class="slider" id="myRange"><p><span id="num"></span></p>
+				<input type="range" min="0" max="255" value="255" class="slider1" id="myRange1"><p><span id="num1"></span></p>
+				<input type="range" min="0" max="255" value="255" class="slider2" id="myRange2"><p><span id="num2"></span></p>
+			</div>
+			<div class="hexdiv" id="hexdiv" style="display:none">
+				<input type="text" id="hexcode" class="hexcode" maxlength="6" placeholder="HEX CODE">
+				<button class="btn" onclick="getcolor()"> Change </button>
+			</div>
+			<div class="named" id="named" style="display:none">
+				<input type="text" name="colorname" id="colorname" class="colorname" placeholder="Color Name">
+				<button class="btn" onclick="getcolorname()"> Change </button>
+			</div>
+		</div> 
+		<script type="text/javascript">
+		function getcolor()
+			{
+				var color = document.getElementById('hexcode').value;
+				document.body.style.background = "#"+color;
+			}
+			
+			function getcolorname()
+			{
+				var color_name = document.getElementById('colorname').value;
+				document.body.style.background = color_name;
+			}
+			var slider = document.getElementById("myRange");
+			var slider1 = document.getElementById("myRange1");
+			var slider2 = document.getElementById("myRange2");
+			var output = document.getElementById("num");
+			var output1 = document.getElementById("num1");
+			var output2 = document.getElementById("num2");
+				output.innerHTML = slider.value;
+				output1.innerHTML = slider1.value;
+				output2.innerHTML = slider2.value;
+				slider.oninput = function() {
+  				output.innerHTML = this.value;
+  				document.body.style.background = "rgb(" + slider.value + "," + slider1.value + "," + slider2.value + ")";
+				}
+				slider1.oninput = function() {
+  				output1.innerHTML = this.value;
+  				document.body.style.background = "rgb(" + slider.value + "," + slider1.value + "," + slider2.value + ")";
+				}
+				slider2.oninput = function() {
+  				output2.innerHTML = this.value;
+  				document.body.style.background = "rgb(" + slider.value + "," + slider1.value + "," + slider2.value + ")";
+				}
+			function clr(n){
+				if(n == 1){
+					document.getElementById("slidecontain").style.display = "none";
+					document.getElementById("named").style.display = "none";
+					document.getElementById("hexdiv").style.display = "block";
+				}
+				else if(n == 2){
+					document.getElementById("hexdiv").style.display = "none";
+					document.getElementById("named").style.display = "none";
+					document.getElementById("slidecontain").style.display = "block";
+				}
+				else if(n == 3){
+					document.getElementById("hexdiv").style.display = "none";
+					document.getElementById("slidecontain").style.display = "none";
+					document.getElementById("named").style.display = "block";
+				}
+				
+			}
+			
+		</script>
+	</body>
+</html>

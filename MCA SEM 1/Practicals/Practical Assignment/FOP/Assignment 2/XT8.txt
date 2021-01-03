@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+void main()
+{
+	int i, j, k = 0, str1, str2, token = 0,temp=0;
+	char name1[20][20],name2[20][20],res[40][40];
+	printf("\nEnter Number Of Strings In First List : ");
+	scanf("%d",&str1);
+	printf("\nEnter Number Of Strings In Second List : ");
+	scanf("%d",&str2);
+	for(i = 0; i < str1; i++)
+	{
+		printf("\nEnter %d String Of First List : ", i + 1);
+		scanf("%s",name1[i]);
+	}
+	for(i = 0; i < str2; i++)
+	{
+		printf("\nEnter %d String Of Second List : ", i + 1);
+		scanf("%s",name2[i]);
+	}
+	
+	for(j = 0; j < str2 && k < str1; j++)
+	{
+		token = strcmp(name1[k], name2[j]);
+		if(token < 0)
+		{
+			strcpy(res[temp], name1[k]);
+			k++;
+			j--;
+
+		}
+		else if(token > 0)
+		{
+			strcpy(res[temp], name2[j]);
+		}
+		temp++;
+	}
+
+	while( j != str2 )
+		{
+			strcpy(res[temp], name2[j]);
+			j++;
+			temp++;
+		}
+
+	while( k != str1 )
+	{
+		strcpy(res[temp], name1[k]);
+		k++;
+		temp++;
+	}
+
+	for( i = 0; i < str1 + str2; i++)
+	{
+		printf("%s\n",res[i]);
+	}
+getch();
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exam Result</title>
+</head>
+<body>
+	<p id="getname" > </p>
+	<p id="getmarks"> </p>
+
+	<script type="text/javascript" >
+		
+		var lak = new URLSearchParams(location.search);
+		document.getElementById('getname').innerHTML = lak.get('name');
+		document.getElementById('getmarks').innerHTML = lak.get('marks'); 
+	</script>
+</body>
+</html>

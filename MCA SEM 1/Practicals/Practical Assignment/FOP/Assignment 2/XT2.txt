@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int i,j,row,col,mat1[10][10],mat2[10][10],rest[10][10];
+	printf("Enter The Matrix Dimension: ");
+	scanf("%d %d",&row,&col);
+	for(i=0;i<row;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			printf("Enter The (%d,%d) of First matrix : ",i,j);
+			scanf("%d",&mat1[i][j]);
+		}
+	}
+	for(i=0;i<row;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			printf("Enter The (%d,%d) of Second matrix : ",i,j);
+			scanf("%d",&mat2[i][j]);
+		}
+	}
+	printf("The First Matrix\n");
+	for(i=0;i<row;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			printf("%3d",mat1[i][j]);
+		}
+		printf("\n");
+	}
+	printf("The Second Matrix\n");
+	for(i=0;i<row;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			printf("%3d",mat2[i][j]);
+		}
+		printf("\n");
+	}
+	printf("The Addition Of Both Matrix");
+	for(i=0;i<row;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			rest[i][j]=mat1[i][j]+mat2[i][j];
+			printf("%3d",rest[i][j]);
+		}
+		printf("\n");
+	}
+	getch();
+}
